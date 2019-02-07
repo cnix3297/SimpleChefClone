@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">SimpleChef</string>
+    <string name="app_name">LoginPage</string>
+    <string name="LogIn">Log In</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="OR">OR</string>
+    <string name="SimpleChef">Simple Chef</string>
 </resources>

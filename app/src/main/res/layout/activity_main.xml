@@ -6,13 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="417dp"
+        android:layout_height="735dp"
+        android:alpha="0.95"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee"
+        tools:srcCompat="@drawable/coffee" />
+
+    <Button
+        android:id="@+id/LogInBtn"
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:alpha=".8"
+        android:background="@drawable/background_login"
+        android:text="@string/LogIn"
+        android:textColor="#00A6FF"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+    <Button
+        android:id="@+id/SignUpBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+
+        android:background="@drawable/background_signup"
+        android:text="@string/SignUp"
+        android:textColor="#00A6FF"
+        app:layout_constraintEnd_toEndOf="@+id/LogInBtn"
+        app:layout_constraintStart_toStartOf="@+id/LogInBtn"
+        app:layout_constraintTop_toBottomOf="@+id/LogInBtn" />
+
     <TextView
+        android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:alpha=".8"
+        android:ems="10"
+        app:fontFamily="@font/berkshire_regular"
+        android:gravity="center"
+        android:text="@string/SimpleChef"
+        android:textColor="#000000"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/LogInBtn"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
 </android.support.constraint.ConstraintLayout>
