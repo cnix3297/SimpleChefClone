@@ -4,4 +4,6 @@
     <string name="SignUp">Sign Up</string>
     <string name="OR">OR</string>
     <string name="SimpleChef">Simple Chef</string>
+    <string name="FacebookLogin">Login with Facebook</string>
+    <string name="GoogleLogin">Login with Google</string>
 </resources>
