@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Login = (Button)findViewById(R.id.LogInBtn);
+        Login.setOnClickListener(View.OnClickListener );
 
     }
 }
