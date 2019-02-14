@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
 
     private static final int RC_SIGN_IN = 9001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,8 +52,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        // Robs SHA1:  99:27:60:14:F0:E9:FB:CF:F9:8F:53:F3:B5:3C:DC:FA:CB:8A:06:43
+        // Colbys SHA1:  60:ED:5C:D5:F6:43:AD:EE:17:62:26:8A:B6:8F:51:72:58:04:66:16
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail().requestIdToken("60:ED:5C:D5:F6:43:AD:EE:17:62:26:8A:B6:8F:51:72:58:04:66:16")
+                .requestEmail().requestIdToken("99:27:60:14:F0:E9:FB:CF:F9:8F:53:F3:B5:3C:DC:FA:CB:8A:06:43")
                 .build();
 
         // Build a GoogleSignInClient with the options specified by gso.
