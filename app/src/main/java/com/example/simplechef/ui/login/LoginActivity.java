@@ -106,8 +106,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void setupImages() {
-        // Glide library was required to load large resolution images onto android device
-        // Glide handles auto-scaling images down to proper resolution for efficiency
+        // Glide handles auto-scaling images down to proper resolution
         Glide
                 .with(context)
                 .load(R.drawable.coffee3)
