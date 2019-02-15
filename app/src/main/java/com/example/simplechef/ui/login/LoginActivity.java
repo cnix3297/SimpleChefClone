@@ -1,6 +1,8 @@
 package com.example.simplechef.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 
 //Google SDK Imports
+import com.bumptech.glide.Glide;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.R;
 import com.google.android.gms.auth.api.Auth;
@@ -28,11 +31,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
-    private ImageView imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
+    private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewUsername, textViewPassword;
     // private SignInButton buttonGoogleLogin;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
+
+    private Context context = LoginActivity.this;
 
     private static final int RC_SIGN_IN = 9001;
 
@@ -43,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         setupUiElements();
+        setupImages();
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -89,11 +95,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void setupUiElements() {
 
-        //Associate buttonLogIn & buttonSignUp button to variables
+        // imageViews
+        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
+
+        // buttonViews
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
         buttonFacebookLogin = (Button) findViewById(R.id.buttonFacebookLogin);
         buttonGoogleLogin = (Button) findViewById(R.id.buttonGoogleLogin);
+    }
+
+    public void setupImages() {
+        // Glide library was required to load large resolution images onto android device
+        // Glide handles auto-scaling images down to proper resolution for efficiency
+        Glide
+                .with(context)
+                .load(R.drawable.coffee3)
+                .fitCenter()
+                .into(imageViewBackground);
     }
 
     public void login() {
