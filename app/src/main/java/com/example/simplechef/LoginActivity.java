@@ -1,8 +1,6 @@
 package com.example.simplechef;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,19 +21,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
-    private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin;
+    private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
     private ImageView imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewUsername, textViewPassword;
     // private SignInButton buttonGoogleLogin;
@@ -64,15 +56,32 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        //buttonLogIn click listener
-        buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
+        // standard login listener
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                LoginAnimation();
+                standardLogin();
+                //LoginAnimation();
             }
         });
+
+        // facebook login listener
+        buttonFacebookLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facebookLogin();
+            }
+        });
+
+        // google login listener
+        buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                googleLogin();
+            }
+        });
+
 
     }
 
@@ -81,10 +90,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Associate buttonLogIn & buttonSignUp button to variables
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
+        buttonFacebookLogin = (Button) findViewById(R.id.buttonFacebookLogin);
         buttonGoogleLogin = (Button) findViewById(R.id.buttonGoogleLogin);
-        textViewOr = (TextView) findViewById(R.id.textViewOr);
-        imageViewOrLine1 = (ImageView) findViewById(R.id.imageViewOrLine1);
-        imageViewOrLine2 = (ImageView) findViewById(R.id.imageViewOrLine2);
+    }
+
+    public void standardLogin() {
+        //TODO: handle standard login
+    }
+
+    public void facebookLogin() {
+        //TODO: handle facebook login
+    }
+
+    public void googleLogin() {
+        //TODO: handle google login
+
     }
 
     public void LoginAnimation() {
@@ -111,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         imageViewOrLine2.setVisibility(View.VISIBLE);
 
 
+
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -123,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         });
+
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -140,15 +162,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
-
-
-    // TODO:  googleSignIn()        // should all this googleLogin stuff above and below be in this function?
-
-    // TODO:  facebookSignIn()      // same but for facebook crap
-
-    // TODO:  login()                // same but standard login
-
-
 
 
     private void signIn() {
