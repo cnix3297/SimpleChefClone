@@ -61,9 +61,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             @Override
             public void onClick(View v) {
-                standardLogin();
-                LoginAnimation();   //TODO:  move all Google login stuff to googleLogin(),
-                                    //TODO:  expire LoginAnimation() ?
+                login();
 
             }
         });
@@ -80,6 +78,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LoginAnimation();   //TODO:  move all Google login stuff to googleLogin(),
+                                    //TODO:  expire LoginAnimation() ?
                 googleLogin();
             }
         });
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         buttonGoogleLogin = (Button) findViewById(R.id.buttonGoogleLogin);
     }
 
-    public void standardLogin() {
+    public void login() {
         //TODO: handle standard login
     }
 
