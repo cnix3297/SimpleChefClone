@@ -35,10 +35,10 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
-    private Button buttonLogIn, buttonSignUp, buttonSignOut;
+    private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin;
     private ImageView imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewUsername, textViewPassword;
-    private SignInButton buttonGoogleLogin;
+    // private SignInButton buttonGoogleLogin;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
 
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Associate buttonLogIn & buttonSignUp button to variables
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
-        buttonGoogleLogin = (SignInButton) findViewById(R.id.buttonGoogleLogin);
+        buttonGoogleLogin = (Button) findViewById(R.id.buttonGoogleLogin);
         textViewOr = (TextView) findViewById(R.id.textViewOr);
         imageViewOrLine1 = (ImageView) findViewById(R.id.imageViewOrLine1);
         imageViewOrLine2 = (ImageView) findViewById(R.id.imageViewOrLine2);
@@ -140,6 +140,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
+
+
+    // TODO:  googleSignIn()        // should all this googleLogin stuff above and below be in this function?
+
+    // TODO:  facebookSignIn()      // same but for facebook crap
+
+    // TODO:  login()                // same but standard login
+
+
+
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
