@@ -1,4 +1,4 @@
-package com.example.simplechef;
+package com.example.simplechef.ui.login;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -6,14 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 //Google SDK Imports
+import com.example.simplechef.ui.account.AccountActivity;
+import com.example.simplechef.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

@@ -1,4 +1,4 @@
-package com.example.simplechef;
+package com.example.simplechef.ui.home;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.simplechef.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
