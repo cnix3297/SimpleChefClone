@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity">
 
+    
     <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="wrap_content"
@@ -17,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/coffee3"
-        tools:srcCompat="@drawable/coffee3" />
+        tools:srcCompat="@drawable/coffee3"/>
 
     <Button
         android:id="@+id/buttonLogIn"
@@ -27,10 +28,10 @@
         android:background="@drawable/background_login"
         android:text="@string/LogIn"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewBackground"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewBackground"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
-        app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.74" />
 
     <TextView
@@ -46,9 +47,9 @@
         android:textSize="60sp"
         app:fontFamily="@font/berkshire_regular"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewBackground"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
-        app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.44" />
 
     <Button
@@ -91,9 +92,9 @@
         android:text="@string/OR"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toTopOf="@+id/buttonFacebookLogin"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogIn"
         tools:text="@string/OR" />
 
@@ -103,9 +104,9 @@
         android:layout_height="5dp"
         android:layout_marginTop="15dp"
         android:src="@drawable/login_lines"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogIn" />
 
     <ImageView
@@ -114,9 +115,9 @@
         android:layout_height="5dp"
         android:layout_marginTop="15dp"
         android:src="@drawable/login_lines"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogIn" />
 
     <EditText
@@ -165,8 +166,8 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/textViewPassword"
         app:layout_constraintEnd_toEndOf="@+id/textViewPassword"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="@+id/textViewPassword"
         app:layout_constraintTop_toTopOf="@+id/textViewPassword"
         app:layout_constraintVertical_bias="0.23000002"
         app:srcCompat="@drawable/lock" />
@@ -179,8 +180,8 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textViewPassword"
         app:layout_constraintEnd_toEndOf="@+id/textViewUsername"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="@+id/imageViewBackground"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="@+id/textViewUsername"
         app:layout_constraintTop_toTopOf="@+id/textViewUsername"
         app:srcCompat="@drawable/home_user_icon" />
 
@@ -198,7 +199,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageViewBackground"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
         app:srcCompat="@drawable/logo" />
 
@@ -237,7 +238,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/SignUpSentence"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.397"
         app:layout_constraintStart_toStartOf="parent"
@@ -252,7 +253,7 @@
         android:text="@string/SignUp"
         android:textAllCaps="false"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toEndOf="@+id/textViewSignUp"
