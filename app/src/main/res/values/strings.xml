@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">LoginPage</string>
     <string name="LogIn">Log In</string>
-    <string name="SignUp">Sign Up</string>
+    <string name="SignUpSentence">Don\'t have an account?</string>
+    <string name="SignUp">Sign Up!</string>
     <string name="OR">OR</string>
     <string name="SimpleChef">Simple Chef</string>
     <string name="FacebookLogin">Login with Facebook</string>
     <string name="GoogleLogin">Login with Google</string>
-    <string name="Username">Username or email</string>
+    <string name="Username">Username or Email</string>
     <string name="Password">Password</string>
     <string name="Settings">Settings</string>
     <string name="ChangePhoto">Change Photo</string>

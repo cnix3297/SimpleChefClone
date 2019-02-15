@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setupUiElements();
+
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         // Robs SHA1:  99:27:60:14:F0:E9:FB:CF:F9:8F:53:F3:B5:3C:DC:FA:CB:8A:06:43
@@ -72,19 +74,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-
-
     }
-    public void LoginAnimation() {
+
+    public void setupUiElements() {
 
         //Associate buttonLogIn & buttonSignUp button to variables
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
-        //loginButton = (LoginButton) findViewById(R.id.login_button);
         buttonGoogleLogin = (SignInButton) findViewById(R.id.buttonGoogleLogin);
         textViewOr = (TextView) findViewById(R.id.textViewOr);
         imageViewOrLine1 = (ImageView) findViewById(R.id.imageViewOrLine1);
         imageViewOrLine2 = (ImageView) findViewById(R.id.imageViewOrLine2);
+    }
+
+    public void LoginAnimation() {
+
 
 
         //Animation types
@@ -119,6 +123,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         });
+
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -132,6 +138,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
     }
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
