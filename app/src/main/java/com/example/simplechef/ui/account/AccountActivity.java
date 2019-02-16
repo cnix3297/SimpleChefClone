@@ -1,4 +1,4 @@
-package com.example.simplechef;
+package com.example.simplechef.ui.account;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.simplechef.R;
+import com.example.simplechef.ui.login.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -18,8 +20,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 public class AccountActivity extends AppCompatActivity {
     private TextView textViewName, textViewHomeGivenName, textViewFamilyName, textViewEmail, textViewId, textViewPersonalDetails,textViewSettingsRecipeHeader;

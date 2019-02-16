@@ -1,21 +1,21 @@
-package com.example.simplechef;
+package com.example.simplechef.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 //Google SDK Imports
+import com.bumptech.glide.Glide;
+import com.example.simplechef.ui.account.AccountActivity;
+import com.example.simplechef.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -23,24 +23,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
-    private Button buttonLogIn, buttonSignUp, buttonSignOut;
-    private ImageView imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
+    private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
+    private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewUsername, textViewPassword;
-    private SignInButton buttonGoogleLogin;
+    // private SignInButton buttonGoogleLogin;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
+
+    private Context context = LoginActivity.this;
 
     private static final int RC_SIGN_IN = 9001;
 
@@ -49,6 +45,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        setupUiElements();
+        setupImages();
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -62,31 +61,76 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        //buttonLogIn click listener
-        buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
+        // standard login listener
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                LoginAnimation();
+                login();
+
+            }
+        });
+
+        // facebook login listener
+        buttonFacebookLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facebookLogin();
+            }
+        });
+
+        // google login listener
+        buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginAnimation();   //TODO:  move all Google login stuff to googleLogin(),
+                                    //TODO:  expire LoginAnimation() ?
+                googleLogin();
             }
         });
 
 
-
     }
-    public void LoginAnimation() {
 
-        //Associate buttonLogIn & buttonSignUp button to variables
+    public void setupUiElements() {
+
+        // imageViews
+        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
+
+        // buttonViews
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
-        //loginButton = (LoginButton) findViewById(R.id.login_button);
-        buttonGoogleLogin = (SignInButton) findViewById(R.id.buttonGoogleLogin);
-        textViewOr = (TextView) findViewById(R.id.textViewOr);
-        imageViewOrLine1 = (ImageView) findViewById(R.id.imageViewOrLine1);
-        imageViewOrLine2 = (ImageView) findViewById(R.id.imageViewOrLine2);
+        buttonFacebookLogin = (Button) findViewById(R.id.buttonFacebookLogin);
+        buttonGoogleLogin = (Button) findViewById(R.id.buttonGoogleLogin);
+    }
 
+    public void setupImages() {
+        // Glide handles auto-scaling images down to proper resolution
+        Glide
+                .with(context)
+                .load(R.drawable.login_background)
+                //.fitCenter()
+                .centerCrop()
+                .placeholder(R.drawable.login_background)
+                .into(imageViewBackground);
+    }
 
+    public void login() {
+        //TODO: handle standard login
+    }
+
+    public void facebookLogin() {
+        //TODO: handle facebook login
+    }
+
+    public void googleLogin() {
+        //TODO: handle google login
+
+    }
+
+    public void LoginAnimation() {
+
+/*
         //Animation types
         Animation move = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move);
         Animation FadeHalf = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_50);
@@ -105,7 +149,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         textViewOr.setVisibility(View.VISIBLE);
         imageViewOrLine1.setVisibility(View.VISIBLE);
         imageViewOrLine2.setVisibility(View.VISIBLE);
-
+*/
 
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -119,6 +163,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         });
+
+
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -132,7 +179,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
     }
+
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
