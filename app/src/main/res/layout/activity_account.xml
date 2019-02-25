@@ -18,39 +18,40 @@
         android:background="#272828">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/imageViewBackgroundCircleImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:background="@drawable/settings_background_gradient">
         <TextView
             android:id="@+id/textViewSettingsTitle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/settings_background_gradient"
             android:gravity="center_vertical"
-            android:text="@string/Settings"
             android:textAlignment="center"
             android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
 
         </android.support.constraint.ConstraintLayout>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageViewProfilePic"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="-50dp"
             android:shape="ring" />
+
 
         <Button
             android:id="@+id/buttonChangePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:background="@android:color/transparent"
             android:text="@string/ChangePhoto"
             android:textAlignment="center"
@@ -231,7 +232,7 @@
                 android:layout_marginLeft="8dp"
                 android:background="@android:color/transparent"
                 android:paddingLeft="20dp"
-                android:text="@string/FavoriteRecipes"
+                android:text="@string/Favorites"
                 android:textAlignment="textStart"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -250,35 +251,22 @@
                 app:layout_constraintEnd_toEndOf="@id/buttonFavoriteRecipes"
                 app:layout_constraintTop_toTopOf="@id/buttonFavoriteRecipes" />
         </android.support.constraint.ConstraintLayout>
-        <!--
-        <TextView
-            android:id="@+id/textViewHomeDisplayName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Full Name"
-
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
-            android:id="@+id/textViewHomeEmail"
+            android:id="@+id/textViewAccountHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Email"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-            -->
-
-
+            android:text="@string/Account"
+            android:textSize="23sp"
+            android:textColor="#e8e8e8"
+            android:paddingLeft="40dp"/>
+        <ImageView
+            android:layout_width="333dp"
+            android:layout_height="1.4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/settings_line_divider"/>
 
         <ImageView
             android:id="@+id/textViewHomeUserPic"
@@ -291,12 +279,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/buttonSignOut"
-            android:layout_width="match_parent"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
-            android:text="Sign Out" />
+            android:layout_gravity="center_horizontal">
+            <Button
+                android:id="@+id/buttonSignOut"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:paddingLeft="20dp"
+                android:text="Sign Out"
+                android:textAlignment="textStart"
+                android:background="@android:color/transparent"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/settings_greater_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+
 
     </LinearLayout>
 
