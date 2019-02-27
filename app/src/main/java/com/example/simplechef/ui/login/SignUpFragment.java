@@ -26,10 +26,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.account.AccountActivity;
+import com.example.simplechef.util.GlideApp;
 
 public class SignUpFragment extends Fragment {
 
     private Button btn;
+    private ImageView imageViewBackground;
     private FragmentActivity myContext;
     private Toolbar toolbar;
 
@@ -46,6 +48,8 @@ public class SignUpFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
 
+        imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
+        setupImages(view);
 
         //Back Button to Login Screen
         btn = (Button)view.findViewById(R.id.buttonBack);
@@ -61,6 +65,14 @@ public class SignUpFragment extends Fragment {
         return view;
     }
 
+    public void setupImages(View view) {
+        // Glide handles auto-scaling images down to proper resolution
 
+        GlideApp
+                .with(view)
+                .load(R.drawable.signup_background)
+                .centerCrop()
+                .into(imageViewBackground);
+    }
 
 }

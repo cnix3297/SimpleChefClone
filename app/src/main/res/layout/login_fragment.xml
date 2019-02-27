@@ -29,7 +29,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/background_login"
             android:text="@string/LogIn"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
