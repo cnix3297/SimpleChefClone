@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorBlue</item>
+        <item name="colorPrimary">@color/colorTeal</item>
         <item name="colorPrimaryDark">@color/colorTealDarker</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="ToolbarStyle">
-        <item name="android:background">@color/colorBlue</item>
+        <item name="android:background">@color/colorTeal</item>
     </style>
 
 
