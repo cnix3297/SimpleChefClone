@@ -1,9 +1,41 @@
 <resources>
     <string name="app_name">LoginPage</string>
     <string name="LogIn">Log In</string>
-    <string name="SignUp">Sign Up</string>
+    <string name="SignUpSentence">Don\'t have an account?</string>
+    <string name="SignUp">Sign Up!</string>
+    <string name="SignUpTitle">Sign Up</string>
+    <string name="SignUpTitle_subheader">Amazing recipes await!</string>
     <string name="OR">OR</string>
     <string name="SimpleChef">Simple Chef</string>
     <string name="FacebookLogin">Login with Facebook</string>
     <string name="GoogleLogin">Login with Google</string>
+    <string name="Username">Username or Email</string>
+    <string name="UsernameOnly">Username</string>
+    <string name="Password">Password</string>
+    <string name="Settings">Settings</string>
+    <string name="ChangePhoto">Change Photo</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="PersonalDetails">Personal Details</string>
+    <string name="EditProfile">Edit Profile</string>
+    <string name="Preferences">Preferences</string>
+    <string name="Recipes">Recipes</string>
+    <string name="MyRecipes">My Recipes</string>
+    <string name="SavedRecipes">Saved Recipes</string>
+    <string name="Favorites">Favorites</string>
+    <string name="Account">Account</string>
+    <string name="Email">Email</string>
+    <string name="Gender">Gender</string>
+    <string name="FirstN">First</string>
+    <string name="LastN">Last</string>
+    <string name="Birthday">Birthday</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+
+
+
+
+
+    <string name="facebook_app_id">818324508501472</string>
+    <string name="fb_login_protocol_scheme">fb818324508501472</string>
+
+
 </resources>
