@@ -23,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.util.GlideApp;
