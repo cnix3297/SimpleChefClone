@@ -1,31 +1,30 @@
 package com.example.simplechef.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.util.GlideApp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class SignUpFragment extends Fragment {
 
@@ -57,7 +56,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "SignUp", Toast.LENGTH_SHORT).show();
-                ((LoginActivity)getActivity()).setViewPager(0);
+                ((StartActivity)getActivity()).setViewPager(0);
 
             }
         });
@@ -73,5 +72,6 @@ public class SignUpFragment extends Fragment {
                 .centerCrop()
                 .into(imageViewBackground);
     }
+
 
 }
