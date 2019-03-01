@@ -53,6 +53,7 @@ public class StartActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
         //TODO: check to see if user is signed in (non-null) and go to correct fragment/activity accordingly
+        //TODO: maybe this goes in the Handler() run() function?  Not sure.
         if (user != null) {
             // send to home activity
         } else {
