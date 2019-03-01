@@ -1,1 +1,63 @@
-{"web":{"client_id":"52755096759-lkasvkagct0uprg8vmi5hh3fi259m5jc.apps.googleusercontent.com","project_id":"simple-chef-231122","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"1yNj1Rux1h6a2GLcRrQ1ASzF"}}
+{
+  "project_info": {
+    "project_number": "716457862980",
+    "firebase_url": "https://simplechef-d072f.firebaseio.com",
+    "project_id": "simplechef-d072f",
+    "storage_bucket": "simplechef-d072f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716457862980:android:2dc64abe4d7d913c",
+        "android_client_info": {
+          "package_name": "com.example.simplechef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716457862980-ohnb6b93r4pir3jeq2m314ep0fquec2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.simplechef",
+            "certificate_hash": "d53989c402fd660f9cd9462795b2a19305718f39"
+          }
+        },
+        {
+          "client_id": "716457862980-45osapfkb74nlqoos46shsoj4etukboc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.simplechef",
+            "certificate_hash": "6d9735da75a18b5088e7b2176ed3c88015e01dfd"
+          }
+        },
+        {
+          "client_id": "716457862980-8aii4mn3pnmjeajkkjunasqfgnq95e4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNAjhjUTEwfbBSCO6dCGAa0GQbbmY1dcE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716457862980-8aii4mn3pnmjeajkkjunasqfgnq95e4c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

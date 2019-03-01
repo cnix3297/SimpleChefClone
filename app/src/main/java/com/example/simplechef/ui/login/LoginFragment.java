@@ -58,11 +58,11 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 //SOAP IMPORTS
-import org.ksoap2.SoapEnvelope;
+/*import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
+import org.ksoap2.transport.HttpTransportSE;*/
 
 public class LoginFragment extends Fragment {
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
