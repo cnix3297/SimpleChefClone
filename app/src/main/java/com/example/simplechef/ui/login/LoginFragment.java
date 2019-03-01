@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 //Google SDK Imports
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.R;
+import com.example.simplechef.util.GlideApp;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -56,6 +58,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 //SOAP IMPORTS
 /*import org.ksoap2.SoapEnvelope;
@@ -145,14 +148,12 @@ public class LoginFragment extends Fragment {
 
     public void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
-        Glide
+
+        GlideApp
                 .with(view)
                 .load(R.drawable.login_background)
-                //.fitCenter()
                 .centerCrop()
-                .placeholder(R.drawable.login_background)
                 .into(imageViewBackground);
-
     }
 
     public void login() {
