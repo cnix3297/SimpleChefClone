@@ -68,7 +68,6 @@ public class LoginFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
-
         setupUiElements(view);
         setupImages(view);
         return view;
@@ -107,7 +106,6 @@ public class LoginFragment extends Fragment {
 
     public void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
-
         GlideApp
                 .with(view)
                 .load(R.drawable.login_background)
@@ -115,9 +113,6 @@ public class LoginFragment extends Fragment {
                 .into(imageViewBackground);
     }
 
-    public void login() {
-        //TODO: handle standard login
-    }
 
     private void signInFacebook() {
         callbackManager = CallbackManager.Factory.create();
