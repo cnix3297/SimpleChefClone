@@ -71,11 +71,9 @@ public class LoginFragment extends Fragment {
         setupUiElements(view);
         setupImages(view);
         return view;
+
     }
     public void setupUiElements(View view) {
-
-        // imageViews
-        imageViewBackground = (ImageView) view.findViewById(R.id.imageViewBackground);
 
         // buttons
         buttonLogIn = (Button) view.findViewById(R.id.buttonLogIn);

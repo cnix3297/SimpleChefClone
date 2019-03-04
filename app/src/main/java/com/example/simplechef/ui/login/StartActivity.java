@@ -1,12 +1,14 @@
 package com.example.simplechef.ui.login;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.simplechef.R;
+import com.example.simplechef.ui.home.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,21 +28,31 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-
         // initialize db
         db = FirebaseFirestore.getInstance();
 
         // initialize auth
         mAuth = FirebaseAuth.getInstance();
 
-        sectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager)findViewById(R.id.fragmentContainer);
 
         // used to delay this view (start/title screen)
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                setupViewPager(viewPager);
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                // check to see if a user is already logged in or not
+                if (user != null) {
+                    // send to home activity
+                    Intent intent = new Intent(StartActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    // send to login fragment
+                    //TODO some sort of bug here
+                    sectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+                    viewPager = (ViewPager)findViewById(R.id.fragmentContainer);
+                    setupViewPager(viewPager);
+                }
             }
         }, 2000);
 
@@ -50,15 +62,7 @@ public class StartActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        FirebaseUser user = mAuth.getCurrentUser();
 
-        //TODO: check to see if user is signed in (not null) and go to correct fragment/activity accordingly
-        //TODO: maybe this goes in the Handler() run() function?  Not sure.
-        if (user != null) {
-            // send to home activity
-        } else {
-            // send to login fragment
-        }
     }
 
     private void setupViewPager(ViewPager viewPager){
