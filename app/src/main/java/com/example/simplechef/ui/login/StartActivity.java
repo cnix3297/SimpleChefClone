@@ -48,7 +48,6 @@ public class StartActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // send to login fragment
-                    //TODO some sort of bug here
                     sectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
                     viewPager = (ViewPager)findViewById(R.id.fragmentContainer);
                     setupViewPager(viewPager);

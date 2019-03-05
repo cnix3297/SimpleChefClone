@@ -30,7 +30,6 @@ import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONObject;
 
@@ -69,7 +68,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
         setupUiElements(view);
-        setupImages(view);
+        //setupImages(view);
         return view;
 
     }
