@@ -46,20 +46,9 @@ public class SignUpFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
 
-        imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
+        setupUiElements(view);
         setupImages(view);
 
-        //Back Button to Login Screen
-        btn = (Button)view.findViewById(R.id.buttonBack);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "SignUp", Toast.LENGTH_SHORT).show();
-                ((StartActivity)getActivity()).setViewPager(0);
-
-            }
-        });
         return view;
     }
 
@@ -73,5 +62,21 @@ public class SignUpFragment extends Fragment {
                 .into(imageViewBackground);
     }
 
+    public void setupUiElements(View view) {
 
+        // images
+        imageViewBackground = (ImageView) view.findViewById(R.id.imageViewBackground);
+
+        //Back Button to Login Screen
+        btn = (Button)view.findViewById(R.id.buttonBack);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "SignUp", Toast.LENGTH_SHORT).show();
+                ((StartActivity)getActivity()).setViewPager(0);
+
+            }
+        });
+    }
 }

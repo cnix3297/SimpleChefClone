@@ -41,6 +41,7 @@ public class StartActivity extends AppCompatActivity {
             public void run() {
 
                 FirebaseUser user = mAuth.getCurrentUser();
+
                 // check to see if a user is already logged in or not
                 if (user != null) {
                     // send to home activity
@@ -53,7 +54,7 @@ public class StartActivity extends AppCompatActivity {
                     setupViewPager(viewPager);
                 }
             }
-        }, 2000);
+        }, 1000);
 
     }
 

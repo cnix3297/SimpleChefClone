@@ -68,11 +68,14 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
         setupUiElements(view);
-        //setupImages(view);
+        setupImages(view);
         return view;
 
     }
     public void setupUiElements(View view) {
+
+
+        imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
 
         // buttons
         buttonLogIn = (Button) view.findViewById(R.id.buttonLogIn);
