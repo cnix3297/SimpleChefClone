@@ -34,6 +34,7 @@ public class StartActivity extends AppCompatActivity {
         // initialize auth
         mAuth = FirebaseAuth.getInstance();
 
+/*
 
         // used to delay this view (start/title screen)
         new Handler().postDelayed(new Runnable() {
@@ -55,7 +56,21 @@ public class StartActivity extends AppCompatActivity {
                 }
             }
         }, 1000);
+*/
 
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        // check to see if a user is already logged in or not
+        if (user != null) {
+            // send to home activity
+            Intent intent = new Intent(StartActivity.this, HomeActivity.class);
+            startActivity(intent);
+        } else {
+            // send to login fragment
+            sectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+            viewPager = (ViewPager)findViewById(R.id.fragmentContainer);
+            setupViewPager(viewPager);
+        }
     }
 
     @Override
