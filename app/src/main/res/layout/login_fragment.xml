@@ -137,7 +137,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonLogIn" />
 
         <EditText
-            android:id="@+id/textViewUsername"
+            android:id="@+id/textViewEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
@@ -147,7 +147,7 @@
             android:layout_marginRight="27dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
-            android:hint="@string/Username"
+            android:hint="@string/Email"
             android:inputType="text"
             android:paddingStart="60dp"
             android:paddingLeft="60dp"
@@ -185,7 +185,7 @@
             app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
             app:layout_constraintEnd_toEndOf="@+id/editTextTitle"
             app:layout_constraintStart_toStartOf="@+id/editTextTitle"
-            app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
@@ -211,10 +211,10 @@
             android:contentDescription="@null"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/textViewPassword"
-            app:layout_constraintEnd_toEndOf="@+id/textViewUsername"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEmail"
             app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toStartOf="@+id/textViewUsername"
-            app:layout_constraintTop_toTopOf="@+id/textViewUsername"
+            app:layout_constraintStart_toStartOf="@+id/textViewEmail"
+            app:layout_constraintTop_toTopOf="@+id/textViewEmail"
             app:srcCompat="@drawable/home_user_icon" />
 
         <ImageView
