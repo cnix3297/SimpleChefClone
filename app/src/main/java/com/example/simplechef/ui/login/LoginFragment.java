@@ -22,8 +22,11 @@ import android.widget.Toast;
 
 //Google SDK Imports
 import com.bumptech.glide.Glide;
-import com.example.simplechef.ui.account.AccountActivity;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.R;
+import com.example.simplechef.ui.home.HomeActivity;
+import com.example.simplechef.util.GlideApp;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -57,12 +60,13 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 //SOAP IMPORTS
-import org.ksoap2.SoapEnvelope;
+/*import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
+import org.ksoap2.transport.HttpTransportSE;*/
 
 public class LoginFragment extends Fragment {
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
@@ -145,14 +149,12 @@ public class LoginFragment extends Fragment {
 
     public void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
-        Glide
+
+        GlideApp
                 .with(view)
                 .load(R.drawable.login_background)
-                //.fitCenter()
                 .centerCrop()
-                .placeholder(R.drawable.login_background)
                 .into(imageViewBackground);
-
     }
 
     public void login() {
@@ -179,7 +181,7 @@ public class LoginFragment extends Fragment {
                                     public void onCompleted(
                                             JSONObject object,
                                             GraphResponse response) {
-                                        Intent myIntent = new Intent(getActivity(), AccountActivity.class);
+                                        Intent myIntent = new Intent(getActivity(), HomeActivity.class);
                                         myIntent.putExtras(getFacebookData(object));
                                         startActivity(myIntent);
                                         getActivity().overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
@@ -264,7 +266,7 @@ public class LoginFragment extends Fragment {
             Log.d("STATE", "SIGN IN SUCCESSFUL");
             //Start Home Intent
             GoogleSignInAccount acct = result.getSignInAccount();
-            Intent myIntent = new Intent(getActivity(), AccountActivity.class);
+            Intent myIntent = new Intent(getActivity(), HomeActivity.class);
             myIntent.putExtra("AccountG", acct);
             startActivity(myIntent);
             getActivity().overridePendingTransition(R.anim.slide_right, R.anim.slide_left);

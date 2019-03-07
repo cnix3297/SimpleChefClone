@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,16 +22,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.example.simplechef.R;
 import com.example.simplechef.ui.account.AccountActivity;
+import com.example.simplechef.util.GlideApp;
 
 public class SignUpFragment extends Fragment {
 
     private Button btn;
-    private ImageView imageViewSignUpBackground;
-    private TextView textViewBirthday;
+    private ImageView imageViewBackground;
     private FragmentActivity myContext;
+    private Toolbar toolbar;
 
     @Nullable
     @Override
@@ -38,21 +42,14 @@ public class SignUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.signup_fragment,container,false);
         myContext= (FragmentActivity) getActivity();
 
-        //Set Up Background Image using Glide & form spinners
-        imageViewSignUpBackground = (ImageView)view.findViewById(R.id.imageViewSignUpBackground);
+
+        //Toolbar setup
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
+
+        imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
         setupImages(view);
-
-        //TextView Listeners
-        textViewBirthday = (TextView)view.findViewById(R.id.textViewBirthday);
-        textViewBirthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                    DialogFragment newFragment = new DatePickerFragment();
-                    newFragment.show(myContext.getSupportFragmentManager(), "date picker");
-
-            }
-        });
 
         //Back Button to Login Screen
         btn = (Button)view.findViewById(R.id.buttonBack);
@@ -67,15 +64,15 @@ public class SignUpFragment extends Fragment {
         });
         return view;
     }
+
     public void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
-        Glide
-                .with(view)
-                .load(R.drawable.login_background)
-                //.fitCenter()
-                .centerCrop()
-                .placeholder(R.drawable.login_background)
-                .into(imageViewSignUpBackground);
 
+        GlideApp
+                .with(view)
+                .load(R.drawable.signup_background)
+                .centerCrop()
+                .into(imageViewBackground);
     }
+
 }
