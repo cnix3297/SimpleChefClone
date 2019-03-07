@@ -75,41 +75,14 @@
         app:srcCompat="@drawable/lock_teal" />
 
     <EditText
-        android:id="@+id/textViewUsername"
-        android:backgroundTint="@color/colorGrey"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:gravity="start"
-        android:hint="@string/UsernameOnly"
-        android:inputType="text"
-        android:paddingStart="60dp"
-        android:paddingLeft="60dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"
-        android:textColorHint="@color/colorGrey"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
-    <EditText
         android:id="@+id/textViewEmail"
-        android:backgroundTint="@color/colorGrey"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginLeft="27dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="27dp"
         android:layout_marginRight="27dp"
+        android:backgroundTint="@color/colorGrey"
         android:gravity="start"
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
@@ -119,11 +92,11 @@
         android:paddingEnd="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="15dp"
-        android:textSize="18sp"
         android:textColorHint="@color/colorGrey"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+        tools:layout_editor_absoluteY="253dp" />
 
     <EditText
         android:id="@+id/textViewPassword"
@@ -165,23 +138,9 @@
         app:layout_constraintVertical_bias="0.3"
         app:srcCompat="@drawable/lock_teal" />
 
-    <ImageView
-        android:id="@+id/imageViewUserIcon"
-        android:alpha="0.7"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:contentDescription="@null"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewUsername"
-        app:layout_constraintStart_toStartOf="@+id/textViewUsername"
-        app:layout_constraintTop_toTopOf="@+id/textViewUsername"
-        app:srcCompat="@drawable/home_user_icon_teal" />
-
 
     <Button
-        android:id="@+id/buttonBack"
+        android:id="@+id/buttonSignUp"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"

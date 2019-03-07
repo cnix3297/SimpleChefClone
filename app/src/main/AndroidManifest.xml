@@ -47,7 +47,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.home.HomeActivity" />
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:label="HomeActivity"/>
 
         <activity android:name=".ui.account.AccountActivity"  />
 

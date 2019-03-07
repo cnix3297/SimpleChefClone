@@ -2,13 +2,11 @@ package com.example.simplechef.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,13 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 //Google SDK Imports
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.simplechef.ui.home.HomeActivity;
+import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.util.GlideApp;
@@ -44,8 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
@@ -60,22 +54,14 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-//SOAP IMPORTS
-/*import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;*/
-
 public class LoginFragment extends Fragment {
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
-    private TextView textViewOr, textViewUsername, textViewPassword;
+    private TextView textViewOr, textViewEmail, textViewPassword;
     private ConstraintLayout loginCountainer;
-    // private SignInButton buttonGoogleLogin;
+    private FirebaseAuth mAuth;
+
     private GoogleSignInClient mGoogleSignInClient;
-    private GoogleApiClient mGoogleApiClient;
 
     //Fragment Class
     private SectionsStatePagerAdapter sectionsStatePagerAdapter;
@@ -96,60 +82,64 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        //setup google sign in client
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
         setupUiElements(view);
         setupImages(view);
-
-
         return view;
+
     }
     public void setupUiElements(View view) {
 
-        // imageViews
-        imageViewBackground = (ImageView) view.findViewById(R.id.imageViewBackground);
 
-        //Buttons
+        imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
+
+        // buttons
         buttonLogIn = (Button) view.findViewById(R.id.buttonLogIn);
         buttonFacebookLogin = (Button) view.findViewById(R.id.buttonFacebookLogin);
         buttonGoogleLogin = (Button) view.findViewById(R.id.buttonGoogleLogin);
         buttonSignUp = (Button) view.findViewById(R.id.buttonSignUp);
+
+        textViewEmail = (TextView)view.findViewById(R.id.textViewEmail);
+        textViewPassword = (TextView)view.findViewById(R.id.textViewPassword);
+
+        // button listeners
+        buttonLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = textViewEmail.getText().toString();
+                String password = textViewPassword.getText().toString();
+
+                ((LoginActivity)getActivity()).signInWithEmailandPassword(email, password);
+            }
+        });
+
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((LoginActivity)getActivity()).setViewPager(1);
             }
         });
+
         buttonFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInFacebook();
             }
         });
+
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInGoogle();
+                //signInGoogle();
             }
         });
-
-
-
     }
 
 
-    public void setupImages(View view) {
+    private void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
-
         GlideApp
                 .with(view)
                 .load(R.drawable.login_background)
@@ -157,9 +147,21 @@ public class LoginFragment extends Fragment {
                 .into(imageViewBackground);
     }
 
-    public void login() {
-        //TODO: handle standard login
+    /*
+    private void signInGoogle() {
+        // Configure Google Sign In
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
+   */
+
 
     private void signInFacebook() {
         callbackManager = CallbackManager.Factory.create();
@@ -240,66 +242,21 @@ public class LoginFragment extends Fragment {
         return bundle;
     }
 
-    private void signInGoogle() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // [END configure_signin]
-
-        // [START build_client]
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-        Log.d("STATE", "Signin()");
-
-    }
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        if (result.isSuccess()) {
-
-            Log.d("STATE", "SIGN IN SUCCESSFUL");
-            //Start Home Intent
-            GoogleSignInAccount acct = result.getSignInAccount();
-            Intent myIntent = new Intent(getActivity(), HomeActivity.class);
-            myIntent.putExtra("AccountG", acct);
-            startActivity(myIntent);
-            getActivity().overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-            getActivity().finish();
-        } else {
-            Log.d("Login", "SIGN IN FAILURE" + result.getStatus().getStatusCode());
-        }
-    }
 
     @Override
     public void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
-
-
     }
+
     @Override
     public void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        } else {
-            callbackManager.onActivityResult(requestCode, resultCode, data);
-
-        }
-
     }
+
+
 }
