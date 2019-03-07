@@ -8,30 +8,28 @@ import android.support.v4.app.FragmentActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
 import com.example.simplechef.R;
 import com.example.simplechef.util.GlideApp;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
-
-import static android.support.constraint.Constraints.TAG;
 
 public class SignUpFragment extends Fragment {
 
-    private Button btn;
+    private Button buttonSignUp;
+    private TextView textViewEmail;
+    private TextView textViewPassword;
+
     private ImageView imageViewBackground;
     private FragmentActivity myContext;
     private Toolbar toolbar;
+
+
 
     @Nullable
     @Override
@@ -52,7 +50,7 @@ public class SignUpFragment extends Fragment {
         return view;
     }
 
-    public void setupImages(View view) {
+    private void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
 
         GlideApp
@@ -62,21 +60,30 @@ public class SignUpFragment extends Fragment {
                 .into(imageViewBackground);
     }
 
-    public void setupUiElements(View view) {
+    private void setupUiElements(View view) {
 
         // images
         imageViewBackground = (ImageView) view.findViewById(R.id.imageViewBackground);
 
         //Back Button to Login Screen
-        btn = (Button)view.findViewById(R.id.buttonBack);
+        buttonSignUp = (Button)view.findViewById(R.id.buttonSignUp);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        textViewEmail = (TextView) view.findViewById(R.id.textViewEmail);
+        textViewPassword = (TextView) view.findViewById(R.id.textViewPassword);
+
+        buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "SignUp", Toast.LENGTH_SHORT).show();
-                ((StartActivity)getActivity()).setViewPager(0);
+            public void onClick(View view) {
+
+                String email = textViewEmail.getText().toString();
+                String password = textViewPassword.getText().toString();
+
+                ((LoginActivity)getActivity()).createAccount(email, password);
 
             }
         });
     }
+
+
+
 }

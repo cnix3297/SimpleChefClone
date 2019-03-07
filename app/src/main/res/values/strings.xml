@@ -38,5 +38,6 @@
     <string name="facebook_app_id">818324508501472</string>
     <string name="fb_login_protocol_scheme">fb818324508501472</string>
 
+   <!-- For Google Sign In -->
 
 </resources>

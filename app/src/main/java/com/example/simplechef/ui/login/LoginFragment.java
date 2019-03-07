@@ -29,6 +29,8 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONObject;
@@ -42,9 +44,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class LoginFragment extends Fragment {
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
-    private TextView textViewOr, textViewUsername, textViewPassword;
+    private TextView textViewOr, textViewEmail, textViewPassword;
     private ConstraintLayout loginCountainer;
     private FirebaseAuth mAuth;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     //Fragment Class
     private SectionsStatePagerAdapter sectionsStatePagerAdapter;
@@ -57,7 +61,7 @@ public class LoginFragment extends Fragment {
 
     //CallBackManager
     private CallbackManager callbackManager;
-    private Context context = ((StartActivity)(getActivity()));
+    private Context context = ((LoginActivity)(getActivity()));
     private static final int RC_SIGN_IN = 9001;
 
 
@@ -83,28 +87,45 @@ public class LoginFragment extends Fragment {
         buttonGoogleLogin = (Button) view.findViewById(R.id.buttonGoogleLogin);
         buttonSignUp = (Button) view.findViewById(R.id.buttonSignUp);
 
+        textViewEmail = (TextView)view.findViewById(R.id.textViewEmail);
+        textViewPassword = (TextView)view.findViewById(R.id.textViewPassword);
+
         // button listeners
+        buttonLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = textViewEmail.getText().toString();
+                String password = textViewPassword.getText().toString();
+
+                ((LoginActivity)getActivity()).signInWithEmailandPassword(email, password);
+            }
+        });
+
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((StartActivity)getActivity()).setViewPager(1);
+                ((LoginActivity)getActivity()).setViewPager(1);
             }
         });
+
         buttonFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInFacebook();
             }
         });
+
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //signInGoogle();
             }
         });
     }
 
 
-    public void setupImages(View view) {
+    private void setupImages(View view) {
         // Glide handles auto-scaling images down to proper resolution
         GlideApp
                 .with(view)
@@ -112,6 +133,21 @@ public class LoginFragment extends Fragment {
                 .centerCrop()
                 .into(imageViewBackground);
     }
+
+    /*
+    private void signInGoogle() {
+        // Configure Google Sign In
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+    }
+   */
 
 
     private void signInFacebook() {
