@@ -48,6 +48,18 @@ public class SignUpFragment extends Fragment {
         setupUiElements(view);
         setupImages(view);
 
+        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = textViewEmail.getText().toString();
+                String password = textViewPassword.getText().toString();
+
+                ((LoginActivity)getActivity()).createAccount(email, password);
+
+            }
+        });
+
         return view;
     }
 
@@ -72,17 +84,6 @@ public class SignUpFragment extends Fragment {
         textViewEmail = (TextView) view.findViewById(R.id.textViewEmail);
         textViewPassword = (TextView) view.findViewById(R.id.textViewPassword);
 
-        buttonSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String email = textViewEmail.getText().toString();
-                String password = textViewPassword.getText().toString();
-
-                ((LoginActivity)getActivity()).createAccount(email, password);
-
-            }
-        });
     }
 
 
