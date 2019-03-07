@@ -24,33 +24,7 @@ import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.util.GlideApp;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookSdk;
-import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.LoginBehavior;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.auth.FirebaseAuth;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -59,9 +33,6 @@ public class LoginFragment extends Fragment {
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewEmail, textViewPassword;
     private ConstraintLayout loginCountainer;
-    private FirebaseAuth mAuth;
-
-    private GoogleSignInClient mGoogleSignInClient;
 
     //Fragment Class
     private SectionsStatePagerAdapter sectionsStatePagerAdapter;
@@ -75,7 +46,6 @@ public class LoginFragment extends Fragment {
     //CallBackManager
     private CallbackManager callbackManager;
     private Context context = ((LoginActivity)(getActivity()));
-    private static final int RC_SIGN_IN = 9001;
 
 
     @Nullable
@@ -125,14 +95,14 @@ public class LoginFragment extends Fragment {
         buttonFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInFacebook();
+                //signInFacebook();
             }
         });
 
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //signInGoogle();
+                ((LoginActivity)getActivity()).signInGoogle();
             }
         });
     }
@@ -146,21 +116,20 @@ public class LoginFragment extends Fragment {
                 .centerCrop()
                 .into(imageViewBackground);
     }
+/*
 
-    /*
     private void signInGoogle() {
         // Configure Google Sign In
+        GoogleSignInClient mGoogleSignInClient;
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
-   */
 
 
     private void signInFacebook() {
@@ -257,6 +226,7 @@ public class LoginFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+*/
 
 
 }
