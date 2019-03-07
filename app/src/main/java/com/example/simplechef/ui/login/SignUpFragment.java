@@ -42,6 +42,7 @@ public class SignUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.signup_fragment,container,false);
         myContext= (FragmentActivity) getActivity();
 
+
         //Toolbar setup
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);

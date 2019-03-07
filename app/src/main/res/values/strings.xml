@@ -29,7 +29,10 @@
     <string name="LastN">Last</string>
     <string name="Birthday">Birthday</string>
     <string name="ConfirmPassword">Confirm Password</string>
-    <string name="Submit">Submit</string>
+    <string name="Submit">Submit</string>\
+    <string name="Home">Home</string>
+    <string name="Search">Search</string>
+
 
 
 

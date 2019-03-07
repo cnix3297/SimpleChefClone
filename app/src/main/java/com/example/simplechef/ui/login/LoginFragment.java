@@ -23,8 +23,9 @@ import android.widget.Toast;
 //Google SDK Imports
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.simplechef.ui.account.AccountActivity;
+import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.R;
+import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.util.GlideApp;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -180,7 +181,7 @@ public class LoginFragment extends Fragment {
                                     public void onCompleted(
                                             JSONObject object,
                                             GraphResponse response) {
-                                        Intent myIntent = new Intent(getActivity(), AccountActivity.class);
+                                        Intent myIntent = new Intent(getActivity(), HomeActivity.class);
                                         myIntent.putExtras(getFacebookData(object));
                                         startActivity(myIntent);
                                         getActivity().overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
@@ -265,7 +266,7 @@ public class LoginFragment extends Fragment {
             Log.d("STATE", "SIGN IN SUCCESSFUL");
             //Start Home Intent
             GoogleSignInAccount acct = result.getSignInAccount();
-            Intent myIntent = new Intent(getActivity(), AccountActivity.class);
+            Intent myIntent = new Intent(getActivity(), HomeActivity.class);
             myIntent.putExtra("AccountG", acct);
             startActivity(myIntent);
             getActivity().overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
