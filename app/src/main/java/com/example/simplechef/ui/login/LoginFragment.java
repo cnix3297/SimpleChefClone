@@ -38,29 +38,29 @@ public class LoginFragment extends Fragment {
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewEmail, textViewPassword;
+    private FirebaseAuth mAuth;
 
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
-
-
-
-
-
-
-
-
-
+    public FirebaseAuth getmAuth() {
+        return mAuth;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
     }
 
@@ -165,20 +165,20 @@ public class LoginFragment extends Fragment {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            LoginActivity.updateUI(user);
+                            ((LoginActivity)getActivity()).updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast toast = Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT);
                             toast.show();
-                            LoginActivity.updateUI(null);
+                            ((LoginActivity)getActivity()).updateUI(null);
                         }
 
                         // ...
@@ -189,24 +189,25 @@ public class LoginFragment extends Fragment {
     public void signInWithEmailandPassword(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            LoginActivity.updateUI(user);
+                            ((LoginActivity)getActivity()).updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(getActivity(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            LoginActivity.updateUI(null);
+                            ((LoginActivity)getActivity()).updateUI(null);
                         }
 
                         // ...
                     }
                 });
     }
+
 }

@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager){
+
+
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new LoginFragment(), "Login");
@@ -76,13 +78,15 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signOut();
 
         // google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+/*        mGoogleSignInClient.signOut().addOnCompleteListener(this,
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         updateUI(null);
                     }
                 });
+*/
+
     }
 
 
@@ -100,5 +104,6 @@ public class LoginActivity extends AppCompatActivity {
             setupViewPager(viewPager);
         }
     }
+
 
 }

@@ -23,6 +23,7 @@ import com.example.simplechef.util.GlideApp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import static android.support.constraint.Constraints.TAG;
@@ -32,11 +33,18 @@ public class SignUpFragment extends Fragment {
     private Button buttonSignUp;
     private TextView textViewEmail;
     private TextView textViewPassword;
-
     private ImageView imageViewBackground;
     private Toolbar toolbar;
 
+    private FirebaseAuth mAuth;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        mAuth = FirebaseAuth.getInstance();
+    }
 
     @Nullable
     @Override
@@ -99,20 +107,20 @@ public class SignUpFragment extends Fragment {
 
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            LoginActivity.updateUI(user);
+                            ((LoginActivity)getActivity()).updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getActivity(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            LoginActivity.updateUI(null);
+                            ((LoginActivity)getActivity()).updateUI(null);
                         }
 
                         // ...

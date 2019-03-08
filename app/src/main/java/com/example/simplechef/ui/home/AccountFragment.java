@@ -20,11 +20,11 @@ import android.widget.TextView;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.login.LoginActivity;
-import com.facebook.AccessToken;
+/*import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
+import com.facebook.login.LoginManager;*/
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -132,7 +132,7 @@ public class AccountFragment extends Fragment {
                     }
                 });
                 break;
-            case "Facebook":
+/*            case "Facebook":
                 if (AccessToken.getCurrentAccessToken() == null) {
                     return; // already logged out
                 }
@@ -150,7 +150,7 @@ public class AccountFragment extends Fragment {
                 startActivity(myIntent);
                 getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
 
-                break;
+                break;*/
         }
 
     }
