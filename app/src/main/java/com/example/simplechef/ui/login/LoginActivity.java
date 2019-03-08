@@ -70,27 +70,6 @@ public class LoginActivity extends AppCompatActivity {
         viewPager.setCurrentItem(FragmentNumber);
     }
 
-
-
-    public void signOut() {
-
-        // firebase sign out
-        mAuth.signOut();
-
-        // google sign out
-/*        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(null);
-                    }
-                });
-*/
-
-    }
-
-
-
     public void updateUI(FirebaseUser user) {
         // check to see if a user is already logged in or not
         if (user != null) {
