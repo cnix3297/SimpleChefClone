@@ -1,14 +1,9 @@
 package com.example.simplechef.ui.login;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,35 +13,20 @@ import android.widget.TextView;
 
 
 //Google SDK Imports
-import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.R;
-import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.util.GlideApp;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
 
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LoginFragment extends Fragment {
     private Button buttonLogIn, buttonSignUp, buttonSignOut, buttonGoogleLogin, buttonFacebookLogin;
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewEmail, textViewPassword;
-    private ConstraintLayout loginCountainer;
 
-    //Fragment Class
-    private SectionsStatePagerAdapter sectionsStatePagerAdapter;
-
-    //ViewPager
-    private ViewPager viewPager;
-
-    //Circle Image View
-    private CircleImageView circleImageViewProfilePic;
-
-    //CallBackManager
-    private CallbackManager callbackManager;
-    private Context context = ((LoginActivity)(getActivity()));
-
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -56,11 +36,13 @@ public class LoginFragment extends Fragment {
 
         setupUiElements(view);
         setupImages(view);
+
         return view;
-
     }
-    public void setupUiElements(View view) {
 
+
+
+    public void setupUiElements(View view) {
 
         imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
 
@@ -116,117 +98,6 @@ public class LoginFragment extends Fragment {
                 .centerCrop()
                 .into(imageViewBackground);
     }
-/*
-
-    private void signInGoogle() {
-        // Configure Google Sign In
-        GoogleSignInClient mGoogleSignInClient;
-
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-    }
-
-
-    private void signInFacebook() {
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().setLoginBehavior(LoginBehavior.WEB_ONLY);
-
-        LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
-
-
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-
-                        //Graph Request
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                loginResult.getAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(
-                                            JSONObject object,
-                                            GraphResponse response) {
-                                        Intent myIntent = new Intent(getActivity(), HomeActivity.class);
-                                        myIntent.putExtras(getFacebookData(object));
-                                        startActivity(myIntent);
-                                        getActivity().overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                                    }
-                                });
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,email,gender, birthday");
-                        request.setParameters(parameters);
-                        request.executeAsync();
-
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.d("STATE", "Facebook Login Canceled");
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                        Log.d("STATE", exception.toString());
-
-                    }
-                });
-    }
-
-    private Bundle getFacebookData(JSONObject object) {
-        Bundle bundle = new Bundle();
-
-        try {
-            String id = object.getString("id");
-            URL profile_pic;
-            try {
-                profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
-                Log.i("profile_pic", profile_pic + "");
-                bundle.putString("profile_pic", profile_pic.toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            bundle.putString("idFacebook", id);
-            if (object.has("name"))
-                bundle.putString("name", object.getString("name"));
-            if (object.has("birthday"))
-                bundle.putString("birthday", object.getString("birthday"));
-            if (object.has("gender"))
-                bundle.putString("gender", object.getString("gender"));
-
-        } catch (Exception e) {
-            Log.d("Bundle Exception: ", "BUNDLE Exception : " + e.toString());
-        }
-
-        return bundle;
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-*/
 
 
 }

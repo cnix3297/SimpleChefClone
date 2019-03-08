@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
-    private SectionsStatePagerAdapter sectionsStatePagerAdapter;
     private ViewPager viewPager;
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -48,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // initialize auth
         mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signInWithEmailandPassword(String email, String password) {
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -203,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             // send to login fragment
-            sectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+            SectionsStatePagerAdapter sectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
             viewPager = (ViewPager) findViewById(R.id.fragmentContainer);
             setupViewPager(viewPager);
         }
