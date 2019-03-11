@@ -12,7 +12,7 @@ import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
 import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
 
-public class activity_recipe_create extends AppCompatActivity implements recipe_create_fragment_s1.onRecipeChangeIngredientListener, fragment_recipe_create_direction.onRecipeChangeDirectionListener {
+public class activity_recipe_create extends AppCompatActivity implements recipe_create_fragment_s1.onRecipeChangeIngredientListener, fragment_recipe_create_direction.onRecipeChangeDirectionListener, fragment_recipe_create_extra1.onRecipeChangeExtraListener {
     ViewPager fragmentContainer;
     Recipe mainRecipe;
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,4 +45,13 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
     public void onRecipeChangeDirectionListenerMethod(Recipe recipe) {
         mainRecipe.setDirections(recipe.getDirections());
     }
+
+    @Override
+    public void onRecipeChangeExtraListenerMethod(Recipe recipe) {
+        mainRecipe.setDescription(recipe.getDescription());
+        mainRecipe.setCost(recipe.getCost());
+        mainRecipe.setCompletionTime(recipe.getCompletionTime());
+    }
+
+
 }

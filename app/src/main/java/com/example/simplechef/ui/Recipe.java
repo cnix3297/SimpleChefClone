@@ -163,6 +163,7 @@ private class Ingredient{
 private class Direction{
     private String direction;
     private int order;
+
     Direction(String direction, int order){
         this.direction = direction;
         this.order = order;
