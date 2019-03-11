@@ -1,5 +1,6 @@
 package com.example.simplechef.ui;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import com.example.simplechef.RecipeAPI;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class Recipe {
         private String description;
-        private Image picture;
+        private Bitmap picture;
         private String date;
         private int completionTime;
         private double cost;
@@ -69,11 +70,11 @@ public class Recipe {
 
         }
 
-        public Image getPicture() {
+        public Bitmap getPicture() {
             return picture;
         }
 
-        public void setPicture(Image picture) {
+        public void setPicture(Bitmap picture) {
             this.picture = picture;
 
         }
