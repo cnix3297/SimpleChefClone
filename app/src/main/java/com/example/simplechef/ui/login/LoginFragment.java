@@ -59,9 +59,11 @@ public class LoginFragment extends Fragment {
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewEmail, textViewPassword;
     private FirebaseAuth mAuth;
-
+    private FirebaseUser currentUser;
+/*
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
+*/
 
     private CallbackManager callbackManager;
 
@@ -76,6 +78,7 @@ public class LoginFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+/*
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -84,6 +87,7 @@ public class LoginFragment extends Fragment {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+*/
 
     }
 
@@ -143,7 +147,7 @@ public class LoginFragment extends Fragment {
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInGoogle();
+                ((LoginActivity)getActivity()).signInGoogle();
             }
         });
     }
@@ -158,6 +162,7 @@ public class LoginFragment extends Fragment {
                 .into(imageViewBackground);
     }
 
+/*
 
     public void signInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -208,6 +213,7 @@ public class LoginFragment extends Fragment {
                     }
                 });
     }
+*/
 
     public void signInWithEmailandPassword(String email, String password) {
 
@@ -218,8 +224,8 @@ public class LoginFragment extends Fragment {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            ((LoginActivity)getActivity()).updateUI(user);
+                            currentUser = mAuth.getCurrentUser();
+                            ((LoginActivity)getActivity()).updateUI(currentUser);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
