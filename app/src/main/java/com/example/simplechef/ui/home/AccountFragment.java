@@ -59,11 +59,11 @@ public class AccountFragment extends Fragment {
         final String LoginAccount;
         if(intent.hasExtra("AccountG")){
             LoginType = "Google";
-            InitializeGoogle();
+            //InitializeGoogle();
         }
         else{
             LoginType = "Facebook";
-            InitializeFacebook();
+            //InitializeFacebook();
         }
 
         //buttonSignOut click listener for google

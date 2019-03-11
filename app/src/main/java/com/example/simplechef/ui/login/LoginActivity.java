@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // initialize auth
         mAuth = FirebaseAuth.getInstance();
+/*
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -57,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+*/
 
     }
 
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void signOut() {
         mAuth.signOut();
-
+/*
         // google sign out
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
                 new OnCompleteListener<Void>() {
@@ -94,8 +96,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         updateUI(null);
                     }
-                });
+                });*/
     }
+/*
 
     public void signInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -144,6 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+*/
 
     public void updateUI(FirebaseUser user) {
         // check to see if a user is already logged in or not
