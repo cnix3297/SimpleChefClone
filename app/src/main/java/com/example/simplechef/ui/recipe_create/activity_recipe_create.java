@@ -11,10 +11,17 @@ import com.example.simplechef.R;
 
 import com.example.simplechef.ui.Recipe;
 import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Collection;
+import java.util.Date;
 
 public class activity_recipe_create extends AppCompatActivity implements recipe_create_fragment_s1.onRecipeChangeIngredientListener, fragment_recipe_create_direction.onRecipeChangeDirectionListener, fragment_recipe_create_extra1.onRecipeChangeExtraListener {
     ViewPager fragmentContainer;
     Recipe mainRecipe;
+    /*private FirebaseFirestore db;*/
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_create);
@@ -22,6 +29,7 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
          fragmentContainer= (ViewPager) findViewById(R.id.activity_create_recipe_fragment_view);
 
         setupViewPager(fragmentContainer);
+        /*db = FirebaseFirestore.getInstance();*/
     }
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
@@ -48,9 +56,18 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
 
     @Override
     public void onRecipeChangeExtraListenerMethod(Recipe recipe) {
-        mainRecipe.setDescription(recipe.getDescription());
+        /*mainRecipe.setDescription(recipe.getDescription());
+        Log.d("description passed", "onRecipeChangeExtraListenerMethod: ");
         mainRecipe.setCost(recipe.getCost());
+        Log.d("cost passed", "onRecipeChangeExtraListenerMethod: ");
         mainRecipe.setCompletionTime(recipe.getCompletionTime());
+        Log.d("time passed", "onRecipeChangeExtraListenerMethod: ");
+        CollectionReference dbRecipe = db.collection("Recipe");
+        Log.d("dbRecipe passed", "onRecipeChangeExtraListenerMethod: ");
+        recipe.setRank(5);
+        recipe.setDate(new Date().toString());
+        Log.d(recipe.getDate(), "onRecipeChangeExtraListenerMethod: ");
+        dbRecipe.add(mainRecipe);*/
     }
 
 

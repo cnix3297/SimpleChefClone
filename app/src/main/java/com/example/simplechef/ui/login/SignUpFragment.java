@@ -45,8 +45,8 @@ public class SignUpFragment extends Fragment {
 
         //Toolbar setup
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
+        /*((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);*/
+        /*((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");*/
 
         imageViewBackground = (ImageView)view.findViewById(R.id.imageViewBackground);
         setupImages(view);

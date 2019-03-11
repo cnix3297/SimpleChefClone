@@ -9,7 +9,12 @@ import java.util.ArrayList;
 
 public class Recipe {
         private String description;
-        private Bitmap picture;
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    /*private Bitmap picture;*/
         private String date;
         private int completionTime;
         private double cost;
@@ -61,6 +66,7 @@ public class Recipe {
 
 
 
+
     public String getDescription() {
             return description;
         }
@@ -70,14 +76,14 @@ public class Recipe {
 
         }
 
-        public Bitmap getPicture() {
+        /*public Bitmap getPicture() {
             return picture;
         }
 
         public void setPicture(Bitmap picture) {
             this.picture = picture;
 
-        }
+        }*/
 
         public String getDate() {
             return date;

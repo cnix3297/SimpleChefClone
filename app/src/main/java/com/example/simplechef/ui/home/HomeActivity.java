@@ -1,5 +1,6 @@
 package com.example.simplechef.ui.home;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
+import com.example.simplechef.ui.recipe_create.activity_recipe_create;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -33,7 +35,9 @@ public class HomeActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(0);
                         return true;
                     case R.id.menuSearch:
-                        viewPager.setCurrentItem(1);
+                        Intent myIntent = new Intent(getBaseContext(), activity_recipe_create.class);
+
+                        startActivity(myIntent);
                         return true;
                     case R.id.menuAccount:
                         viewPager.setCurrentItem(2);
