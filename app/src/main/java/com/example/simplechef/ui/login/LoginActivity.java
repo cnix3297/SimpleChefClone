@@ -70,6 +70,11 @@ public class LoginActivity extends AppCompatActivity {
         viewPager.setCurrentItem(FragmentNumber);
     }
 
+    public void signOut() {
+        mAuth.signOut();
+        updateUI(null);
+    }
+
     public void updateUI(FirebaseUser user) {
         // check to see if a user is already logged in or not
         if (user != null) {
