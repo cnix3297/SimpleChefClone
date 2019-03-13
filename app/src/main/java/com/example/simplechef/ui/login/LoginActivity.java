@@ -42,14 +42,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
         currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
 
     private void setupViewPager(ViewPager viewPager){
-
-
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new LoginFragment(), "Login");
@@ -59,22 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void setViewPager(int FragmentNumber){
         viewPager.setCurrentItem(FragmentNumber);
-    }
-
-
-
-    public void signOut() {
-        mAuth.signOut();
-
-/*
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(null);
-                    }
-                });*/
     }
 
     public void updateUI(FirebaseUser user) {
@@ -90,6 +71,4 @@ public class LoginActivity extends AppCompatActivity {
             setupViewPager(viewPager);
         }
     }
-
-
 }

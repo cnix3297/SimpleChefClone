@@ -45,11 +45,6 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;*/
 
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -65,10 +60,6 @@ public class LoginFragment extends Fragment {
 
     //private CallbackManager callbackManager;
 
-
-    public FirebaseAuth getmAuth() {
-        return mAuth;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
