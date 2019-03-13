@@ -53,5 +53,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
     //Bottom Navigation View
     implementation 'com.android.support:design:28.0.0'
-    implementation files('src/main/res/libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.jar')
+    implementation files('build/libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.jar')
 }

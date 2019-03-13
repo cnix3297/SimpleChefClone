@@ -25,7 +25,7 @@ public class fragment_recipe_create_extra1 extends Fragment {
         ImageView picture;
         EditText  price,time,description;
         Button okay;
-        Recipe recipe = new Recipe();
+        Recipe recipe;
         onRecipeChangeExtraListener onRecipeChangeExtraListenerVar;
 
 
@@ -46,6 +46,7 @@ public class fragment_recipe_create_extra1 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_recipe_create_extra1, container, false);
         setObjects(view);
+        recipe = new Recipe();
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,18 +54,19 @@ public class fragment_recipe_create_extra1 extends Fragment {
                 startActivityForResult(intent,0);
             }
         });
+
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(isInputsValid()){
+            if(true){
                 recipe.setDescription(description.getText().toString());
                 recipe.setCost(Double.parseDouble(price.getText().toString()));
                 Log.d("time", "onClick: " + time.getText().toString());
                 String[] hold = time.getText().toString().split("\\W");
                 recipe.setCompletionTime(Integer.parseInt(hold[0]) * 60 * 60 + Integer.parseInt(hold[1]) * 60);
                 Log.d("maths", "onClick: " + recipe.getCompletionTime());
-                onRecipeChangeExtraListenerVar.onRecipeChangeExtraListenerMethod(recipe);
-
+                /*onRecipeChangeExtraListenerVar.onRecipeChangeExtraListenerMethod(recipe);
+*/
                 }
             }
         });
@@ -77,7 +79,7 @@ public class fragment_recipe_create_extra1 extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
             super.onActivityResult(requestCode,resultCode,data);
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            recipe.setPicture(bitmap);
+            /*recipe.setPicture(bitmap);*/
             picture.setImageBitmap(bitmap);
     }
 
@@ -88,13 +90,16 @@ public class fragment_recipe_create_extra1 extends Fragment {
         description = view.findViewById(R.id.fragment_recipe_create_extra1_description);
         okay = view.findViewById(R.id.fragment_recipe_create_extra_Button_done);
     }
-    private boolean isInputsValid(){
+    /*private boolean isInputsValid(){
         boolean check = true;
-        if (!time.getText().toString().matches(".*\\W.{2}")){
+        if (time.getText().toString().matches(".*\\W.{2}")){
+
+            time.setBackgroundColor(0xFFFFFF);
+        }else {
             time.setBackgroundColor(0xffff0000);
             check = false;
-        }else
-            time.setBackgroundColor(0xFFFFFF);
+        }
+
 
         if(description.getText().length() == 0){
             description.setBackgroundColor(0xffff0000);
@@ -108,12 +113,12 @@ public class fragment_recipe_create_extra1 extends Fragment {
         }else
             time.setBackgroundColor(0xFFFFFF);
 
-        if(recipe.getPicture() != null){
+        if(recipe.getPicture() == null){
             check = false;
             picture.setBackgroundColor(0xffff0000);
 
         }else
             time.setBackgroundColor(0xFFFFFF);
         return check;
-    }
+    }*/
 }
