@@ -37,8 +37,8 @@
     <string name="facebook_app_id">818324508501472</string>
     <string name="fb_login_protocol_scheme">fb818324508501472</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
-   <!-- For Google Sign In -->
 
 </resources>
