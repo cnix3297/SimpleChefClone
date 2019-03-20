@@ -145,7 +145,7 @@ public class SignUpFragment extends Fragment {
         user.put("email", email);
 
         // Add a new document with a generated ID
-        db.collection("users")
+        db.collection("Users")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -160,6 +160,4 @@ public class SignUpFragment extends Fragment {
                     }
                 });
     }
-
-
 }
