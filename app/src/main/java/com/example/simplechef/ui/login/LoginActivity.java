@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.home.HomeActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,8 +19,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
 
+    private SectionsStatePagerAdapter sectionsStatePagerAdapter;
     private ViewPager viewPager;
     private static final String TAG = "LoginActivity";
 
@@ -33,20 +37,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // initialize auth
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
 
     private void setupViewPager(ViewPager viewPager){
-
-
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new LoginFragment(), "Login");
@@ -56,11 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void setViewPager(int FragmentNumber){
         viewPager.setCurrentItem(FragmentNumber);
-    }
-
-    public void signOut() {
-        mAuth.signOut();
-        updateUI(null);
     }
 
     public void updateUI(FirebaseUser user) {
@@ -76,6 +71,4 @@ public class LoginActivity extends AppCompatActivity {
             setupViewPager(viewPager);
         }
     }
-
-
 }

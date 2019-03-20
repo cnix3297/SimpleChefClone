@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 //Google SDK Imports
 import com.example.simplechef.R;
+import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.util.GlideApp;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -31,6 +32,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+/*import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookSdk;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginBehavior;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;*/
+
+
 import static android.support.constraint.Constraints.TAG;
 
 
@@ -39,13 +54,12 @@ public class LoginFragment extends Fragment {
     private ImageView imageViewBackground, imageViewGoogleIcon, imageViewOrLine1, imageViewOrLine2;
     private TextView textViewOr, textViewEmail, textViewPassword;
     private FirebaseAuth mAuth;
-
+    private FirebaseUser currentUser;
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
-    public FirebaseAuth getmAuth() {
-        return mAuth;
-    }
+    //private CallbackManager callbackManager;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -155,7 +169,6 @@ public class LoginFragment extends Fragment {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                // ...
             }
         }
     }
@@ -195,8 +208,8 @@ public class LoginFragment extends Fragment {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            ((LoginActivity)getActivity()).updateUI(user);
+                            currentUser = mAuth.getCurrentUser();
+                            ((LoginActivity)getActivity()).updateUI(currentUser);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -209,5 +222,4 @@ public class LoginFragment extends Fragment {
                     }
                 });
     }
-
 }

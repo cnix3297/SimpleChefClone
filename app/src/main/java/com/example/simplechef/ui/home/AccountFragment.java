@@ -31,6 +31,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -46,6 +47,8 @@ public class AccountFragment extends Fragment {
     private Context context;
     private View view;
     private Intent intent;
+
+    private static final String TAG = "AccountFragment";
 
 
     @Nullable
@@ -63,7 +66,7 @@ public class AccountFragment extends Fragment {
         }
         else{
             LoginType = "Facebook";
-            InitializeFacebook();
+            //InitializeFacebook();
         }
 
         //buttonSignOut click listener for google
@@ -120,6 +123,7 @@ public class AccountFragment extends Fragment {
         textViewAccountHeader.setTypeface(face);
     }
     private void signOut() {
+
         switch (LoginType) {
             case "Google":
                 mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
@@ -128,11 +132,12 @@ public class AccountFragment extends Fragment {
                         Intent myIntent = new Intent(context, LoginActivity.class);
                         startActivity(myIntent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
-
+                        Log.d(TAG, "Signing out of Google login");
                     }
                 });
                 break;
-/*            case "Facebook":
+/*
+            case "Facebook":
                 if (AccessToken.getCurrentAccessToken() == null) {
                     return; // already logged out
                 }
@@ -150,7 +155,14 @@ public class AccountFragment extends Fragment {
                 startActivity(myIntent);
                 getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
 
-                break;*/
+                break;
+*/
+            default:
+                FirebaseAuth.getInstance().signOut();
+                Intent myIntent = new Intent(context, LoginActivity.class);
+                startActivity(myIntent);
+                Log.d(TAG, "Signing out of standard login");
+                break;
         }
 
     }
