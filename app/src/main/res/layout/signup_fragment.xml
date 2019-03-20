@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
     tools:context=".ui.login.LoginActivity">
 
 
@@ -35,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/textViewUsername"
+        android:id="@+id/editTextUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
@@ -54,6 +53,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="15dp"
         android:textColorHint="@color/colorGrey"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -70,9 +70,9 @@
         android:layout_marginLeft="8dp"
         android:contentDescription="@null"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewUsername"
-        app:layout_constraintStart_toStartOf="@+id/textViewUsername"
-        app:layout_constraintTop_toTopOf="@+id/textViewUsername"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextUsername"
+        app:layout_constraintStart_toStartOf="@+id/editTextUsername"
+        app:layout_constraintTop_toTopOf="@+id/editTextUsername"
         app:srcCompat="@drawable/home_user_icon_teal" />
 
     <EditText
@@ -95,6 +95,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="15dp"
         android:textColorHint="@color/colorGrey"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,10 +135,11 @@
         android:paddingRight="10dp"
         android:paddingBottom="15dp"
         android:textColorHint="@color/colorGrey"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
     <EditText
         android:id="@+id/textViewPassword"
@@ -160,6 +162,7 @@
         android:paddingBottom="15dp"
         android:textSize="18sp"
         android:textColorHint="@color/colorGrey"
+        android:textColor="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
