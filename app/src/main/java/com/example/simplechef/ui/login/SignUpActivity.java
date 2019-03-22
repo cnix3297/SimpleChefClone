@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -102,8 +103,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                             String username = editTextUsername.getText().toString();
                             String email = editTextEmail.getText().toString();
-                            addUserToDB(username, email);
 
+                            // adds the displayName to the Firebase currentUser object
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username).build();
+
+                            addUserToDB(username, email);
                             updateUI(user);
 
                         } else {

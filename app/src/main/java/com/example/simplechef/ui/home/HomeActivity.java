@@ -6,17 +6,21 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 import com.example.simplechef.ui.recipe_create.activity_recipe_create;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SectionsStatePagerAdapter sectionsStatePagerAdapter;
     private BottomNavigationView bottomNavigationView;
+    private final static String TAG = "HomeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
