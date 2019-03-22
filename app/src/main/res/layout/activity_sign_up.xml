@@ -48,13 +48,12 @@ tools:context=".ui.login.SignUpActivity">
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="15dp"
+    android:paddingBottom="10dp"
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
     android:textSize="18sp"
     android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
@@ -90,7 +89,7 @@ tools:context=".ui.login.SignUpActivity">
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="15dp"
+    android:paddingBottom="10dp"
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
     android:textSize="18sp"
@@ -109,7 +108,6 @@ tools:context=".ui.login.SignUpActivity">
     app:layout_constraintBottom_toBottomOf="@+id/textViewPassword2"
     app:layout_constraintStart_toStartOf="@+id/textViewPassword2"
     app:layout_constraintTop_toTopOf="@+id/textViewPassword2"
-    app:layout_constraintVertical_bias="0.3"
     app:srcCompat="@drawable/lock_teal" />
 
 <EditText
@@ -130,7 +128,7 @@ tools:context=".ui.login.SignUpActivity">
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="15dp"
+    android:paddingBottom="10dp"
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
     android:textSize="18sp"
@@ -157,7 +155,7 @@ tools:context=".ui.login.SignUpActivity">
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="15dp"
+    android:paddingBottom="10dp"
     android:textSize="18sp"
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
@@ -177,7 +175,6 @@ tools:context=".ui.login.SignUpActivity">
     app:layout_constraintBottom_toBottomOf="@+id/textViewPassword"
     app:layout_constraintStart_toStartOf="@+id/textViewPassword"
     app:layout_constraintTop_toTopOf="@+id/textViewPassword"
-    app:layout_constraintVertical_bias="0.3"
     app:srcCompat="@drawable/lock_teal" />
 
 
