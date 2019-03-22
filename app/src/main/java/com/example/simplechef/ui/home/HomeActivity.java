@@ -7,6 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
 import com.example.simplechef.R;
 import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
 import com.example.simplechef.ui.recipe_create.activity_recipe_create;
@@ -26,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.authenticatedContainer);
         setupViewPager(viewPager);
 
+
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -35,12 +39,11 @@ public class HomeActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(0);
                         return true;
                     case R.id.menuSearch:
-                        Intent myIntent = new Intent(getBaseContext(), activity_recipe_create.class);
-
-                        startActivity(myIntent);
+                        viewPager.setCurrentItem(1);
                         return true;
-                    case R.id.menuAccount:
-                        viewPager.setCurrentItem(2);
+                    case R.id.imageViewAdd:
+                        Intent myIntent = new Intent(getBaseContext(), activity_recipe_create.class);
+                        startActivity(myIntent);
                         return true;
                 }
                 return false;
@@ -53,7 +56,6 @@ public class HomeActivity extends AppCompatActivity {
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new SearchFragment(), "Search");
-        adapter.addFragment(new AccountFragment(), "Account");
 
         viewPager.setAdapter(adapter);
 

@@ -7,6 +7,37 @@
     tools:context=".ui.recipe_create.activity_recipe_create"
     android:id="@+id/recipeCreateContainer">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorGreyDarkNav"
+        android:elevation="4dp"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        app:layout_constraintTop_toTopOf="@+id/activity_create_recipe_fragment_view"
+        app:popupTheme="@style/Theme.AppCompat.NoActionBar"
+        tools:layout_editor_absoluteX="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Add Ingredients"
+                android:textSize="18sp"
+                android:gravity = "center"
+                android:id="@+id/toolbar_title"
+                android:layout_weight=".8"/>
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/activity_create_recipe_fragment_view"

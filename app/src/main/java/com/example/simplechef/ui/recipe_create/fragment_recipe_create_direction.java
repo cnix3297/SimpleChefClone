@@ -45,6 +45,7 @@ public class fragment_recipe_create_direction extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_fragment_recipe_create_direction, container, false);
+
         // Inflate the layout for this fragment
         getObject(view);
         add.setOnClickListener(new View.OnClickListener() {

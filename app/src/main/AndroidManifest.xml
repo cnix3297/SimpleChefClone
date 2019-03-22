@@ -53,8 +53,7 @@
             android:label="HomeActivity"/>
 
         <activity android:name=".ui.account.AccountActivity"  />
-        <activity android:name=".ui.recipe_create.activity_recipe_create"
-            android:label= "@string/SimpleChef">
+        <activity android:name=".ui.recipe_create.activity_recipe_create" android:label= "@string/SimpleChef" >
         <!--<intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

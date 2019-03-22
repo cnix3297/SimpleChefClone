@@ -1,15 +1,22 @@
 package com.example.simplechef.ui.recipe_create;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.simplechef.R;
 
 import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,6 +29,7 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
     Recipe mainRecipe;
     /*private FirebaseFirestore db;*/
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_create);
@@ -30,6 +38,26 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
 
         setupViewPager(fragmentContainer);
         /*db = FirebaseFirestore.getInstance();*/
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setTitle("Add Ingredients!");
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            }
+        });
+
+    }
+   
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.create_recipe_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
     }
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
@@ -37,8 +65,6 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
         adapter.addFragment(new fragment_recipe_create_direction(), "direction");
         adapter.addFragment(new fragment_recipe_create_extra1(), "extra");
         viewPager.setAdapter(adapter);
-
-
     }
     public void setViewPager(int FragmentNumber){
         fragmentContainer.setCurrentItem(FragmentNumber);
@@ -69,6 +95,7 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
         Log.d(recipe.getDate(), "onRecipeChangeExtraListenerMethod: ");
         dbRecipe.add(mainRecipe);*/
     }
+
 
 
 }
