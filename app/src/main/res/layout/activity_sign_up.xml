@@ -9,15 +9,14 @@ tools:context=".ui.login.SignUpActivity">
 
 <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"
-    android:alpha="0.7"
     style="@style/ToolbarStyle"
     android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
     android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-
     />
 
 <ImageView
