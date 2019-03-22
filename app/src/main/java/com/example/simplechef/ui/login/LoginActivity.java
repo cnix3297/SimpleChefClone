@@ -40,7 +40,7 @@ import java.util.Arrays;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
+    private FirebaseUser mCurrentUser;
     private Button buttonLogIn, buttonSignUp, buttonGoogleLogin, buttonFacebookLogin;
     private ImageView imageViewBackground;
     private TextView textViewEmail, textViewPassword;
@@ -66,67 +66,36 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        mCurrentUser = mAuth.getCurrentUser();
+        updateUI(mCurrentUser);
     }
 
     private void signInFacebook() {
         mCallbackManager = CallbackManager.Factory.create();
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         LoginManager.getInstance().setLoginBehavior(LoginBehavior.WEB_ONLY);
-
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
-
-
         LoginManager.getInstance().registerCallback(mCallbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-
-
                         Log.d(TAG, "facebook:onSuccess:" + loginResult);
                         handleFacebookAccessToken(loginResult.getAccessToken());
-
-
-/*
-
-                        //Graph Request
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                loginResult.getAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(
-                                            JSONObject object,
-                                            GraphResponse response) {
-                                        Intent myIntent = new Intent(LoginActivity.this, AccountActivity.class);
-                                        myIntent.putExtras(getFacebookData(object));
-                                        startActivity(myIntent);
-                                        overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                                    }
-                                });
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,email,gender, birthday");
-                        request.setParameters(parameters);
-                        request.executeAsync();
-*/
-
-
                     }
 
                     @Override
                     public void onCancel() {
                         Log.d("STATE", "Facebook Login Canceled");
-
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
                         Log.d("STATE", exception.toString());
-
                     }
                 });
     }
+
     public void setupUiElements() {
         buttonLogIn = findViewById(R.id.buttonLogIn);
         buttonFacebookLogin = findViewById(R.id.buttonFacebookLogin);
@@ -168,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void setupImages() {
         // Glide handles auto-scaling images down to proper resolution
@@ -245,8 +213,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            currentUser = mAuth.getCurrentUser();
-                            updateUI(currentUser);
+                            mCurrentUser = mAuth.getCurrentUser();
+                            updateUI(mCurrentUser);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -254,8 +222,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
@@ -287,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void updateUI(FirebaseUser user) {
+        Log.d(TAG, "Updating UI...");
         // check to see if a user is already logged in or not
         if (user != null) {
             // send to home activity

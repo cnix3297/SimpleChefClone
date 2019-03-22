@@ -1,58 +1,36 @@
 package com.example.simplechef.ui.account;
 
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.squareup.picasso.Picasso;
-
-//Import Layout and Activity Classes
 import com.example.simplechef.R;
-import com.example.simplechef.ui.login.LoginActivity;
 
-
-import org.w3c.dom.Text;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.net.URI;
 
 public class AccountActivity extends AppCompatActivity {
-    private TextView textViewAccountHeader, textViewPersonalDetails,textViewSettingsRecipeHeader;
-    private ImageView circleImageViewProfilePic;
-    private Button buttonSignOut;
-    private GoogleSignInClient mGoogleSignInClient;
-    private Typeface face;
-    private String LoginType;
+    private static final String TAG = "AccountActivity";
+    private FirebaseUser mCurrentUser;
+    private FirebaseAuth mAuth;
+    private String mUsername, mEmail;
+    private URI mPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+
+        mUsername = mCurrentUser.getDisplayName();
+        mEmail = mCurrentUser.getEmail();
+        //TODO:  mPhoto
+
+        //TODO:  display these on Account page UI
+
     }
-
-
 }
 
