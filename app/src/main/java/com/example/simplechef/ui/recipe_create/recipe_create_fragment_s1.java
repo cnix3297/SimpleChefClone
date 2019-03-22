@@ -1,21 +1,13 @@
 package com.example.simplechef.ui.recipe_create;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentContainer;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +18,6 @@ import android.widget.TextView;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.ui.Recipe;
-import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
-import com.google.api.Distribution;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

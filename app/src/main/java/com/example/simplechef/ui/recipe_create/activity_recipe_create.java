@@ -2,27 +2,17 @@ package com.example.simplechef.ui.recipe_create;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.simplechef.R;
 
 import com.example.simplechef.ui.Recipe;
 import com.example.simplechef.ui.home.HomeActivity;
-import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Collection;
-import java.util.Date;
+import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 
 public class activity_recipe_create extends AppCompatActivity implements recipe_create_fragment_s1.onRecipeChangeIngredientListener, fragment_recipe_create_direction.onRecipeChangeDirectionListener, fragment_recipe_create_extra1.onRecipeChangeExtraListener {
     ViewPager fragmentContainer;
