@@ -7,26 +7,17 @@
     tools:context=".ui.account.AccountActivity">
 
 
-
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#272828"
+        android:background="@android:color/transparent"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/imageViewBackgroundCircleImage"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/settings_background_gradient">
-
-        </android.support.constraint.ConstraintLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageViewProfilePic"
@@ -102,39 +93,6 @@
                 app:layout_constraintTop_toTopOf="@id/buttonEditProfile" />
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="333dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/buttonPreferences"
-                android:layout_width="333dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@android:color/transparent"
-                android:paddingLeft="20dp"
-                android:text="@string/Preferences"
-                android:textAlignment="textStart"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="16dp"
-
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/settings_greater_icon"
-                app:layout_constraintEnd_toEndOf="@id/buttonPreferences"
-                app:layout_constraintTop_toTopOf="@id/buttonPreferences" />
-        </android.support.constraint.ConstraintLayout>
 
         <TextView
             android:id="@+id/textViewSettingsRecipeHeader"

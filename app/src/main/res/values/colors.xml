@@ -13,4 +13,5 @@
    <color name="colorGreyLight">#f2f2f2</color>
     <color name="colorGrey">#b3b3b3</color>
     <color name="colorGreyDark">#404040</color>
+    <color name="colorGreyDarkNav">#3D3D3F</color>
 </resources>

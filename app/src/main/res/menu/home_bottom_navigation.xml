@@ -12,10 +12,9 @@
         app:showAsAction="ifRoom|withText" >
 
     </item>
-    <item android:id="@+id/menuAccount"
-        android:title="@string/Account"
-        android:icon="@drawable/home_user_icon"
-
+    <item android:id="@+id/imageViewAdd"
+        android:title="Recipes"
+        android:icon="@drawable/add_circle"
         app:showAsAction="ifRoom|withText" >
 
     </item>
