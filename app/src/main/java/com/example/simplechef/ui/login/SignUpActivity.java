@@ -108,7 +108,9 @@ public class SignUpActivity extends AppCompatActivity {
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(username).build();
 
-                            addUserToDB(username, email);
+                            user.updateProfile(profileUpdates);
+
+                            //addUserToDB(username, email);
                             updateUI(user);
 
                         } else {
@@ -121,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-
+/*
     private void addUserToDB(String username, String email) {
         Map<String, Object> user = new HashMap<>();
         user.put("username", username);
@@ -143,6 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+*/
 
     public void updateUI(FirebaseUser user) {
         // check to see if a user is already logged in or not
