@@ -32,6 +32,7 @@ tools:context=".ui.login.SignUpActivity">
 
 <EditText
     android:id="@+id/editTextUsername"
+    android:alpha=".8"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="27dp"
@@ -39,7 +40,6 @@ tools:context=".ui.login.SignUpActivity">
     android:layout_marginTop="180dp"
     android:layout_marginEnd="27dp"
     android:layout_marginRight="27dp"
-    android:backgroundTint="@color/colorGrey"
     android:gravity="start"
     android:hint="@string/UsernameOnly"
     android:inputType="text"
@@ -52,6 +52,7 @@ tools:context=".ui.login.SignUpActivity">
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
     android:textSize="18sp"
+    android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,6 @@ tools:context=".ui.login.SignUpActivity">
 
 <ImageView
     android:id="@+id/imageViewUserIcon"
-    android:alpha="0.7"
     android:layout_width="28dp"
     android:layout_height="28dp"
     android:layout_marginStart="8dp"
@@ -74,7 +74,7 @@ tools:context=".ui.login.SignUpActivity">
 
 <EditText
     android:id="@+id/textViewPassword2"
-    android:backgroundTint="@color/colorGrey"
+    android:alpha=".8"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="27dp"
@@ -94,13 +94,13 @@ tools:context=".ui.login.SignUpActivity">
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
     android:textSize="18sp"
+    android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textViewPassword" />
 
 <ImageView
     android:id="@+id/imageViewLockIcon2"
-    android:alpha="0.7"
     android:layout_width="25dp"
     android:layout_height="25dp"
     android:layout_marginStart="8dp"
@@ -114,6 +114,7 @@ tools:context=".ui.login.SignUpActivity">
 
 <EditText
     android:id="@+id/textViewEmail"
+    android:alpha=".8"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="27dp"
@@ -121,7 +122,6 @@ tools:context=".ui.login.SignUpActivity">
     android:layout_marginTop="24dp"
     android:layout_marginEnd="27dp"
     android:layout_marginRight="27dp"
-    android:backgroundTint="@color/colorGrey"
     android:gravity="start"
     android:hint="@string/Email"
     android:inputType="textEmailAddress"
@@ -134,13 +134,14 @@ tools:context=".ui.login.SignUpActivity">
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
     android:textSize="18sp"
+    android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
 <EditText
     android:id="@+id/textViewPassword"
-    android:backgroundTint="@color/colorGrey"
+    android:alpha=".8"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="27dp"
@@ -160,13 +161,13 @@ tools:context=".ui.login.SignUpActivity">
     android:textSize="18sp"
     android:textColorHint="@color/colorGrey"
     android:textColor="@color/colorBlack"
+    android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
 <ImageView
     android:id="@+id/imageViewLockIcon"
-    android:alpha="0.7"
     android:layout_width="25dp"
     android:layout_height="25dp"
     android:layout_marginStart="8dp"
@@ -200,7 +201,6 @@ tools:context=".ui.login.SignUpActivity">
 
 <ImageView
     android:id="@+id/imageViewEmailIcon"
-    android:alpha="0.7"
     android:layout_width="24dp"
     android:layout_height="27dp"
     android:layout_marginStart="8dp"
