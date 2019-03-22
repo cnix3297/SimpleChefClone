@@ -1,21 +1,18 @@
 package com.example.simplechef.ui.login;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import com.example.simplechef.ui.home.HomeActivity;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 
 import com.example.simplechef.R;
 import com.example.simplechef.util.GlideApp;
@@ -32,43 +29,51 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.support.constraint.Constraints.TAG;
-
-public class SignUpFragment extends Fragment {
-
+public class SignUpActivity extends AppCompatActivity {
     private Button buttonSignUp;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextUsername;
     private ImageView imageViewBackground;
     private Toolbar toolbar;
-
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private final static String TAG = "SignUpActivity";
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        setupToolbar();
+        setupUiElements();
+        setupImages();
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    private void setupToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Sign Up");
+    }
 
-        //View To Return
-        View view = inflater.inflate(R.layout.signup_fragment,container,false);
+    private void setupImages() {
+        // Glide handles auto-scaling images down to proper resolution
+        GlideApp
+                .with(this)
+                .load(R.drawable.signup_background)
+                .centerCrop()
+                .into(imageViewBackground);
+    }
 
-
-        //Toolbar setup
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
-
-        setupUiElements(view);
-        setupImages(view);
+    private void setupUiElements() {
+        imageViewBackground = findViewById(R.id.imageViewBackground);
+        buttonSignUp = findViewById(R.id.buttonSignUp);
+        editTextEmail = findViewById(R.id.textViewEmail);
+        editTextPassword =findViewById(R.id.textViewPassword);
+        editTextUsername = findViewById(R.id.editTextUsername);
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,38 +86,13 @@ public class SignUpFragment extends Fragment {
 
             }
         });
-
-        return view;
-    }
-
-    private void setupImages(View view) {
-        // Glide handles auto-scaling images down to proper resolution
-
-        GlideApp
-                .with(view)
-                .load(R.drawable.signup_background)
-                .centerCrop()
-                .into(imageViewBackground);
-    }
-
-    private void setupUiElements(View view) {
-
-        imageViewBackground = (ImageView) view.findViewById(R.id.imageViewBackground);
-        buttonSignUp = view.findViewById(R.id.buttonSignUp);
-        editTextEmail = view.findViewById(R.id.textViewEmail);
-        editTextPassword = view.findViewById(R.id.textViewPassword);
-        editTextUsername = view.findViewById(R.id.editTextUsername);
-
     }
 
 
     public void createAccount(String email, String password) {
-
         Log.d(TAG, "Create Account:"+email);
-
-
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -124,17 +104,15 @@ public class SignUpFragment extends Fragment {
                             String email = editTextEmail.getText().toString();
                             addUserToDB(username, email);
 
-                            ((LoginActivity)getActivity()).updateUI(user);
+                            updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(getActivity(), "Authentication failed.",
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            ((LoginActivity)getActivity()).updateUI(null);
+                            updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
@@ -159,5 +137,14 @@ public class SignUpFragment extends Fragment {
                         Log.w(TAG, "Error adding document");
                     }
                 });
+    }
+
+    public void updateUI(FirebaseUser user) {
+        // check to see if a user is already logged in or not
+        if (user != null) {
+            // send to home activity
+            Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }

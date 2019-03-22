@@ -7,11 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.login.SectionsStatePagerAdapter;
+import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 import com.example.simplechef.ui.recipe_create.activity_recipe_create;
 
 public class HomeActivity extends AppCompatActivity {
