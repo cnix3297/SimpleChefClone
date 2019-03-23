@@ -10,18 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="133dp"
-            android:layout_marginLeft="133dp"
-            android:layout_marginTop="16dp"
-            android:text="Finishing up"
-            android:textSize="20sp"
-            app:fontFamily="@font/berkshire_regular"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <EditText
             android:id="@+id/fragment_recipe_create_price"

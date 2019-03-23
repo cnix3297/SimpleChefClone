@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.simplechef.R;
 
@@ -18,6 +19,7 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
     ViewPager fragmentContainer;
     Recipe mainRecipe;
     /*private FirebaseFirestore db;*/
+    private TextView toolbar_title;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +32,26 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
         /*db = FirebaseFirestore.getInstance();*/
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setTitle("Add Ingredients!");
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Add Ingredients");
 
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                if(fragmentContainer.getCurrentItem() == 0){
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                }
+                else {
+                    setViewPager(fragmentContainer.getCurrentItem() - 1);
+
+                }
             }
         });
 
     }
-   
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.create_recipe_toolbar, menu);

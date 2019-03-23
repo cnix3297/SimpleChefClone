@@ -8,20 +8,10 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="105dp"
-            android:layout_marginLeft="105dp"
-            android:layout_marginTop="16dp"
-            android:text="Directions"
-            android:textSize="24sp"
-            app:fontFamily="@font/berkwash"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <EditText
             android:id="@+id/fragment_recipe_create_TextBox_input"
@@ -33,7 +23,7 @@
             android:ems="10"
             android:inputType="textMultiLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
         <Button
             android:id="@+id/fragment_recipe_create_direction_Button_add"

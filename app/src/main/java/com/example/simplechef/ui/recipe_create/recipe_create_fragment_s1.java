@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,12 +29,14 @@ import java.util.ArrayList;
 public class recipe_create_fragment_s1 extends Fragment {
     Spinner measurement;
     EditText quantity,ingredientName,price;
-    Button addIngredient,next, delete;
+    Button addIngredient, next, delete;
+
     LinearLayout listIngredient;
-    TextView error;
+    TextView error, textToolbar;
     Recipe recipe = new Recipe();
     int count = 0;
     onRecipeChangeIngredientListener onRecipeChangeIngredientListenerVar;
+
 
 
 
@@ -59,7 +62,8 @@ public class recipe_create_fragment_s1 extends Fragment {
         // Inflate the layout for this fragment
 
         getWindowObjects(view);
-
+        textToolbar = ((activity_recipe_create)getActivity()).findViewById(R.id.toolbar_title);
+        textToolbar.setText("Add Ingredients");
         //items are being added but spinner is not visible
         final ArrayList<String> list = new ArrayList<>();
         list.add("tsp");
@@ -71,6 +75,7 @@ public class recipe_create_fragment_s1 extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, list);
         measurement.setAdapter(adapter);
         measurement.setPadding(8,8,8,8);
+        measurement.setPrompt("Metric");
         Log.d("spinner", measurement.getSelectedItem() + "");
 
 

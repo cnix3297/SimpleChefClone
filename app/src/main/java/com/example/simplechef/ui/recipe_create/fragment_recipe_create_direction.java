@@ -24,6 +24,7 @@ public class fragment_recipe_create_direction extends Fragment {
     LinearLayout outPut;
     Button add, delete, next;
     int count = 1;
+    TextView textToolbar;
     Recipe recipe = new Recipe();
     onRecipeChangeDirectionListener onRecipeChangeDirectionListenerVar;
 
@@ -48,6 +49,8 @@ public class fragment_recipe_create_direction extends Fragment {
 
         // Inflate the layout for this fragment
         getObject(view);
+        textToolbar = ((activity_recipe_create)getActivity()).findViewById(R.id.toolbar_title);
+        textToolbar.setText("Add Directions");
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

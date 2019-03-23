@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
@@ -26,6 +27,7 @@ public class fragment_recipe_create_extra1 extends Fragment {
         EditText  price,time,description;
         Button okay;
         Recipe recipe;
+        TextView textToolbar;
         onRecipeChangeExtraListener onRecipeChangeExtraListenerVar;
 
 
@@ -46,6 +48,8 @@ public class fragment_recipe_create_extra1 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_recipe_create_extra1, container, false);
         setObjects(view);
+        textToolbar = ((activity_recipe_create)getActivity()).findViewById(R.id.toolbar_title);
+        textToolbar.setText("Price/Picture");
         recipe = new Recipe();
         picture.setOnClickListener(new View.OnClickListener() {
             @Override

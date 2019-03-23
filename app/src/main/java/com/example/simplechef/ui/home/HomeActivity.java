@@ -6,8 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
@@ -52,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
     }
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
@@ -65,5 +67,6 @@ public class HomeActivity extends AppCompatActivity {
     public void setViewPager(int FragmentNumber){
         viewPager.setCurrentItem(FragmentNumber);
     }
+
 
 }
