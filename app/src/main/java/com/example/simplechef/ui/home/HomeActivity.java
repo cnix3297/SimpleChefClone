@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     private ViewPager viewPager;
     private SectionsStatePagerAdapter sectionsStatePagerAdapter;
     private BottomNavigationView bottomNavigationView;
@@ -54,6 +55,9 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
     }
     private void setupViewPager(ViewPager viewPager){
