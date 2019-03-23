@@ -10,13 +10,6 @@
 
     <style name="ToolbarStyle">
         <item name="android:background">@color/colorPrimary</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
-
-
-
 
 </resources>

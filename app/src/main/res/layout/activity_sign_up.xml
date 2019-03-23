@@ -46,7 +46,7 @@ tools:context=".ui.login.SignUpActivity">
     android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/toolbar" />
+    app:layout_constraintTop_toTopOf="parent" />
 
 
 <ImageView
