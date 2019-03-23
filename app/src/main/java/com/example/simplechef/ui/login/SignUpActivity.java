@@ -55,9 +55,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbarSignUp);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sign Up");
     }
 
     private void setupImages() {
