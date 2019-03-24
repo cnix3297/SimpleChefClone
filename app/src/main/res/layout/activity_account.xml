@@ -8,6 +8,10 @@ tools:context=".ui.login.LoginActivity"
     android:id="@+id/authenticatedConstraint">
 
 
+       <include
+           android:id="@+id/toolbar"
+           layout="@layout/toolbar_home"/>
+
     <android.support.v4.view.ViewPager
 
         android:id="@+id/authenticatedContainer"

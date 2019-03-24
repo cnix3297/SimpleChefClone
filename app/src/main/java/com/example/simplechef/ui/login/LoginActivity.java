@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = textViewPassword.getText().toString();
 
                 signInWithEmailandPassword(email, password);
+
             }
         });
 
