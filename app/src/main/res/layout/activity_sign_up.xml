@@ -6,18 +6,9 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.login.SignUpActivity">
 
-
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    style="@style/ToolbarStyle"
-    android:layout_width="match_parent"
-    android:layout_height="?android:attr/actionBarSize"
-    android:elevation="4dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    />
+    <include
+        android:id="@+id/toolbarSignUp"
+        layout="@layout/toolbar_sign_up"/>
 
 <ImageView
     android:id="@+id/imageViewBackground"
@@ -55,7 +46,7 @@ tools:context=".ui.login.SignUpActivity">
     android:background="@drawable/edit_text_box"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/toolbar" />
+    app:layout_constraintTop_toTopOf="parent" />
 
 
 <ImageView

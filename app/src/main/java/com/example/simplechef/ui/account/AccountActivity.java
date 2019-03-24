@@ -34,3 +34,141 @@ public class AccountActivity extends AppCompatActivity {
     }
 }
 
+
+
+/*
+public class AccountFragment extends Fragment {
+
+    private TextView textViewAccountHeader, textViewPersonalDetails,textViewSettingsRecipeHeader;
+    private ImageView circleImageViewProfilePic;
+    private Button buttonSignOut;
+    private GoogleSignInClient mGoogleSignInClient;
+    private Typeface face;
+    private String LoginType;
+    private Context context;
+    private View view;
+    private Intent intent;
+
+    private static final String TAG = "AccountFragment";
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //View To Return
+        view = inflater.inflate(R.layout.fragment_account, container, false);
+        context = (HomeActivity)getActivity();
+        intent = ((FragmentActivity) context).getIntent();
+        final String LoginAccount;
+        if(intent.hasExtra("AccountG")){
+            LoginType = "Google";
+            InitializeGoogle();
+        }
+        else{
+            LoginType = "Facebook";
+            //InitializeFacebook();
+        }
+
+        //buttonSignOut click listener for google
+        buttonSignOut = (Button)view.findViewById(R.id.buttonSignOut);
+        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+        return view;
+    }
+    private void InitializeGoogle(){
+        circleImageViewProfilePic = (CircleImageView)view.findViewById(R.id.circleImageViewProfilePic);
+        GoogleSignInAccount acct = intent.getParcelableExtra("AccountG");
+        //User Personal Information from GoogleSignInAccount
+        String personName = acct.getDisplayName();
+        String personGivenName = acct.getGivenName();
+        String personFamilyName = acct.getFamilyName();
+        String personEmail = acct.getEmail();
+        String personId = acct.getId();
+        Uri personPhoto = acct.getPhotoUrl();
+        Picasso.with(getActivity()).load(personPhoto).into(circleImageViewProfilePic);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail().requestIdToken("60:ED:5C:D5:F6:43:AD:EE:17:62:26:8A:B6:8F:51:72:58:04:66:16")
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
+        //Initialize fonts
+        InitializeFonts();
+
+    }
+    private void InitializeFacebook() {
+        circleImageViewProfilePic = (CircleImageView)view.findViewById(R.id.circleImageViewProfilePic);
+        Bundle bundle = intent.getExtras();
+        if(bundle.containsKey("profile_pic")) {
+            Picasso.with(getActivity()).load(bundle.getString("profile_pic")).into(circleImageViewProfilePic);
+        }
+        Log.d("INFORMATION: " , bundle.getString("idFacebook") + ":" + bundle.getString("name")+ ":" + bundle.getString("birthday")+ ":" + bundle.get("gender"));
+
+        InitializeFonts();
+    }
+    private void InitializeFonts(){
+        //Adding fonts
+        textViewPersonalDetails = (TextView) view.findViewById(R.id.textViewPersonalDetails);
+        textViewSettingsRecipeHeader = (TextView) view.findViewById(R.id.textViewSettingsRecipeHeader);
+        textViewAccountHeader = (TextView)view.findViewById(R.id.textViewAccountHeader);
+        face = Typeface.createFromAsset(getActivity().getAssets(), "figure_things.otf");
+        textViewPersonalDetails.setTypeface(face);
+        textViewSettingsRecipeHeader.setTypeface(face);
+        textViewAccountHeader.setTypeface(face);
+    }
+    private void signOut() {
+
+        switch (LoginType) {
+            case "Google":
+                mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent myIntent = new Intent(context, LoginActivity.class);
+                        startActivity(myIntent);
+                        getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
+                        Log.d(TAG, "Signing out of Google login");
+                    }
+                });
+                break;
+*/
+/*
+            case "Facebook":
+                if (AccessToken.getCurrentAccessToken() == null) {
+                    return; // already logged out
+                }
+
+                new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                        .Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse graphResponse) {
+
+                        LoginManager.getInstance().logOut();
+
+                    }
+                }).executeAsync();
+                Intent myIntent = new Intent(context, LoginActivity.class);
+                startActivity(myIntent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
+
+                break;
+*//*
+
+            default:
+                FirebaseAuth.getInstance().signOut();
+                Intent myIntent = new Intent(context, LoginActivity.class);
+                startActivity(myIntent);
+                Log.d(TAG, "Signing out of standard login");
+                break;
+        }
+
+    }
+}
+*/
+
