@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recipe_create.IngredientsFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/signup_background">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/divider_color_primary"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_button_addIngredient" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/berkwash"
+            android:text="Add Ingredients"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.547"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/IngredientsInfo"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.547"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:alpha=".5"
+            android:fontFamily="@font/berkshire_regular"
+            android:text="Ingredient"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient" />
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:alpha=".5"
+            android:fontFamily="@font/berkshire_regular"
+            android:text="Price"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_price"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_price"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_price" />
+
+        <TextView
+            android:id="@+id/textViewQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginLeft="52dp"
+            android:alpha=".5"
+            android:fontFamily="@font/berkshire_regular"
+            android:text="Quantity"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_quantity" />
+
+        <Button
+            android:id="@+id/fragment_activity_recipe_create_s1_button_addIngredient"
+            android:layout_width="161dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorPrimary"
+            android:text="+ Add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity" />
+
+        <Spinner
+            android:id="@+id/fragment_activity_recipe_create_s1_size_spinner"
+            android:layout_width="83dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+            app:layout_constraintVertical_bias="0.727" />
+
+        <EditText
+            android:id="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="1"
+            android:background="@drawable/edit_text_box"
+            android:gravity="start"
+            android:hint="Quantity"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGrey"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_price"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_price" />
+
+        <EditText
+            android:id="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+            android:layout_width="214dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="104dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:alpha="1"
+            android:background="@drawable/edit_text_box"
+            android:gravity="start"
+            android:hint="Zuccini"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="5dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGrey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.883"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/fragment_activity_recipe_create_s1_editText_price"
+            android:layout_width="214dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="1"
+            android:background="@drawable/edit_text_box"
+            android:gravity="start"
+            android:hint="Price"
+            android:inputType="numberDecimal"
+            android:paddingStart="15dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="5dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGrey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient" />
+
+        <Button
+            android:id="@+id/fragment_activity_recipe_button_delete"
+            android:layout_width="161dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorPrimaryDarker"
+            android:text="Delete Previous"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+
+        <TextView
+            android:id="@+id/fragment_activity_recipe_create_s1_TextView_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/scrollView3"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="407dp"
+            android:layout_height="178dp"
+            android:layout_marginTop="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/fragment_activity_recipe_create_s1_linearLayout_recipeView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

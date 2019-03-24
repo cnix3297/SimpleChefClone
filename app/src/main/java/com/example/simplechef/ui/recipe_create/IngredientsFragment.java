@@ -25,12 +25,13 @@ import java.util.ArrayList;
 /**
 
  */
-public class recipe_create_fragment_s1 extends Fragment {
+public class IngredientsFragment extends Fragment {
     Spinner measurement;
     EditText quantity,ingredientName,price;
-    Button addIngredient,next, delete;
+    Button addIngredient, next, delete;
+
     LinearLayout listIngredient;
-    TextView error;
+    TextView error, textToolbar;
     Recipe recipe = new Recipe();
     int count = 0;
     onRecipeChangeIngredientListener onRecipeChangeIngredientListenerVar;
@@ -39,7 +40,8 @@ public class recipe_create_fragment_s1 extends Fragment {
 
 
 
-    public recipe_create_fragment_s1() {
+
+    public IngredientsFragment() {
         // Required empty public constructor
     }
 
@@ -55,11 +57,12 @@ public class recipe_create_fragment_s1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_recipe_create_fragment_s1, container, false);
+        final View view = inflater.inflate(R.layout.fragment_recipe_create_incredients, container, false);
         // Inflate the layout for this fragment
 
         getWindowObjects(view);
-
+        textToolbar = ((CreateRecipeActivity)getActivity()).findViewById(R.id.toolbar_title);
+        textToolbar.setText("Add Ingredients");
         //items are being added but spinner is not visible
         final ArrayList<String> list = new ArrayList<>();
         list.add("tsp");
@@ -71,6 +74,7 @@ public class recipe_create_fragment_s1 extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, list);
         measurement.setAdapter(adapter);
         measurement.setPadding(8,8,8,8);
+        measurement.setPrompt("Metric");
         Log.d("spinner", measurement.getSelectedItem() + "");
 
 

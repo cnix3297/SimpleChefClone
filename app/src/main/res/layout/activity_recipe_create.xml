@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recipe_create.activity_recipe_create"
+    tools:context=".ui.recipe_create.CreateRecipeActivity"
     android:id="@+id/recipeCreateContainer">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorGreyDarkNav"
+        android:background="@color/colorDarkBlue"
         android:elevation="4dp"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         app:layout_constraintTop_toTopOf="@+id/activity_create_recipe_fragment_view"
@@ -49,10 +49,10 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="50dp"
         android:backgroundTint="@drawable/bottom_navigation_states"
         app:itemTextColor="@drawable/bottom_navigation_states"
+        android:background="@drawable/background_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/home_bottom_navigation"
         tools:layout_editor_absoluteX="0dp" />

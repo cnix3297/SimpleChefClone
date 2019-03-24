@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.simplechef.R;
 
@@ -14,10 +15,11 @@ import com.example.simplechef.ui.Recipe;
 import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 
-public class activity_recipe_create extends AppCompatActivity implements recipe_create_fragment_s1.onRecipeChangeIngredientListener, fragment_recipe_create_direction.onRecipeChangeDirectionListener, fragment_recipe_create_extra1.onRecipeChangeExtraListener {
+public class CreateRecipeActivity extends AppCompatActivity implements IngredientsFragment.onRecipeChangeIngredientListener, StepsFragment.onRecipeChangeDirectionListener, DescriptionFragment.onRecipeChangeExtraListener {
     ViewPager fragmentContainer;
     Recipe mainRecipe;
     /*private FirebaseFirestore db;*/
+    private TextView toolbar_title;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +32,26 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
         /*db = FirebaseFirestore.getInstance();*/
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setTitle("Add Ingredients!");
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Add Ingredients");
 
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                if(fragmentContainer.getCurrentItem() == 0){
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                }
+                else {
+                    setViewPager(fragmentContainer.getCurrentItem() - 1);
+
+                }
             }
         });
 
     }
-   
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.create_recipe_toolbar, menu);
@@ -51,9 +59,9 @@ public class activity_recipe_create extends AppCompatActivity implements recipe_
     }
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new recipe_create_fragment_s1(), "Ingredient");
-        adapter.addFragment(new fragment_recipe_create_direction(), "direction");
-        adapter.addFragment(new fragment_recipe_create_extra1(), "extra");
+        adapter.addFragment(new IngredientsFragment(), "Ingredient");
+        adapter.addFragment(new StepsFragment(), "direction");
+        adapter.addFragment(new DescriptionFragment(), "extra");
         viewPager.setAdapter(adapter);
     }
     public void setViewPager(int FragmentNumber){
