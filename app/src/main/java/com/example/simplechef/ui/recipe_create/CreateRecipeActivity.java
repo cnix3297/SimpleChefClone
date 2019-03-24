@@ -54,7 +54,7 @@ public class CreateRecipeActivity extends AppCompatActivity implements Ingredien
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.create_recipe_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
     private void setupViewPager(ViewPager viewPager){
