@@ -7,16 +7,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
-import com.example.simplechef.ui.recipe_create.activity_recipe_create;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -48,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(1);
                         return true;
                     case R.id.imageViewAdd:
-                        Intent myIntent = new Intent(getBaseContext(), activity_recipe_create.class);
+                        Intent myIntent = new Intent(getBaseContext(), CreateRecipeActivity.class);
                         startActivity(myIntent);
                         return true;
                 }

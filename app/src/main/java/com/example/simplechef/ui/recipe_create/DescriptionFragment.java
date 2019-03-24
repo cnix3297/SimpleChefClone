@@ -1,11 +1,7 @@
 package com.example.simplechef.ui.recipe_create;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -22,7 +18,7 @@ import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
 
 
-public class fragment_recipe_create_extra1 extends Fragment {
+public class DescriptionFragment extends Fragment {
         ImageView picture;
         EditText  price,time,description;
         Button okay;
@@ -33,7 +29,7 @@ public class fragment_recipe_create_extra1 extends Fragment {
 
 
 
-    public fragment_recipe_create_extra1() {
+    public DescriptionFragment() {
         // Required empty public constructor
     }
     public interface onRecipeChangeExtraListener
@@ -46,9 +42,9 @@ public class fragment_recipe_create_extra1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fragment_recipe_create_extra1, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_create_description, container, false);
         setObjects(view);
-        textToolbar = ((activity_recipe_create)getActivity()).findViewById(R.id.toolbar_title);
+        textToolbar = ((CreateRecipeActivity)getActivity()).findViewById(R.id.toolbar_title);
         textToolbar.setText("Price/Picture");
         recipe = new Recipe();
         picture.setOnClickListener(new View.OnClickListener() {

@@ -15,10 +15,8 @@ import android.widget.TextView;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
 
-import org.w3c.dom.Text;
 
-
-public class fragment_recipe_create_direction extends Fragment {
+public class StepsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     EditText input;
     LinearLayout outPut;
@@ -30,7 +28,7 @@ public class fragment_recipe_create_direction extends Fragment {
 
 
 
-    public fragment_recipe_create_direction() {
+    public StepsFragment() {
         // Required empty public constructor
     }
     public interface onRecipeChangeDirectionListener
@@ -45,11 +43,11 @@ public class fragment_recipe_create_direction extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_fragment_recipe_create_direction, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_create_steps, container, false);
 
         // Inflate the layout for this fragment
         getObject(view);
-        textToolbar = ((activity_recipe_create)getActivity()).findViewById(R.id.toolbar_title);
+        textToolbar = ((CreateRecipeActivity)getActivity()).findViewById(R.id.toolbar_title);
         textToolbar.setText("Add Directions");
         add.setOnClickListener(new View.OnClickListener() {
             @Override

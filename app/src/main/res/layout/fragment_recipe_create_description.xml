@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recipe_create.fragment_recipe_create_extra1">
+    tools:context=".ui.recipe_create.DescriptionFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
