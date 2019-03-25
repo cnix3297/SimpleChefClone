@@ -13,15 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.simplechef.ui.login.LoginActivity;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.example.simplechef.util.GlideApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.example.simplechef.R;
-
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,6 +30,7 @@ public class AccountActivity extends AppCompatActivity {
     private TextView textViewUsername;
     private TextView textViewEmail;
     private CircleImageView imageViewPhoto;
+    private ImageView imageViewBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +40,20 @@ public class AccountActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
-        setupToolbar();
-
+        imageViewBackground = findViewById(R.id.imageViewBackground);
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewEmail = findViewById(R.id.textViewEmail);
         imageViewPhoto = findViewById(R.id.circleImageViewProfilePic);
 
+        setupToolbar();
+        setupImages();
+
 
         mUsername = mCurrentUser.getDisplayName();
         mEmail = mCurrentUser.getEmail();
-        mPhotoURL = mCurrentUser.getPhotoUrl().toString();
-        Drawable pic = LoadImageFromWebOperations(mPhotoURL);
-
 
         textViewUsername.setText(mUsername);
         textViewEmail.setText(mEmail);
-        imageViewPhoto.setImageDrawable(pic);
     }
 
     private void setupToolbar() {
@@ -79,14 +74,13 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "is name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
+    private void setupImages() {
+        // Glide handles auto-scaling images down to proper resolution
+        GlideApp
+                .with(this)
+                .load(R.drawable.signup_background)
+                .centerCrop()
+                .into(imageViewBackground);
     }
 }
 
