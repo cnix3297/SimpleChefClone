@@ -1,14 +1,10 @@
 package com.example.simplechef.ui.account;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,15 +41,15 @@ public class AccountActivity extends AppCompatActivity {
         textViewEmail = findViewById(R.id.textViewEmail);
         imageViewPhoto = findViewById(R.id.circleImageViewProfilePic);
 
-        setupToolbar();
-        setupImages();
-
-
         mUsername = mCurrentUser.getDisplayName();
         mEmail = mCurrentUser.getEmail();
+        mPhotoURL = mCurrentUser.getPhotoUrl().toString();
 
         textViewUsername.setText(mUsername);
         textViewEmail.setText(mEmail);
+
+        setupToolbar();
+        setupImages();
     }
 
     private void setupToolbar() {
@@ -81,6 +77,11 @@ public class AccountActivity extends AppCompatActivity {
                 .load(R.drawable.signup_background)
                 .centerCrop()
                 .into(imageViewBackground);
+
+        GlideApp
+                .with(this)
+                .load(mPhotoURL)
+                .into(imageViewPhoto);
     }
 }
 
