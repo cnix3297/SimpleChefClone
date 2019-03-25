@@ -23,6 +23,7 @@ import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
+        setContentView(R.layout.activity_home);
         context = this;
         view = ((HomeActivity) context).view;
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
@@ -79,10 +80,13 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_profile:
-                Toast.makeText(this, "PROFILE", Toast.LENGTH_LONG).show();
+                Intent profileIntent = new Intent(HomeActivity.this, AccountActivity.class);
+                startActivity(profileIntent);
                 break;
             case R.id.action_signout:
-                Toast.makeText(this, "SIGNOUT", Toast.LENGTH_LONG).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent signOutIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(signOutIntent);
                 break;
             default:
                 break;
