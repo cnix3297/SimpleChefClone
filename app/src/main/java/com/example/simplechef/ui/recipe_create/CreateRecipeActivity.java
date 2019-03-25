@@ -31,6 +31,12 @@ public class CreateRecipeActivity extends AppCompatActivity implements Ingredien
         setupViewPager(fragmentContainer);
         /*db = FirebaseFirestore.getInstance();*/
 
+        setupToolbar();
+
+    }
+
+    private void setupToolbar() {
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,13 +56,14 @@ public class CreateRecipeActivity extends AppCompatActivity implements Ingredien
                 }
             }
         });
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.create_recipe_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new IngredientsFragment(), "Ingredient");

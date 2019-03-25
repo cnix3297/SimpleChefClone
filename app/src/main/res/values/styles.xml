@@ -9,12 +9,11 @@
     </style>
 
     <style name="ToolbarStyle">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorDarkBlue</item>
     </style>
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@color/colorWhite</item>
     </style>
-
 
 
 

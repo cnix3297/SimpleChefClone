@@ -1,8 +1,18 @@
 package com.example.simplechef.ui.account;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.simplechef.ui.login.LoginActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,6 +26,8 @@ public class AccountActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mUsername, mEmail;
     private URI mPhoto;
+    private TextView textViewUsername;
+    private TextView textViewEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +37,40 @@ public class AccountActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
+        setupToolbar();
+
+        textViewUsername = findViewById(R.id.textViewUsername);
+        textViewEmail = findViewById(R.id.textViewEmail);
+
+
         mUsername = mCurrentUser.getDisplayName();
         mEmail = mCurrentUser.getEmail();
         //TODO:  mPhoto
 
         //TODO:  display these on Account page UI
 
+
+
+        textViewUsername.setText(mUsername);
+        textViewEmail.setText(mEmail);
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Profile");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+
+            }
+        });
     }
 }
 

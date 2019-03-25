@@ -7,8 +7,8 @@ android:layout_height="match_parent"
 tools:context=".ui.login.SignUpActivity">
 
     <include
-        android:id="@+id/toolbarSignUp"
-        layout="@layout/toolbar_sign_up"/>
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
 <ImageView
     android:id="@+id/imageViewBackground"

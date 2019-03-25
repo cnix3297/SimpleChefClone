@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_settings"
         android:icon="@drawable/ellipsis"
         android:title=""
         app:showAsAction="always">
@@ -15,6 +14,7 @@
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/action_signout"
+                android:icon="@drawable/logout"
                 android:title="Sign Out"
                 app:showAsAction="ifRoom" />
 

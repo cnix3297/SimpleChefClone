@@ -38,7 +38,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private EditText editTextUsername;
     private ImageView imageViewBackground;
-    private Toolbar toolbar;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private final static String TAG = "SignUpActivity";
@@ -57,7 +56,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbarSignUp);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Sign Up");
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
