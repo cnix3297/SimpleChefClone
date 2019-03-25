@@ -36,7 +36,6 @@ public class CreateRecipeActivity extends AppCompatActivity implements Ingredien
     }
 
     private void setupToolbar() {
-
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

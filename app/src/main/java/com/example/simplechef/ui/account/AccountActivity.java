@@ -3,6 +3,7 @@ package com.example.simplechef.ui.account;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,16 +19,21 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.example.simplechef.R;
 
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountActivity extends AppCompatActivity {
     private static final String TAG = "AccountActivity";
     private FirebaseUser mCurrentUser;
     private FirebaseAuth mAuth;
     private String mUsername, mEmail;
-    private URI mPhoto;
+    private String mPhotoURL;
     private TextView textViewUsername;
     private TextView textViewEmail;
+    private CircleImageView imageViewPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +47,18 @@ public class AccountActivity extends AppCompatActivity {
 
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewEmail = findViewById(R.id.textViewEmail);
+        imageViewPhoto = findViewById(R.id.circleImageViewProfilePic);
 
 
         mUsername = mCurrentUser.getDisplayName();
         mEmail = mCurrentUser.getEmail();
-        //TODO:  mPhoto
-
-        //TODO:  display these on Account page UI
-
+        mPhotoURL = mCurrentUser.getPhotoUrl().toString();
+        Drawable pic = LoadImageFromWebOperations(mPhotoURL);
 
 
         textViewUsername.setText(mUsername);
         textViewEmail.setText(mEmail);
+        imageViewPhoto.setImageDrawable(pic);
     }
 
     private void setupToolbar() {
@@ -71,6 +77,16 @@ public class AccountActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "is name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
 
