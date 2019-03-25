@@ -4,7 +4,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ui.account.AccountActivity">
+tools:context=".ui.login.LoginActivity"
+    android:id="@+id/authenticatedConstraint">
+
+
+       <include
+           android:id="@+id/toolbar"
+           layout="@layout/toolbar_home"/>
 
    <include
        android:id="@+id/toolbar"
@@ -19,10 +25,13 @@ tools:context=".ui.account.AccountActivity">
         android:backgroundTint="@drawable/bottom_navigation_states"
         android:background="@drawable/background_search"
         app:itemTextColor="@drawable/bottom_navigation_states"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/authenticatedConstraint"
         app:menu="@menu/home_bottom_navigation" />
 
-
+    <include
+        android:id="@+id/editTextPopUpSearch"
+        layout="@layout/search_bar_popup"
+        android:visibility="invisible"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageViewProfilePic"

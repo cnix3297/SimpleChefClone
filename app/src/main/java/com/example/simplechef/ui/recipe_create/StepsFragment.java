@@ -48,7 +48,7 @@ public class StepsFragment extends Fragment {
         // Inflate the layout for this fragment
         getObject(view);
         textToolbar = ((CreateRecipeActivity)getActivity()).findViewById(R.id.toolbar_title);
-        textToolbar.setText("Add Directions");
+        textToolbar.setText("Info");
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
