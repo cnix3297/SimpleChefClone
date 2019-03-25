@@ -4,26 +4,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ui.login.LoginActivity"
-    android:id="@+id/authenticatedConstraint">
+tools:context=".ui.account.AccountActivity">
 
-
-       <include
-           android:id="@+id/toolbar"
-           layout="@layout/toolbar_home"/>
-
-    <android.support.v4.view.ViewPager
-
-        android:id="@+id/authenticatedContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </android.support.v4.view.ViewPager>
+   <include
+       android:id="@+id/toolbar"
+       layout="@layout/toolbar"/>
 
 
     <android.support.design.widget.BottomNavigationView
@@ -34,9 +19,53 @@ tools:context=".ui.login.LoginActivity"
         android:backgroundTint="@drawable/bottom_navigation_states"
         android:background="@drawable/background_search"
         app:itemTextColor="@drawable/bottom_navigation_states"
-        app:layout_constraintBottom_toBottomOf="@+id/authenticatedConstraint"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/home_bottom_navigation" />
 
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageViewProfilePic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:shape="ring"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/textViewUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageViewProfilePic" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
 
 </android.support.constraint.ConstraintLayout>
