@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.util.GlideApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,11 +23,9 @@ public class AccountActivity extends AppCompatActivity {
     private static final String TAG = "AccountActivity";
     private FirebaseUser mCurrentUser;
     private FirebaseAuth mAuth;
-    private String mUsername, mEmail;
-    private String mPhotoURL;
     private TextView textViewUsername;
     private TextView textViewEmail;
-    private CircleImageView imageViewPhoto;
+    private ImageView imageViewPhoto;
     private ImageView imageViewBackground;
 
     @Override
@@ -36,20 +36,42 @@ public class AccountActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
+        if (mCurrentUser == null) {
+            Log.d(TAG, "User is null!");
+        }
+
         imageViewBackground = findViewById(R.id.imageViewBackground);
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewEmail = findViewById(R.id.textViewEmail);
         imageViewPhoto = findViewById(R.id.circleImageViewProfilePic);
 
-        mUsername = mCurrentUser.getDisplayName();
-        mEmail = mCurrentUser.getEmail();
-        mPhotoURL = mCurrentUser.getPhotoUrl().toString();
+        setupToolbar();
+        setupBGImage();
+        setUserDataAndPhoto();
+    }
+
+    private void setUserDataAndPhoto() {
+        String mUsername = mCurrentUser.getDisplayName();
+        String mEmail = mCurrentUser.getEmail();
+        String mPhotoURL;
 
         textViewUsername.setText(mUsername);
         textViewEmail.setText(mEmail);
 
-        setupToolbar();
-        setupImages();
+        // sets photo from URL
+        if (mCurrentUser.getPhotoUrl() != null) {
+            mPhotoURL = mCurrentUser.getPhotoUrl().toString();
+            GlideApp
+                    .with(this)
+                    .load(mPhotoURL)
+                    .into(imageViewPhoto);
+        } else {
+            GlideApp
+                    .with(this)
+                    .load(R.drawable.no_photo)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(imageViewPhoto);
+        }
     }
 
     private void setupToolbar() {
@@ -70,7 +92,7 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
-    private void setupImages() {
+    private void setupBGImage() {
         // Glide handles auto-scaling images down to proper resolution
         GlideApp
                 .with(this)
@@ -78,10 +100,6 @@ public class AccountActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(imageViewBackground);
 
-        GlideApp
-                .with(this)
-                .load(mPhotoURL)
-                .into(imageViewPhoto);
     }
 }
 

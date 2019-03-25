@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // initialize auth
         mAuth = FirebaseAuth.getInstance();
-        mAuth.getInstance().signOut();
 
         setupUiElements();
         setupImages();
@@ -112,8 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = textViewEmail.getText().toString();
                 String password = textViewPassword.getText().toString();
 
-                //signInWithEmailandPassword(email, password);
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                signInWithEmailandPassword(email, password);
 
             }
         });

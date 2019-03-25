@@ -115,7 +115,6 @@ public class SignUpActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             String username = editTextUsername.getText().toString();
-                            String email = editTextEmail.getText().toString();
 
                             // adds the displayName to the Firebase currentUser object
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
