@@ -45,7 +45,7 @@ public class DescriptionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_create_description, container, false);
         setObjects(view);
         textToolbar = ((CreateRecipeActivity)getActivity()).findViewById(R.id.toolbar_title);
-        textToolbar.setText("Price/Picture");
+        textToolbar.setText("Directions");
         recipe = new Recipe();
         picture.setOnClickListener(new View.OnClickListener() {
             @Override

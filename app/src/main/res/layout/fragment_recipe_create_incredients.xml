@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recipe_create.IngredientsFragment">
+    tools:context=".ui.recipe_create.IngredientsFragment"
+    android:background="@drawable/signup_background">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/signup_background">
+
 
         <ImageView
             android:id="@+id/imageView2"
@@ -27,23 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_button_addIngredient" />
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/berkwash"
-            android:text="Add Ingredients"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.547"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/textView2"
@@ -51,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="@string/IngredientsInfo"
@@ -71,7 +52,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:alpha=".5"
-            android:fontFamily="@font/berkshire_regular"
             android:text="Ingredient"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
@@ -88,9 +68,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="4dp"
             android:alpha=".5"
-            android:fontFamily="@font/berkshire_regular"
             android:text="Price"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
@@ -107,13 +86,26 @@
             android:layout_marginStart="52dp"
             android:layout_marginLeft="52dp"
             android:alpha=".5"
-            android:fontFamily="@font/berkshire_regular"
             android:text="Quantity"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_quantity" />
+
+        <TextView
+            android:id="@+id/textViewList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginBottom="12dp"
+            android:alpha=".5"
+            android:text="Current List"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/fragment_activity_recipe_create_s1_button_addIngredient"
@@ -256,7 +248,7 @@
             android:id="@+id/scrollView3"
             android:layout_width="407dp"
             android:layout_height="178dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="328dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -268,5 +260,4 @@
         </ScrollView>
 
 
-    </android.support.constraint.ConstraintLayout>
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

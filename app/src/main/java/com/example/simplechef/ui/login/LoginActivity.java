@@ -112,7 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                 String email = textViewEmail.getText().toString();
                 String password = textViewPassword.getText().toString();
 
-                signInWithEmailandPassword(email, password);
+                //signInWithEmailandPassword(email, password);
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
             }
         });
