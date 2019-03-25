@@ -16,19 +16,19 @@ tools:context=".ui.account.AccountActivity">
         android:layout_width="640dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="@null"
+        android:contentDescription="@string/portrait"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/circleImageViewProfilePic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <ImageButton
+        android:id="@+id/imageButtonProfilePic"
+        android:background="@drawable/portrait_borders"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="64dp"
-        android:shape="ring"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -45,7 +45,7 @@ tools:context=".ui.account.AccountActivity">
         android:textColor="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageViewProfilePic" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonProfilePic" />
 
     <TextView
         android:id="@+id/textViewEmail"
