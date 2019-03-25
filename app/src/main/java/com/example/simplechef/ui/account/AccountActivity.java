@@ -24,6 +24,8 @@ public class AccountActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mUsername, mEmail;
     private URI mPhoto;
+    private TextView textViewUsername;
+    private TextView textViewEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,13 @@ public class AccountActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
+
+
+        //textViewUsername = findViewById(R.id.textViewUsername);
+        textViewEmail = findViewById(R.id.textViewEmail);
+
+
+
 
         mUsername = mCurrentUser.getDisplayName();
         mEmail = mCurrentUser.getEmail();
