@@ -39,7 +39,6 @@ dependencies {
     // what is this?
     implementation 'com.squareup.picasso:picasso:2.5.2'
     // what is this?
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
     // glide (imaging) dependencies
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
@@ -50,6 +49,7 @@ dependencies {
     // firebase dependencies
     implementation 'com.google.firebase:firebase-auth:16.2.0'
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
     //Bottom Navigation View
     implementation 'com.android.support:design:28.0.0'
 

@@ -1,23 +1,37 @@
 package com.example.simplechef.ui.account;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.request.RequestOptions;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.util.GlideApp;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.example.simplechef.R;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.io.ByteArrayOutputStream;
+
+import static android.widget.Toast.LENGTH_LONG;
+
 
 public class AccountActivity extends AppCompatActivity {
     private static final String TAG = "AccountActivity";
@@ -25,7 +39,7 @@ public class AccountActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView textViewUsername;
     private TextView textViewEmail;
-    private ImageView imageViewPhoto;
+    private ImageButton imageButtonPhoto;
     private ImageView imageViewBackground;
 
     @Override
@@ -36,18 +50,31 @@ public class AccountActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
-        if (mCurrentUser == null) {
-            Log.d(TAG, "User is null!");
-        }
-
         imageViewBackground = findViewById(R.id.imageViewBackground);
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewEmail = findViewById(R.id.textViewEmail);
-        imageViewPhoto = findViewById(R.id.circleImageViewProfilePic);
+        imageButtonPhoto = findViewById(R.id.imageButtonProfilePic);
+
+        imageButtonPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         setupToolbar();
         setupBGImage();
         setUserDataAndPhoto();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        // send to firebase
+        addProfilePictureToFirebase(bitmap);
     }
 
     private void setUserDataAndPhoto() {
@@ -64,13 +91,12 @@ public class AccountActivity extends AppCompatActivity {
             GlideApp
                     .with(this)
                     .load(mPhotoURL)
-                    .into(imageViewPhoto);
+                    .into(imageButtonPhoto);
         } else {
             GlideApp
                     .with(this)
                     .load(R.drawable.no_photo)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(imageViewPhoto);
+                    .into(imageButtonPhoto);
         }
     }
 
@@ -101,143 +127,50 @@ public class AccountActivity extends AppCompatActivity {
                 .into(imageViewBackground);
 
     }
-}
+
+    private void addProfilePictureToFirebase(final Bitmap bitmap) {
+        final FirebaseStorage storage = FirebaseStorage.getInstance();
+        final StorageReference profilePicturesRef = storage.getReference().child("Users/" + mCurrentUser.getUid() + "/profile_pic.jpg");
 
 
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
 
-/*
-public class AccountFragment extends Fragment {
-
-    private TextView textViewAccountHeader, textViewPersonalDetails,textViewSettingsRecipeHeader;
-    private ImageView circleImageViewProfilePic;
-    private Button buttonSignOut;
-    private GoogleSignInClient mGoogleSignInClient;
-    private Typeface face;
-    private String LoginType;
-    private Context context;
-    private View view;
-    private Intent intent;
-
-    private static final String TAG = "AccountFragment";
-
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        //View To Return
-        view = inflater.inflate(R.layout.fragment_account, container, false);
-        context = (HomeActivity)getActivity();
-        intent = ((FragmentActivity) context).getIntent();
-        final String LoginAccount;
-        if(intent.hasExtra("AccountG")){
-            LoginType = "Google";
-            InitializeGoogle();
-        }
-        else{
-            LoginType = "Facebook";
-            //InitializeFacebook();
-        }
-
-        //buttonSignOut click listener for google
-        buttonSignOut = (Button)view.findViewById(R.id.buttonSignOut);
-        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+        UploadTask uploadTask = profilePicturesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onClick(View v) {
-                signOut();
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Failure uploading file");
+                Toast.makeText(getApplicationContext(),"There was a problem uploading the image", Toast.LENGTH_LONG).show();
             }
-        });
-        return view;
-    }
-    private void InitializeGoogle(){
-        circleImageViewProfilePic = (CircleImageView)view.findViewById(R.id.circleImageViewProfilePic);
-        GoogleSignInAccount acct = intent.getParcelableExtra("AccountG");
-        //User Personal Information from GoogleSignInAccount
-        String personName = acct.getDisplayName();
-        String personGivenName = acct.getGivenName();
-        String personFamilyName = acct.getFamilyName();
-        String personEmail = acct.getEmail();
-        String personId = acct.getId();
-        Uri personPhoto = acct.getPhotoUrl();
-        Picasso.with(getActivity()).load(personPhoto).into(circleImageViewProfilePic);
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "Success uploading file");
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail().requestIdToken("60:ED:5C:D5:F6:43:AD:EE:17:62:26:8A:B6:8F:51:72:58:04:66:16")
-                .build();
+                GlideApp
+                        .with(getApplicationContext())
+                        .load(bitmap)
+                        .into(imageButtonPhoto);
 
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        //Initialize fonts
-        InitializeFonts();
-
-    }
-    private void InitializeFacebook() {
-        circleImageViewProfilePic = (CircleImageView)view.findViewById(R.id.circleImageViewProfilePic);
-        Bundle bundle = intent.getExtras();
-        if(bundle.containsKey("profile_pic")) {
-            Picasso.with(getActivity()).load(bundle.getString("profile_pic")).into(circleImageViewProfilePic);
-        }
-        Log.d("INFORMATION: " , bundle.getString("idFacebook") + ":" + bundle.getString("name")+ ":" + bundle.getString("birthday")+ ":" + bundle.get("gender"));
-
-        InitializeFonts();
-    }
-    private void InitializeFonts(){
-        //Adding fonts
-        textViewPersonalDetails = (TextView) view.findViewById(R.id.textViewPersonalDetails);
-        textViewSettingsRecipeHeader = (TextView) view.findViewById(R.id.textViewSettingsRecipeHeader);
-        textViewAccountHeader = (TextView)view.findViewById(R.id.textViewAccountHeader);
-        face = Typeface.createFromAsset(getActivity().getAssets(), "figure_things.otf");
-        textViewPersonalDetails.setTypeface(face);
-        textViewSettingsRecipeHeader.setTypeface(face);
-        textViewAccountHeader.setTypeface(face);
-    }
-    private void signOut() {
-
-        switch (LoginType) {
-            case "Google":
-                mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+                profilePicturesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Intent myIntent = new Intent(context, LoginActivity.class);
-                        startActivity(myIntent);
-                        getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
-                        Log.d(TAG, "Signing out of Google login");
+                    public void onSuccess(Uri uri) {
+                        Log.d(TAG, uri.toString());
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setPhotoUri(uri).build();
+
+                        mCurrentUser.updateProfile(profileUpdates);
                     }
                 });
-                break;
-*/
-/*
-            case "Facebook":
-                if (AccessToken.getCurrentAccessToken() == null) {
-                    return; // already logged out
-                }
 
-                new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
-                        .Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse graphResponse) {
-
-                        LoginManager.getInstance().logOut();
-
-                    }
-                }).executeAsync();
-                Intent myIntent = new Intent(context, LoginActivity.class);
-                startActivity(myIntent);
-                getActivity().overridePendingTransition(R.anim.slide_in_right, 0);
-
-                break;
-*//*
-
-            default:
-                FirebaseAuth.getInstance().signOut();
-                Intent myIntent = new Intent(context, LoginActivity.class);
-                startActivity(myIntent);
-                Log.d(TAG, "Signing out of standard login");
-                break;
-        }
-
+            }
+        });
     }
 }
-*/
+
+
+
 

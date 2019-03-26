@@ -33,6 +33,7 @@
     <string name="Home">Home</string>
     <string name="Search">Search</string>
     <string name="IngredientsInfo">Search and add ingredients to your recipe with the respective quantities!</string>
+    <string name="portrait">portrait_picture</string>
     <string name="facebook_app_id">2270832079861459</string>
     <string name="fb_login_protocol_scheme">fb2270832079861459</string>
 
