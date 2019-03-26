@@ -91,11 +91,13 @@ public class AccountActivity extends AppCompatActivity {
             GlideApp
                     .with(this)
                     .load(mPhotoURL)
+                    .centerCrop()
                     .into(imageButtonPhoto);
         } else {
             GlideApp
                     .with(this)
                     .load(R.drawable.no_photo)
+                    .centerCrop()
                     .into(imageButtonPhoto);
         }
     }
@@ -152,13 +154,13 @@ public class AccountActivity extends AppCompatActivity {
                 GlideApp
                         .with(getApplicationContext())
                         .load(bitmap)
+                        .centerCrop()
                         .into(imageButtonPhoto);
 
 
                 profilePicturesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Log.d(TAG, uri.toString());
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setPhotoUri(uri).build();
 
