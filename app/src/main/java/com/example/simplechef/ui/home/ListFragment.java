@@ -17,6 +17,9 @@ public class ListFragment extends Fragment {
     private ListAdapter listAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    public ListFragment() {
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

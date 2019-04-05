@@ -6,26 +6,38 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
+    private String [] tabTitles = new String [] { "Recipes", "Favorites", "My Recipes"};
+
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        ListFragment listFragment = new ListFragment();
+        switch(position) {
+            case 0:
+                return new ListFragment();
+            case 1:
+                return new ListFragment();
+            case 2:
+                return new ListFragment();
+            default:
+                return null;
 
-        return listFragment;
+        }
+
+        //return ListFragment.newInstance(position + 1);
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return tabTitles.length;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
+        return tabTitles[position];
     }
 
 }
