@@ -25,8 +25,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return null;
 
         }
-
-        //return ListFragment.newInstance(position + 1);
     }
 
     @Override

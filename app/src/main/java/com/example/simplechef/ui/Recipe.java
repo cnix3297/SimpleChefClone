@@ -1,13 +1,9 @@
 package com.example.simplechef.ui;
 
-import android.graphics.Bitmap;
-import android.media.Image;
-
-import com.example.simplechef.RecipeAPI;
-
 import java.util.ArrayList;
 
 public class Recipe {
+        private String name;
         private String description;
 
     public void setDate(String date) {
@@ -15,16 +11,28 @@ public class Recipe {
     }
 
     /*private Bitmap picture;*/
-        private String date;
-        private int completionTime;
-        private double cost;
-        private double rank;
-        private ArrayList<Ingredient> ingredients = new ArrayList<>();
-        private ArrayList<Direction> directions = new ArrayList<>();
+    private String date;
+    private int completionTime;
+    private double cost;
+    private double rank;
+    private ArrayList<Ingredient> ingredients = new ArrayList<>();
+    private ArrayList<Direction> directions = new ArrayList<>();
 
-        public Recipe(){
+    public Recipe(){
 
-        }
+    }
+
+    public Recipe(String name) {
+        this.name = name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void setIngredients(ArrayList<Ingredient> ingredients){
             this.ingredients = ingredients;

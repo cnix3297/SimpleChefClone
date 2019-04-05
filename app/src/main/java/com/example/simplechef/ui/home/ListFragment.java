@@ -11,14 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simplechef.R;
+import com.example.simplechef.ui.Recipe;
+
+import java.util.ArrayList;
 
 public class ListFragment extends Fragment {
+    private ArrayList<Recipe> mRecipeList;
     private RecyclerView recyclerView;
     private ListAdapter listAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public ListFragment() {
-    }
 
     @Nullable
     @Override
@@ -27,11 +29,24 @@ public class ListFragment extends Fragment {
         //View To Return
         View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
+        mRecipeList = new ArrayList<>();
+
+        // TODO:  Remove later, for testing purposes
+        mRecipeList.add(new Recipe("Recipe1"));
+        mRecipeList.add(new Recipe("Recipe2"));
+        mRecipeList.add(new Recipe("Recipe3"));
+        mRecipeList.add(new Recipe("Recipe4"));
+        mRecipeList.add(new Recipe("Recipe5"));
+        mRecipeList.add(new Recipe("Recipe6"));
+
+
         recyclerView = view.findViewById(R.id.recyclerViewList);
-        listAdapter = new ListAdapter();
-        recyclerView.setAdapter(listAdapter);
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        listAdapter = new ListAdapter(mRecipeList);
+        recyclerView.setAdapter(listAdapter);
 
 
 
