@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class ListFragment extends Fragment {
     private ArrayList<Recipe> mRecipeList;
+
     private RecyclerView recyclerView;
     private ListAdapter listAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -30,6 +31,7 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
         mRecipeList = new ArrayList<>();
+
 
         // TODO:  Remove later, for testing purposes
         mRecipeList.add(new Recipe("Recipe1"));
@@ -48,11 +50,7 @@ public class ListFragment extends Fragment {
         listAdapter = new ListAdapter(mRecipeList);
         recyclerView.setAdapter(listAdapter);
 
-
-
-
         return view;
-
     }
 
 }

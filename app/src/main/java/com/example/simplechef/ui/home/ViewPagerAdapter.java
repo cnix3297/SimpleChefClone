@@ -5,26 +5,39 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.simplechef.ui.Recipe;
+
+import java.util.ArrayList;
+
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private String [] tabTitles = new String [] { "Recipes", "Favorites", "My Recipes"};
+    private ArrayList<Recipe> recipes, favorites, myRecipes;
+    private ListFragment recipesFragment, favoritesFragment, myRecipesFragment;
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
+        recipesFragment = new ListFragment(recipes);
+        favoritesFragment = new ListFragment(favorites);
+        myRecipesFragment = new ListFragment(myRecipes);
     }
 
     @Override
     public Fragment getItem(int position) {
+        Fragment fragment = null;
         switch(position) {
             case 0:
-                return new ListFragment();
+                fragment = recipesFragment;
+                break;
             case 1:
-                return new ListFragment();
+                fragment = favoritesFragment;
+                break;
             case 2:
-                return new ListFragment();
+                fragment = myRecipesFragment;
+                break;
             default:
                 return null;
-
         }
+        return fragment;
     }
 
     @Override
