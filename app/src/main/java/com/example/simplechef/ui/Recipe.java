@@ -1,14 +1,13 @@
 package com.example.simplechef.ui;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 public class Recipe {
         private String name;
         private String description;
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     /*private Bitmap picture;*/
     private String date;
@@ -32,6 +31,10 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setIngredients(ArrayList<Ingredient> ingredients){
@@ -124,7 +127,8 @@ public class Recipe {
         }
 
 
-private class Ingredient{
+
+    private class Ingredient{
     private String name;
     private double price;
     private String measurementType;

@@ -23,13 +23,18 @@ public class ListFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
 
     public static ListFragment newInstance(ArrayList<Recipe> list) {
-       Bundle args = new Bundle();
-       args.putSerializable("data", list);
-       ListFragment fragment = new ListFragment();
-       fragment.setArguments(args);
-       return fragment;
+        ListFragment fragment = new ListFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("list", list);
+        fragment.setArguments(args);
+        return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Nullable
     @Override
@@ -38,10 +43,9 @@ public class ListFragment extends Fragment {
         //View To Return
         View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
-        mRecipeList = new ArrayList<>();
-
 
         // TODO:  Remove later, for testing purposes
+        mRecipeList = new ArrayList<>();
         mRecipeList.add(new Recipe("Recipe1"));
         mRecipeList.add(new Recipe("Recipe2"));
         mRecipeList.add(new Recipe("Recipe3"));

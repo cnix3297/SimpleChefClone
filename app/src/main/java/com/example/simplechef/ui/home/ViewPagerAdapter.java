@@ -16,9 +16,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        recipesFragment = new ListFragment.newInstance(recipes);
-        favoritesFragment = new ListFragment(favorites);
-        myRecipesFragment = new ListFragment(myRecipes);
+        recipesFragment = ListFragment.newInstance(recipes);
+        favoritesFragment = ListFragment.newInstance(favorites);
+        myRecipesFragment = ListFragment.newInstance(myRecipes);
     }
 
     @Override
