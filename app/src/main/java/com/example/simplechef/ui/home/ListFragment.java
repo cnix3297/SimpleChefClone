@@ -22,6 +22,14 @@ public class ListFragment extends Fragment {
     private ListAdapter listAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    public static ListFragment newInstance(ArrayList<Recipe> list) {
+       Bundle args = new Bundle();
+       args.putSerializable("data", list);
+       ListFragment fragment = new ListFragment();
+       fragment.setArguments(args);
+       return fragment;
+    }
+
 
     @Nullable
     @Override
