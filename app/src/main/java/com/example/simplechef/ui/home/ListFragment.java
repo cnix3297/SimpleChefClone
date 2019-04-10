@@ -25,7 +25,8 @@ public class ListFragment extends Fragment {
     public static ListFragment newInstance(ArrayList<Recipe> list) {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
-        args.putParcelable("list", list);
+        //TODO FIX this
+        //args.putParcelable("list", list);
         fragment.setArguments(args);
         return fragment;
     }
