@@ -1,5 +1,6 @@
 package com.example.simplechef.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 
 import java.util.ArrayList;
 
@@ -62,6 +64,15 @@ public class ListFragment extends Fragment {
 
         listAdapter = new ListAdapter(mRecipeList);
         recyclerView.setAdapter(listAdapter);
+
+        listAdapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // TODO fix later - go to item at position!
+                Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

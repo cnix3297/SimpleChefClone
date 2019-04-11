@@ -16,17 +16,28 @@ import java.util.ArrayList;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
     private final static String TAG = "ListAdapter";
     private ArrayList<Recipe> mRecipeList;
+    private OnItemClickListener mListener;
 
     public ListAdapter(ArrayList<Recipe> recipeList) {
         mRecipeList = recipeList;
     }
+
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
 
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewtype) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View v = layoutInflater.inflate(R.layout.recipe_list_item, parent, false);
-        return new ListViewHolder(v);
+        return new ListViewHolder(v, mListener);
     }
 
     @Override
@@ -43,12 +54,27 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
 
 
+
+
+
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         public TextView recipeName;
 
-        public ListViewHolder(View view) {
+        public ListViewHolder(View view, final OnItemClickListener listener) {
             super(view);
             recipeName = view.findViewById(R.id.textViewRecipeName);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 

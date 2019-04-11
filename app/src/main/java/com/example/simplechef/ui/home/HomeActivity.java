@@ -92,6 +92,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -109,6 +110,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         return true;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_home, menu);

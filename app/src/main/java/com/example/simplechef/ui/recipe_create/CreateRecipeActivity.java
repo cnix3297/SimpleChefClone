@@ -6,14 +6,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.simplechef.R;
 
 import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.home.HomeActivity;
+import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class CreateRecipeActivity extends AppCompatActivity implements CreateIngredientsFragment.onRecipeChangeIngredientListener, CreateStepsFragment.onRecipeChangeDirectionListener, CreateDescriptionFragment.onRecipeChangeExtraListener {
     ViewPager fragmentContainer;
@@ -55,6 +59,24 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateIng
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_profile:
+                Intent profileIntent = new Intent(CreateRecipeActivity.this, AccountActivity.class);
+                startActivity(profileIntent);
+                break;
+            case R.id.action_signout:
+                FirebaseAuth.getInstance().signOut();
+                Intent signOutIntent = new Intent(CreateRecipeActivity.this, LoginActivity.class);
+                startActivity(signOutIntent);
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override
