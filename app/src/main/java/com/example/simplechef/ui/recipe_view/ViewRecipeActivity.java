@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.home.ViewPagerAdapter;
 
 public class ViewRecipeActivity extends AppCompatActivity {
     private final static String TAG = "ViewRecipeActivity";

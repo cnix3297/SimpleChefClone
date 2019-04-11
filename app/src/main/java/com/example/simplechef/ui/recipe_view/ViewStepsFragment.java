@@ -10,6 +10,11 @@ import com.example.simplechef.R;
 
 public class ViewStepsFragment extends Fragment {
 
+    public static ViewStepsFragment newInstance() {
+        ViewStepsFragment fragment = new ViewStepsFragment();
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
