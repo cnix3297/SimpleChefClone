@@ -16,7 +16,7 @@ import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
 
 
-public class StepsFragment extends Fragment {
+public class CreateStepsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     EditText input;
     LinearLayout outPut;
@@ -28,7 +28,7 @@ public class StepsFragment extends Fragment {
 
 
 
-    public StepsFragment() {
+    public CreateStepsFragment() {
         // Required empty public constructor
     }
     public interface onRecipeChangeDirectionListener

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
 
  */
-public class IngredientsFragment extends Fragment {
+public class CreateIngredientsFragment extends Fragment {
     Spinner measurement;
     EditText quantity,ingredientName,price;
     Button addIngredient, next, delete;
@@ -41,7 +41,7 @@ public class IngredientsFragment extends Fragment {
 
 
 
-    public IngredientsFragment() {
+    public CreateIngredientsFragment() {
         // Required empty public constructor
     }
 
