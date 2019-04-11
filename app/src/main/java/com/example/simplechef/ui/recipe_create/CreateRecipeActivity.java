@@ -15,7 +15,7 @@ import com.example.simplechef.ui.Recipe;
 import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 
-public class CreateRecipeActivity extends AppCompatActivity implements IngredientsFragment.onRecipeChangeIngredientListener, StepsFragment.onRecipeChangeDirectionListener, DescriptionFragment.onRecipeChangeExtraListener {
+public class CreateRecipeActivity extends AppCompatActivity implements CreateIngredientsFragment.onRecipeChangeIngredientListener, CreateStepsFragment.onRecipeChangeDirectionListener, CreateDescriptionFragment.onRecipeChangeExtraListener {
     ViewPager fragmentContainer;
     Recipe mainRecipe;
     /*private FirebaseFirestore db;*/
@@ -65,11 +65,12 @@ public class CreateRecipeActivity extends AppCompatActivity implements Ingredien
 
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new IngredientsFragment(), "Ingredient");
-        adapter.addFragment(new StepsFragment(), "direction");
-        adapter.addFragment(new DescriptionFragment(), "extra");
+        adapter.addFragment(new CreateIngredientsFragment(), "Ingredient");
+        adapter.addFragment(new CreateStepsFragment(), "direction");
+        adapter.addFragment(new CreateDescriptionFragment(), "extra");
         viewPager.setAdapter(adapter);
     }
+
     public void setViewPager(int FragmentNumber){
         fragmentContainer.setCurrentItem(FragmentNumber);
     }

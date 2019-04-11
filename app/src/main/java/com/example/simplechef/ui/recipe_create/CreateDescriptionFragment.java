@@ -18,7 +18,7 @@ import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
 
 
-public class DescriptionFragment extends Fragment {
+public class CreateDescriptionFragment extends Fragment {
         ImageView picture;
         EditText  price,time,description;
         Button okay;
@@ -29,7 +29,7 @@ public class DescriptionFragment extends Fragment {
 
 
 
-    public DescriptionFragment() {
+    public CreateDescriptionFragment() {
         // Required empty public constructor
     }
     public interface onRecipeChangeExtraListener
