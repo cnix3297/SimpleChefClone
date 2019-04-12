@@ -13,12 +13,12 @@ import com.example.simplechef.ui.Recipe;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
-    private final static String TAG = "ListAdapter";
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ListViewHolder> {
+    private final static String TAG = "RecyclerViewAdapter";
     private ArrayList<Recipe> mRecipeList;
     private OnItemClickListener mListener;
 
-    public ListAdapter(ArrayList<Recipe> recipeList) {
+    public RecyclerViewAdapter(ArrayList<Recipe> recipeList) {
         mRecipeList = recipeList;
     }
 

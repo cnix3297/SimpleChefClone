@@ -7,33 +7,22 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private String [] tabTitles = new String [] { "Description", "Ingredients", "Steps" };
-    private ViewDescriptionFragment viewDescriptionFragment;
-    private ViewIngredientsFragment viewIngredientsFragment;
-    private ViewStepsFragment viewStepsFragment;
 
    public ViewPagerAdapter(FragmentManager fm) {
        super(fm);
-       viewDescriptionFragment = ViewDescriptionFragment.newInstance();
-       viewIngredientsFragment = ViewIngredientsFragment.newInstance();
-       viewStepsFragment = ViewStepsFragment.newInstance();
    }
     @Override
     public Fragment getItem(int position) {
-       Fragment fragment = null;
        switch(position) {
            case 0:
-               fragment = viewDescriptionFragment;
-               break;
+               return ViewDescriptionFragment.newInstance();
            case 1:
-               fragment = viewIngredientsFragment;
-               break;
+               return ViewIngredientsFragment.newInstance();
            case 2:
-               fragment = viewStepsFragment;
-               break;
+               return ViewStepsFragment.newInstance();
            default:
                return null;
        }
-        return fragment;
     }
 
     @Override

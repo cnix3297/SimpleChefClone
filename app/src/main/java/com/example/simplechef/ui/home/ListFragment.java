@@ -21,7 +21,7 @@ public class ListFragment extends Fragment {
     private ArrayList<Recipe> mRecipeList;
 
     private RecyclerView recyclerView;
-    private ListAdapter listAdapter;
+    private RecyclerViewAdapter recyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     public static ListFragment newInstance(ArrayList<Recipe> list) {
@@ -62,10 +62,10 @@ public class ListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        listAdapter = new ListAdapter(mRecipeList);
-        recyclerView.setAdapter(listAdapter);
+        recyclerViewAdapter = new RecyclerViewAdapter(mRecipeList);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
-        listAdapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
+        recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // TODO fix later - go to item at position!
