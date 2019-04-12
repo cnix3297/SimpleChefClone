@@ -12,32 +12,23 @@ import java.util.ArrayList;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private String [] tabTitles = new String [] { "Recipes", "Favorites", "My Recipes"};
     private ArrayList<Recipe> recipes, favorites, myRecipes;
-    private ListFragment recipesFragment, favoritesFragment, myRecipesFragment;
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        recipesFragment = ListFragment.newInstance(recipes);
-        favoritesFragment = ListFragment.newInstance(favorites);
-        myRecipesFragment = ListFragment.newInstance(myRecipes);
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = null;
         switch(position) {
             case 0:
-                fragment = recipesFragment;
-                break;
+                return RecipeListFragment.newInstance(recipes);
             case 1:
-                fragment = favoritesFragment;
-                break;
+                return RecipeListFragment.newInstance(favorites);
             case 2:
-                fragment = myRecipesFragment;
-                break;
+                return RecipeListFragment.newInstance(myRecipes);
             default:
                 return null;
         }
-        return fragment;
     }
 
     @Override
