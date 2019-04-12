@@ -21,11 +21,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return RecipeListFragment.newInstance(recipes);
+                return ListFragment.newInstance(recipes);
             case 1:
-                return RecipeListFragment.newInstance(favorites);
+                return ListFragment.newInstance(favorites);
             case 2:
-                return RecipeListFragment.newInstance(myRecipes);
+                return ListFragment.newInstance(myRecipes);
             default:
                 return null;
         }

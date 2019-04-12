@@ -17,15 +17,15 @@ import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 
 import java.util.ArrayList;
 
-public class RecipeListFragment extends Fragment {
+public class ListFragment extends Fragment {
     private ArrayList<Recipe> mRecipeList;
 
     private RecyclerView recyclerView;
-    private RecipeListAdapter recipeListAdapter;
+    private RecyclerViewAdapter recyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public static RecipeListFragment newInstance(ArrayList<Recipe> list) {
-        RecipeListFragment fragment = new RecipeListFragment();
+    public static ListFragment newInstance(ArrayList<Recipe> list) {
+        ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
         //TODO FIX this
         //args.putParcelable("list", list);
@@ -62,10 +62,10 @@ public class RecipeListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        recipeListAdapter = new RecipeListAdapter(mRecipeList);
-        recyclerView.setAdapter(recipeListAdapter);
+        recyclerViewAdapter = new RecyclerViewAdapter(mRecipeList);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
-        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {
+        recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // TODO fix later - go to item at position!
