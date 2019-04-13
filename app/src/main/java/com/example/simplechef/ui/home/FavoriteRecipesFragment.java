@@ -12,16 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.Recipe;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 
-import java.util.ArrayList;
+public class FavoriteRecipesFragment extends Fragment {
 
-public class ListFragment extends Fragment {
-    private RecipeViewModel recipeViewModel;
-
-    public static ListFragment newInstance(ArrayList<Recipe> list) {
-        ListFragment fragment = new ListFragment();
+    public static FavoriteRecipesFragment newInstance() {
+        FavoriteRecipesFragment fragment = new FavoriteRecipesFragment();
         return fragment;
     }
 
@@ -36,10 +32,10 @@ public class ListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecipeAdapter recipeAdapter = new RecipeAdapter();
-        recyclerView.setAdapter(recipeAdapter);
+        RecipeListAdapter recipeListAdapter = new RecipeListAdapter();
+        recyclerView.setAdapter(recipeListAdapter);
 
-        recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // TODO bundle recipe data to send

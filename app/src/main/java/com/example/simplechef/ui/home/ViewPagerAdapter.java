@@ -5,14 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.simplechef.ui.Recipe;
-
-import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private String [] tabTitles = new String [] { "Recipes", "Favorites", "My Recipes"};
-    private ArrayList<Recipe> recipes, favorites, myRecipes;
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -22,11 +18,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return ListFragment.newInstance(recipes);
+                return AllRecipesFragment.newInstance();
             case 1:
-                return ListFragment.newInstance(favorites);
+                return FavoriteRecipesFragment.newInstance();
             case 2:
-                return ListFragment.newInstance(myRecipes);
+                return MyRecipesFragment.newInstance();
             default:
                 return null;
         }

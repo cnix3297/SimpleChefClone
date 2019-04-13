@@ -11,6 +11,11 @@
     <style name="ToolbarStyle">
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
+    <style name="MenuStyle">
+        <item name="android:background">@color/colorWhite</item>
+    </style>
+
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@color/colorWhite</item>
     </style>

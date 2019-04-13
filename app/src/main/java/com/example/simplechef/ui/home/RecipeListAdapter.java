@@ -13,16 +13,10 @@ import com.example.simplechef.ui.Recipe;
 
 import java.util.ArrayList;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
-    private final static String TAG = "RecipeAdapter";
+public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
+    private final static String TAG = "RecipeListAdapter";
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private OnItemClickListener mListener;
-
-/*
-    public RecipeAdapter(ArrayList<Recipe> recipeList) {
-        recipes = recipeList;
-    }
-*/
 
 
     public interface OnItemClickListener {
