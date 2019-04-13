@@ -10,14 +10,21 @@ import android.widget.TextView;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.ui.RecipeClass;
 
 import java.util.ArrayList;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
     private final static String TAG = "RecipeListAdapter";
-    private ArrayList<Recipe> recipes = new ArrayList<>();
+    private ArrayList<RecipeClass> recipes;
     private OnItemClickListener mListener;
 
+
+    RecipeListAdapter(ArrayList<RecipeClass> list){
+        this.recipes = list;
+        Log.d("CONSTRUCTOR CALLED", this.recipes.toString());
+
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -39,19 +46,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull RecipeHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder:  called.");
-        Recipe currentRecipe = recipes.get(position);
+        RecipeClass currentRecipe = recipes.get(position);
         holder.recipeName.setText(currentRecipe.getName());
+        Log.d("RecipeHolder", currentRecipe.getName());
+
     }
 
     @Override
     public int getItemCount() {
         return recipes.size();
-    }
-
-    public void setRecipes(ArrayList<Recipe> recipes) {
-        this.recipes = recipes;
-        // TODO use better functions than this one later on
-        notifyDataSetChanged();
     }
 
     public class RecipeHolder extends RecyclerView.ViewHolder {
@@ -60,7 +63,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public RecipeHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             recipeName = itemView.findViewById(R.id.textViewRecipeName);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

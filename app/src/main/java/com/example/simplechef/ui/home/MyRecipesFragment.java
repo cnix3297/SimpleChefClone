@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simplechef.R;
+import com.example.simplechef.ui.RecipeClass;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
+
+import java.util.ArrayList;
 
 public class MyRecipesFragment extends Fragment {
     public static MyRecipesFragment newInstance() {
@@ -31,7 +34,7 @@ public class MyRecipesFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecipeListAdapter recipeListAdapter = new RecipeListAdapter();
+        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(new ArrayList<RecipeClass>());
         recyclerView.setAdapter(recipeListAdapter);
 
         recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {

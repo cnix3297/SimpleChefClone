@@ -13,75 +13,88 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simplechef.R;
+import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.ui.RecipeClass;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import bolts.Task;
+import java.util.ArrayList;
 
 import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
 public class AllRecipesFragment extends Fragment {
 
-
+    private ArrayList<RecipeClass> list = new ArrayList<>();
     public static AllRecipesFragment newInstance() {
         AllRecipesFragment fragment = new AllRecipesFragment();
         return fragment;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Recipe").document();
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         //View To Return
-        View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //Access NoSql Database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //DocumentReference docRef = db.collection("Recipe").document("4S0ycFz9A05IWKs3249d");
 
-        RecipeListAdapter recipeListAdapter = new RecipeListAdapter();
-        recyclerView.setAdapter(recipeListAdapter);
+        //Get Info from Recipe Collection
+        db.collection("Recipe")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
-        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                // TODO bundle recipe data to send
-                Bundle bundle = new Bundle();
-                // TODO fix later - go to item at position!
-                Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                startActivity(intent);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        RecipeClass recipeobj = document.toObject(RecipeClass.class);
+                        AddObject(recipeobj);
+                        Log.d("Recipes", document.getId() + " => " + recipeobj.getName() + ": " + recipeobj.getDescription());
+                    }
+
+                    //Recycler View Init & Data Pass
+                    RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                    Log.d("BEFORE", list.toString());
+                    RecipeListAdapter recipeListAdapter = new RecipeListAdapter(list);
+                    recyclerView.setAdapter(recipeListAdapter);
+
+                    recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            // TODO bundle recipe data to send
+                            Bundle bundle = new Bundle();
+                            // TODO fix later - go to item at position!
+                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
             }
+
         });
 
+
+
         return view;
+    }
+    public void AddObject(RecipeClass obj){
+        this.list.add(obj);
     }
 
 }
