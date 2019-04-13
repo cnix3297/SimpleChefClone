@@ -18,11 +18,7 @@ import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import java.util.ArrayList;
 
 public class ListFragment extends Fragment {
-    private ArrayList<Recipe> mRecipeList;
-
-    private RecyclerView recyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private RecipeViewModel recipeViewModel;
 
     public static ListFragment newInstance(ArrayList<Recipe> list) {
         ListFragment fragment = new ListFragment();
@@ -37,24 +33,13 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
 
-        // TODO:  Remove later, for testing purposes
-        mRecipeList = new ArrayList<>();
-        mRecipeList.add(new Recipe("Recipe1"));
-        mRecipeList.add(new Recipe("Recipe2"));
-        mRecipeList.add(new Recipe("Recipe3"));
-        mRecipeList.add(new Recipe("Recipe4"));
-        mRecipeList.add(new Recipe("Recipe5"));
-        mRecipeList.add(new Recipe("Recipe6"));
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        RecipeAdapter recipeAdapter = new RecipeAdapter();
+        recyclerView.setAdapter(recipeAdapter);
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerViewAdapter = new RecyclerViewAdapter(mRecipeList);
-
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-        recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+        recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // TODO bundle recipe data to send
