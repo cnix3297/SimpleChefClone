@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.ui.Recipe;
+import com.google.api.Distribution;
 
 import java.util.ArrayList;
 
@@ -28,13 +30,15 @@ import java.util.ArrayList;
 public class CreateIngredientsFragment extends Fragment {
     Spinner measurement;
     EditText quantity,ingredientName,price;
-    Button addIngredient, next, delete;
-
+    Button next, delete;
+    ImageButton addIngredient;
     LinearLayout listIngredient;
     TextView error, textToolbar;
     Recipe recipe = new Recipe();
     int count = 0;
     onRecipeChangeIngredientListener onRecipeChangeIngredientListenerVar;
+    //Tabs
+    private LinearLayout tabGeneral, visibleGeneral, tabIngredients, visibleIngredients;
 
 
 
@@ -138,6 +142,46 @@ public class CreateIngredientsFragment extends Fragment {
 
             }
         });
+        tabIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(visibleIngredients.getVisibility() == View.INVISIBLE) {
+                    visibleIngredients.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
+                    params.height = 200;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    visibleIngredients.setLayoutParams(params);
+
+                }
+                else {
+                    visibleIngredients.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
+                    params.height = 0;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    visibleIngredients.setLayoutParams(params);
+                }
+            }
+        });
+        tabGeneral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(visibleGeneral.getVisibility() == View.INVISIBLE) {
+                    visibleGeneral.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = visibleGeneral.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    visibleGeneral.setLayoutParams(params);
+
+                }
+                else {
+                    visibleGeneral.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = visibleGeneral.getLayoutParams();
+                    params.height = 0;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    visibleGeneral.setLayoutParams(params);
+                }
+            }
+        });
         return view;
     }
     private void setObjectsEmpty(){
@@ -156,10 +200,17 @@ public class CreateIngredientsFragment extends Fragment {
         quantity = (EditText) view.findViewById(R.id.fragment_activity_recipe_create_s1_editText_quantity);
         ingredientName = (EditText) view.findViewById(R.id.fragment_activity_recipe_create_s1_editText_ingredient);
         price = (EditText) view.findViewById(R.id.fragment_activity_recipe_create_s1_editText_price);
-        addIngredient = (Button) view.findViewById(R.id.fragment_activity_recipe_create_s1_button_addIngredient);
+        addIngredient = (ImageButton) view.findViewById(R.id.fragment_activity_recipe_create_s1_button_addIngredient);
         listIngredient = (LinearLayout) view.findViewById(R.id.fragment_activity_recipe_create_s1_linearLayout_recipeView);
         error = (TextView) view.findViewById(R.id.fragment_activity_recipe_create_s1_TextView_error);
         delete = (Button) view.findViewById(R.id.fragment_activity_recipe_button_delete);
+
+        //tabs
+        tabGeneral = (LinearLayout)view.findViewById(R.id.linearLayoutGeneral);
+        visibleGeneral = (LinearLayout)view.findViewById(R.id.visibleGeneral);
+        tabIngredients = (LinearLayout)view.findViewById(R.id.linearLayoutIngredients);
+        visibleIngredients = (LinearLayout)view.findViewById(R.id.visibleIngredients);
+
     }
 
     @Override

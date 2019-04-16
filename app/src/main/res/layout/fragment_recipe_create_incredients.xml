@@ -8,228 +8,457 @@
     android:background="@drawable/signup_background">
 
 
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="325dp"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/divider_color_primary"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_button_addIngredient" />
+            app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
 
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="68dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="@string/IngredientsInfo"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:fontFamily="@font/ostrich"
+            android:text="Create Recipe"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.547"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textViewIngredient"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:alpha=".5"
-            android:text="Ingredient"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
-            app:layout_constraintHorizontal_bias="0.454"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <TextView
-            android:id="@+id/textViewPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="4dp"
-            android:alpha=".5"
-            android:text="Price"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_price"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_price"
-            app:layout_constraintHorizontal_bias="0.472"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_price" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutGeneral"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textViewQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginLeft="52dp"
-            android:alpha=".5"
-            android:text="Quantity"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_quantity" />
+                        <ImageButton
+                            android:id="@+id/buttonGeneralInfo"
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight=".2"
+                            android:alpha=".8"
+                            android:background="@drawable/add_circle"
+                            android:backgroundTint="@color/green"
+                            android:text="+ Add Item"
+                            android:textColor="@color/colorWhite" />
 
-        <TextView
-            android:id="@+id/textViewList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginLeft="52dp"
-            android:layout_marginBottom="12dp"
-            android:alpha=".5"
-            android:text="Current List"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/fragment_activity_recipe_create_s1_button_addIngredient"
-            android:layout_width="161dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@color/colorPrimary"
-            android:text="+ Add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity" />
-
-        <Spinner
-            android:id="@+id/fragment_activity_recipe_create_s1_size_spinner"
-            android:layout_width="83dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
-            android:gravity="center"
-            android:paddingStart="15dp"
-            android:paddingLeft="30dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="15dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="10dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
-            app:layout_constraintVertical_bias="0.727" />
-
-        <EditText
-            android:id="@+id/fragment_activity_recipe_create_s1_editText_quantity"
-            android:layout_width="112dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:alpha="1"
-            android:background="@drawable/edit_text_box"
-            android:gravity="start"
-            android:hint="Quantity"
-            android:inputType="numberDecimal"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorGrey"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_price"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_price" />
-
-        <EditText
-            android:id="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
-            android:layout_width="214dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:alpha="1"
-            android:background="@drawable/edit_text_box"
-            android:gravity="start"
-            android:hint="Zuccini"
-            android:inputType="text"
-            android:paddingStart="15dp"
-            android:paddingLeft="30dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="15dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="5dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorGrey"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.883"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/textViewGeneral"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="8"
+                            android:alpha="1"
+                            android:background="#fefbf7"
+                            android:fontFamily="@font/ostrich"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="General"
+                            android:textColor="@color/colorGreyDarkNav"
+                            android:textSize="24sp"
+                            android:textStyle="normal" />
 
 
-        <EditText
-            android:id="@+id/fragment_activity_recipe_create_s1_editText_price"
-            android:layout_width="214dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:alpha="1"
-            android:background="@drawable/edit_text_box"
-            android:gravity="start"
-            android:hint="Price"
-            android:inputType="numberDecimal"
-            android:paddingStart="15dp"
-            android:paddingLeft="30dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="15dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="5dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorGrey"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:id="@+id/visibleGeneral">
+                        <EditText
+                            android:id="@+id/editTextDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_green_opacity_half"
+                            android:ems="10"
+                            android:hint="Zach's Exquisite Ramen"
+                            android:maxLength="25"
+                            android:inputType="textCapSentences"
+                            android:textAlignment="center"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:alpha="1"
+                            android:text="Name"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:background="@color/colorPrimaryMain"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/azoft_sans" />
+                        <EditText
+                            android:id="@+id/editTextPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_green_opacity_half"
+                            android:ems="10"
+                            android:hint="$3.00"
+                            android:maxLength="25"
+                            android:inputType="numberDecimal"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:alpha="1"
+                            android:textAlignment="center"
+                            android:text="Cost"
+                            android:textColor="@color/colorWhite"
+                            android:background="@color/colorPrimaryMain"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/azoft_sans" />
+
+                        <EditText
+                            android:id="@+id/editTextTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_green_opacity_half"
+                            android:ems="10"
+                            android:hint="10 Minutes"
+                            android:maxLength="25"
+                            android:inputType="numberDecimal"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginBottom="10dp"
+                            android:alpha="1"
+                            android:textAlignment="center"
+                            android:text="Time"
+                            android:textColor="@color/colorWhite"
+                            android:background="@color/colorPrimaryMain"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/azoft_sans" />
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLayoutIngredients">
+
+                        <ImageButton
+                            android:id="@+id/fragment_activity_recipe_create_s1_button_addIngredient"
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight=".2"
+                            android:alpha=".8"
+                            android:background="@drawable/add_circle"
+                            android:backgroundTint="@color/blue"
+                            android:text="+ Add Item"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/textViewIngredient"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:alpha="1"
+                            android:background="#fefbf7"
+                            android:fontFamily="@font/ostrich"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Ingredients"
+                            android:textColor="@color/colorGreyDarkNav"
+                            android:textSize="24sp"
+                            android:textStyle="normal" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    android:id="@+id/visibleIngredients">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingTop="10dp"
+                                    android:paddingLeft="10dp"
+
+                                    android:orientation="vertical">
+                                        <EditText
+                                            android:id="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+                                            android:layout_width="100dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:paddingStart="15dp"
+                                            android:paddingLeft="30dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingEnd="15dp"
+                                            android:paddingRight="30dp"
+                                            android:paddingBottom="5dp"
+                                            android:alpha="1"
+                                            android:background="@color/colorPrimaryMain"
+                                            android:gravity="start"
+                                            android:hint="Zuccini"
+                                            android:inputType="text"
+                                            android:textAlignment="textStart"
+                                            android:textColor="@color/colorWhite"
+                                            android:textColorHint="@color/colorWhite"
+                                            android:textSize="18sp"/>
+                                        <TextView
+                                            android:id="@+id/asdfjk"
+                                            android:layout_width="100dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:alpha=".7"
+                                            android:text="Ingredient"
+                                            android:textColor="@color/colorBlack"
+                                            android:background="@color/colorWhite"
+                                            android:fontFamily="@font/azoft"
+                                            android:textSize="17sp"
+                                            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_price"
+                                            app:layout_constraintEnd_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_price"
+                                            app:layout_constraintHorizontal_bias="0.472"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_price" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="101dp"
+                                    android:layout_weight="1"
+                                    android:paddingTop="10dp"
+                                    android:paddingLeft="10dp"
+                                    android:orientation="vertical">
+                                        <EditText
+                                            android:id="@+id/fragment_activity_recipe_create_s1_editText_price"
+                                            android:layout_width="100dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:textAlignment="center"
+                                            android:alpha="1"
+                                            android:background="@color/colorPrimaryMain"
+                                            android:hint="$3.00"
+                                            android:inputType="numberDecimal"
+                                            android:paddingStart="15dp"
+                                            android:paddingLeft="30dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingEnd="15dp"
+                                            android:paddingRight="30dp"
+                                            android:paddingBottom="5dp"
+                                            android:textColor="@color/colorWhite"
+                                            android:textColorHint="@color/colorWhite"
+                                            android:textSize="18sp"
+                                            app:layout_constraintEnd_toEndOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+                                            app:layout_constraintHorizontal_bias="0.0"
+                                            app:layout_constraintStart_toStartOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient"
+                                            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_ingredient" />
+                                        <TextView
+                                            android:id="@+id/textViewPrice"
+                                            android:layout_width="100dp"
+                                            android:layout_gravity="center"
+                                            android:layout_height="wrap_content"
+                                            android:alpha=".7"
+                                            android:text="Price"
+                                            android:textColor="@color/colorBlack"
+                                            android:background="@color/colorWhite"
+                                            android:fontFamily="@font/azoft"
+                                            android:textAlignment="center"
+                                            android:textSize="17sp" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="101dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+                                        <EditText
+                                            android:id="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+                                            android:layout_width="101dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginTop="8dp"
+                                            android:alpha="1"
+                                            android:background="@color/colorPrimaryMain"
+                                            android:hint="1"
+                                            android:gravity="center"
+                                            android:inputType="numberDecimal"
+                                            android:paddingStart="10dp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingEnd="10dp"
+                                            android:paddingRight="10dp"
+                                            android:paddingBottom="5dp"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/colorWhite"
+                                            android:textColorHint="@color/colorWhite"
+                                            android:textSize="18sp"/>
+
+                                        <TextView
+                                            android:id="@+id/textViewQuantity"
+                                            android:layout_width="101dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:alpha=".7"
+                                            android:text="Quantity"
+                                            android:textColor="@color/colorBlack"
+                                            android:background="@color/colorWhite"
+                                            android:fontFamily="@font/azoft"
+                                            android:textAlignment="center"
+                                            android:textSize="17sp" />
+
+                                </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <Spinner
+                            android:id="@+id/fragment_activity_recipe_create_s1_size_spinner"
+                            android:layout_width="83dp"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="28dp"
+                            android:layout_marginRight="28dp"
+                            android:gravity="center"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="30dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="15dp"
+                            android:paddingRight="30dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/fragment_activity_recipe_create_s1_editText_quantity"
+                            app:layout_constraintVertical_bias="0.727" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/buttonDirections"
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight=".2"
+                            android:alpha=".8"
+                            android:background="@drawable/add_circle"
+                            android:backgroundTint="@color/colorPrimaryMain"
+                            android:text="+ Add Item"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/textViewDirections"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:alpha="1"
+                            android:background="#fefbf7"
+                            android:fontFamily="@font/ostrich"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Directions"
+                            android:textColor="@color/colorGreyDarkNav"
+                            android:textSize="24sp"
+                            android:textStyle="normal" />
+
+
+                </LinearLayout>
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/fragment_activity_recipe_button_delete"
             android:layout_width="161dp"
             android:layout_height="37dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@color/colorPrimaryDarker"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginRight="212dp"
+            android:background="#999999"
             android:text="Delete Previous"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
@@ -246,18 +475,34 @@
 
         <ScrollView
             android:id="@+id/scrollView3"
-            android:layout_width="407dp"
+            android:layout_width="388dp"
             android:layout_height="178dp"
-            android:layout_marginTop="328dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="364dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:id="@+id/fragment_activity_recipe_create_s1_linearLayout_recipeView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                <LinearLayout
+                    android:id="@+id/fragment_activity_recipe_create_s1_linearLayout_recipeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
         </ScrollView>
 
+        <Button
+            android:id="@+id/buttonNextFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/blue"
+            android:text="Next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_activity_recipe_button_delete"
+            tools:layout_editor_absoluteX="161dp" />
+
+                </LinearLayout>
+        </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
