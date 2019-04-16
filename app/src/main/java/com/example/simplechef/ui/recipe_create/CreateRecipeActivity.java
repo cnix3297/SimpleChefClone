@@ -20,8 +20,8 @@ import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class CreateRecipeActivity extends AppCompatActivity implements CreateIngredientsFragment.onRecipeChangeIngredientListener, CreateStepsFragment.onRecipeChangeDirectionListener, CreateDescriptionFragment.onRecipeChangeExtraListener {
-    ViewPager fragmentContainer;
-    Recipe mainRecipe;
+    private ViewPager fragmentContainer;
+    private Recipe mainRecipe;
     /*private FirebaseFirestore db;*/
     private TextView toolbar_title;
 
@@ -84,6 +84,7 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateIng
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());

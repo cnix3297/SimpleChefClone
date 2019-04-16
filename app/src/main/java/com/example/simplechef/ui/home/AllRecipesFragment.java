@@ -82,6 +82,7 @@ public class AllRecipesFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
+
                 } else {
                     Log.d("TAG", "get failed with ", task.getException());
                 }
