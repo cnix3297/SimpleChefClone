@@ -26,17 +26,7 @@ public class ListFragment extends Fragment {
 
     public static ListFragment newInstance(ArrayList<Recipe> list) {
         ListFragment fragment = new ListFragment();
-        Bundle args = new Bundle();
-        //TODO FIX this
-        //args.putParcelable("list", list);
-        fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -57,17 +47,18 @@ public class ListFragment extends Fragment {
         mRecipeList.add(new Recipe("Recipe6"));
 
 
-        recyclerView = view.findViewById(R.id.recyclerViewList);
-
         layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-
         recyclerViewAdapter = new RecyclerViewAdapter(mRecipeList);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                // TODO bundle recipe data to send
+                Bundle bundle = new Bundle();
                 // TODO fix later - go to item at position!
                 Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
                 startActivity(intent);

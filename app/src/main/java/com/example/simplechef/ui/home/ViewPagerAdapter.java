@@ -10,6 +10,7 @@ import com.example.simplechef.ui.Recipe;
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
+
     private String [] tabTitles = new String [] { "Recipes", "Favorites", "My Recipes"};
     private ArrayList<Recipe> recipes, favorites, myRecipes;
 
