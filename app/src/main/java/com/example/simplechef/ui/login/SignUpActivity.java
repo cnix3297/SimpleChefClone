@@ -1,10 +1,9 @@
 package com.example.simplechef.ui.login;
 
 import com.example.simplechef.ui.home.HomeActivity;
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.simplechef.R;
 import com.example.simplechef.util.GlideApp;
 import com.facebook.login.Login;
@@ -158,6 +156,8 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 */
+
+
 
     public void updateUI(FirebaseUser user) {
         // check to see if a user is already logged in or not

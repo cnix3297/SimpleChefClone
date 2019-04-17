@@ -37,7 +37,7 @@ import java.util.ArrayList;
 public class CreateIngredientsFragment extends Fragment {
     Spinner measurement;
     EditText quantity,ingredientName,price;
-    Button next, delete;
+    Button next, delete, buttonSubmitRecipe;
     ImageButton addIngredient;
     LinearLayout listIngredient;
     TextView error, textToolbar;
@@ -93,7 +93,15 @@ public class CreateIngredientsFragment extends Fragment {
         measurement.setPadding(8,8,8,8);
         measurement.setPrompt("Metric");
         Log.d("spinner", measurement.getSelectedItem() + "");
+
 */
+
+        buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         addIngredient.setOnClickListener(new View.OnClickListener() {
 
@@ -279,6 +287,7 @@ public class CreateIngredientsFragment extends Fragment {
         //Button Declaration
         buttonTakeImage = (Button)view.findViewById(R.id.buttonTakeImage);
         buttonUploadImage = (Button)view.findViewById(R.id.buttonUploadExisting);
+        buttonSubmitRecipe = (Button)view.findViewById(R.id.buttonSubmitRecipe);
 
 
     }
