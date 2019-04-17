@@ -31,7 +31,7 @@ public class RecipeAPI {
                     .get()
                     .getBody()
                     .toString();
-            //gets the name of the product from the hold varible and stores it in a temporary variable
+            //gets the name of the product from the hold variable and stores it in a temporary variable
             String[] hold1 = hold.split("\\W");
             //sets foodName to the name of the product
             if(hold1.length != 0)

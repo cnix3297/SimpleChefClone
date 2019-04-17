@@ -19,7 +19,9 @@
     <color name="colorDarkBlue">#171723</color>
     <color name="blue">#3399FF</color>
     <color name="green">#59EB75</color>
+    <color name="purple">#8A2BE2</color>
     <color name="colorPrimaryMain">#75055D6B</color>
+    <color name="colorPrimaryMainOpacityFull">#055D6B</color>
     <color name="colorPrimaryMainHalf">#25055D6B</color>
     <color name="greenOpacityThird">#7559EB75</color>
     <color name="blueOpacityHalf">#503399FF</color>

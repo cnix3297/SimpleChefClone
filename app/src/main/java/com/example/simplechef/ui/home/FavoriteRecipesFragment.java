@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.RecipeClass;
+import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 
 import java.util.ArrayList;
