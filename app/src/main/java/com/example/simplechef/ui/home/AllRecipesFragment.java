@@ -13,20 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.Recipe;
-import com.example.simplechef.ui.RecipeClass;
+import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
-import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
 public class AllRecipesFragment extends Fragment {
 

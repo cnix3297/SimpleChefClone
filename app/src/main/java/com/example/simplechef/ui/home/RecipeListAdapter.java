@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.Recipe;
-import com.example.simplechef.ui.RecipeClass;
+import com.example.simplechef.RecipeClass;
 
 import java.util.ArrayList;
 
