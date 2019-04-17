@@ -48,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         viewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
+
         // ToolBar setup
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

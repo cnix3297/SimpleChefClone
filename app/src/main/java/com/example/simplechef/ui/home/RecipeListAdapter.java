@@ -9,19 +9,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.simplechef.R;
-import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.RecipeClass;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ListViewHolder> {
-    private final static String TAG = "RecyclerViewAdapter";
-    private ArrayList<Recipe> mRecipeList;
+public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
+    private final static String TAG = "RecipeListAdapter";
+    private ArrayList<RecipeClass> recipes;
     private OnItemClickListener mListener;
 
-    public RecyclerViewAdapter(ArrayList<Recipe> recipeList) {
-        mRecipeList = recipeList;
-    }
 
+    RecipeListAdapter(ArrayList<RecipeClass> list){
+        this.recipes = list;
+        Log.d("CONSTRUCTOR CALLED", this.recipes.toString());
+
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -34,37 +36,33 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @NonNull
     @Override
-    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewtype) {
+    public RecipeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.recipe_list_item, parent, false);
-        return new ListViewHolder(v, mListener);
+        View itemView = layoutInflater.inflate(R.layout.recipe_list_item, parent, false);
+        return new RecipeHolder(itemView, mListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder:  called.");
-        Recipe currentRecipe = mRecipeList.get(position);
+        RecipeClass currentRecipe = recipes.get(position);
         holder.recipeName.setText(currentRecipe.getName());
+        Log.d("RecipeHolder", currentRecipe.getName());
+
     }
 
     @Override
     public int getItemCount() {
-        return mRecipeList.size();
+        return recipes.size();
     }
 
-
-
-
-
-
-    public static class ListViewHolder extends RecyclerView.ViewHolder {
+    public class RecipeHolder extends RecyclerView.ViewHolder {
         public TextView recipeName;
 
-        public ListViewHolder(View view, final OnItemClickListener listener) {
-            super(view);
-            recipeName = view.findViewById(R.id.textViewRecipeName);
-
-            view.setOnClickListener(new View.OnClickListener() {
+        public RecipeHolder(View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            recipeName = itemView.findViewById(R.id.textViewRecipeName);
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {

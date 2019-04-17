@@ -1,7 +1,9 @@
 package com.example.simplechef.ui.recipe_create;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -11,19 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.Recipe;
+import com.squareup.picasso.Picasso;
+
+import java.net.URI;
 
 
 public class CreateDescriptionFragment extends Fragment {
-        ImageView picture;
-        EditText  price,time,description;
-        Button okay;
-        Recipe recipe;
-        TextView textToolbar;
+        private ImageButton addPicture;
+        private ImageView picture;
+        private EditText  price,time,description;
+        private Button buttonSubmit;
+        private Recipe recipe;
+        private TextView textToolbar;
+        private Uri mImageUri;
         onRecipeChangeExtraListener onRecipeChangeExtraListenerVar;
 
 
@@ -43,19 +52,38 @@ public class CreateDescriptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_create_description, container, false);
-        setObjects(view);
+
+        //Initialize Objects
+        addPicture = view.findViewById(R.id.addImageButton);
+        picture = view.findViewById(R.id.imageViewDisplayImage);
+        price = view.findViewById(R.id.editTextPrice);
+        time = view.findViewById(R.id.editTextTime);
+        description = view.findViewById(R.id.editTextDescription);
+        buttonSubmit = view.findViewById(R.id.buttonSubmit);
+
+        //Set Title of Toolbar to Directions
         textToolbar = ((CreateRecipeActivity)getActivity()).findViewById(R.id.toolbar_title);
         textToolbar.setText("Directions");
+
+
         recipe = new Recipe();
-        picture.setOnClickListener(new View.OnClickListener() {
+
+        //OnClickListener for Image Button
+        addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Open File Chooser
+                openFileChooser();
+
+                //Take Picture Option
+                /*
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,0);
+                */
             }
         });
 
-        okay.setOnClickListener(new View.OnClickListener() {
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             if(true){
@@ -76,20 +104,27 @@ public class CreateDescriptionFragment extends Fragment {
         return view;
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-            super.onActivityResult(requestCode,resultCode,data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+            // glide will follow imageview's width, height and scaleType
+            Glide.with(this)
+                    .load(mImageUri)
+                    .into(picture);
+        }
+        else {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            /*recipe.setPicture(bitmap);*/
             picture.setImageBitmap(bitmap);
+        }
+    }
+    private void openFileChooser(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
     }
 
-    private void setObjects(View view){
-        picture = view.findViewById(R.id.fragment_recipe_create_extra_imageView_camera);
-        price = view.findViewById(R.id.fragment_recipe_create_price);
-        time = view.findViewById(R.id.fragment_create_recipe_EditText_time);
-        description = view.findViewById(R.id.fragment_recipe_create_extra1_description);
-        okay = view.findViewById(R.id.fragment_recipe_create_extra_Button_done);
-    }
     /*private boolean isInputsValid(){
         boolean check = true;
         if (time.getText().toString().matches(".*\\W.{2}")){
