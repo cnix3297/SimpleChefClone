@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class RecipeClass {
 
-    private ArrayList<Ingredients> ingredientList;
+    private ArrayList<Ingredients> ingredientList = new ArrayList<>();
     private String name, description, cost, time, steps;
     private Bitmap image;
 
@@ -35,6 +35,9 @@ public class RecipeClass {
 
     public void setIngredientList(ArrayList<Ingredients> ingredientList) {
         this.ingredientList = ingredientList;
+    }
+    public Ingredients getIngredientAtIndex(int index){
+        return ingredientList.get(index);
     }
 
     public String getName() {
