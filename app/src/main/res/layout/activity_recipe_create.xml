@@ -226,13 +226,18 @@
                 <LinearLayout
                     android:id="@+id/visibleIngredients"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="invisible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
+                        android:paddingLeft="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="10dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -240,8 +245,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp">
+                            >
 
                             <EditText
                                 android:id="@+id/editTextIngredientName"
@@ -282,7 +286,7 @@
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:paddingLeft="10dp"
-                            android:paddingTop="10dp">
+                            >
 
                             <EditText
                                 android:id="@+id/editTextIngredientCost"
@@ -324,7 +328,7 @@
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:paddingLeft="10dp"
-                            android:paddingTop="10dp">
+                            >
 
                             <EditText
                                 android:id="@+id/editTextIngredientQuantity"
@@ -394,6 +398,7 @@
                                 android:text="Delete" />
                         </RelativeLayout>
                     </LinearLayout>
+                </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/linearLayoutDirections"
@@ -580,7 +585,6 @@
                     android:text="@string/Submit" />
 
             </LinearLayout>
-        </LinearLayout>
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
