@@ -5,6 +5,10 @@ public class Ingredients {
     private String name, quantity;
     private Double price;
 
+    public Ingredients()
+    {
+
+    }
     public Ingredients(String name, Double price, String quantity){
         this.name = name;
         this.price = price;
