@@ -120,7 +120,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseAuth currentUser = FirebaseAuth.getInstance();
                     //Document References
-                    DocumentReference newRecipeRef = db.collection("Recipe").document();
+                    DocumentReference newRecipeRef = db.collection("Recipes").document();
 
 
                     //Adding recipes
