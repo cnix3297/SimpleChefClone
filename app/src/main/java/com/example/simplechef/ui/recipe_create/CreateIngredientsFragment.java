@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
+import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.Recipe;
 import com.google.api.Distribution;
 
@@ -35,10 +38,9 @@ import java.util.ArrayList;
 
  */
 public class CreateIngredientsFragment extends Fragment {
-    Spinner measurement;
-    EditText quantity,ingredientName,price;
-    Button next, delete;
-    ImageButton addIngredient;
+    EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
+    EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity;
+    Button buttonSubmitRecipe;
     LinearLayout listIngredient;
     TextView error, textToolbar;
     Recipe recipe = new Recipe();
@@ -47,8 +49,9 @@ public class CreateIngredientsFragment extends Fragment {
     //Tabs
     private LinearLayout tabGeneral, visibleGeneral, tabIngredients, visibleIngredients, tabDirections, visibleDirections, tabAddImage, visibleAddImage;
     private ImageView imageViewAddImage;
-    private Button buttonUploadImage, buttonTakeImage;
+    private Button buttonUploadImage, buttonTakeImage, addIngredient;
     private Uri imageURI;
+    private RecipeClass recipeObject = new RecipeClass();
 
 
 
@@ -93,20 +96,29 @@ public class CreateIngredientsFragment extends Fragment {
         measurement.setPadding(8,8,8,8);
         measurement.setPrompt("Metric");
         Log.d("spinner", measurement.getSelectedItem() + "");
+
 */
+
+        buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO:VALIDATION, FIELD VALUES,
+
+                String recipeName = editTextRecipeName.getText().toString();
+            }
+        });
 
         addIngredient.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                error.setVisibility(View.INVISIBLE);
 
-                String varQuantity = quantity.getText().toString();
-                String varIngredient = ingredientName.getText().toString();
-                String varPrice = price.getText().toString();
+                String varIngredientQuantity = editTextIngredientQuantity.getText().toString();
+                String varIngredientName = editTextIngredientName.getText().toString();
+                String varIngredientCost = editTextIngredientCost.getText().toString();
 
                 //Form validation
-                if(varQuantity.equals("") && varIngredient.equals("") && varPrice.equals("")){
+                if(varIngredientQuantity.equals("") && varIngredientName.equals("") && varIngredientCost.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
                 }else {
                     //ADD HEADERS
@@ -116,20 +128,22 @@ public class CreateIngredientsFragment extends Fragment {
                         listIngredient.addView(j);
                     }
 
-                    //ask the API for ingrident
-                    RecipeAPI getAPI = new RecipeAPI(ingredientName.getText().toString());
+                    //ask the API for ingredient
+                    RecipeAPI getAPI = new RecipeAPI(varIngredientName);
                     if(getAPI.getFoodName() == null) {
-                        recipe.setIngredients(ingredientName.getText().toString(), Double.parseDouble(price.getText().toString()), measurement.getSelectedItem().toString(), Double.parseDouble(quantity.getText().toString()));
-                        onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
+                        recipeObject.AddIngredient(varIngredientName, Double.parseDouble(varIngredientCost), (varIngredientQuantity));
+                        //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }else {
-                        recipe.setIngredients(getAPI.getFoodName(), Double.parseDouble(price.getText().toString()), measurement.getSelectedItem().toString(), Double.parseDouble(quantity.getText().toString()));
-                        onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
+                        recipeObject.AddIngredient(getAPI.getFoodName(), Double.parseDouble(varIngredientCost), (varIngredientQuantity));
+                        //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }
+
                     //add ingredient to linear layout
                     TextView t = new TextView(getActivity());
-                    t.setText(recipe.getIngredientToString(count));
+                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice());
                     t.setPadding(1,10,1,10);
                     t.setTextSize(20);
+                    t.setTextColor(Color.BLACK);
                     listIngredient.addView(t);
                     count++;
                     setObjectsEmpty();
@@ -141,7 +155,7 @@ public class CreateIngredientsFragment extends Fragment {
 
         });
 
-
+/*
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,13 +168,14 @@ public class CreateIngredientsFragment extends Fragment {
 
             }
         });
+        */
         tabIngredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(visibleIngredients.getVisibility() == View.INVISIBLE) {
                     visibleIngredients.setVisibility(View.VISIBLE);
                     ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
-                    params.height = 200;
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     visibleIngredients.setLayoutParams(params);
 
@@ -250,17 +265,26 @@ public class CreateIngredientsFragment extends Fragment {
         return view;
     }
     private void setObjectsEmpty(){
-        quantity.setText("");
-        ingredientName.setText("");
-        price.setText("");
+        editTextIngredientQuantity.setText("");
+        editTextIngredientName.setText("");
+        editTextIngredientCost.setText("");
 
     }
     private void getWindowObjects(View view){
         //measurement = (Spinner) view.findViewById(R.id.fragment_activity_recipe_create_s1_size_spinner);
-        quantity = (EditText) view.findViewById(R.id.fragment_activity_recipe_create_s1_editText_quantity);
-        ingredientName = (EditText) view.findViewById(R.id.fragment_activity_recipe_create_s1_editText_ingredient);
-        price = (EditText) view.findViewById(R.id.fragment_activity_recipe_create_s1_editText_price);
-        addIngredient = (ImageButton) view.findViewById(R.id.fragment_activity_recipe_create_s1_button_addIngredient);
+
+        // Recipe
+        editTextRecipeName = (EditText) view.findViewById(R.id.editTextRecipeName);
+        editTextRecipeCost = (EditText) view.findViewById(R.id.editTextRecipeCost);
+        editTextRecipeTime = (EditText) view.findViewById(R.id.editTextRecipeTime);
+
+        //Adding Ingredient
+        editTextIngredientName = (EditText) view.findViewById(R.id.editTextIngredientName);
+        editTextIngredientCost = (EditText) view.findViewById(R.id.editTextPrice);
+        editTextIngredientQuantity = (EditText) view.findViewById(R.id.editTextIngredientQuantity);
+
+        //?????
+        addIngredient = (Button) view.findViewById(R.id.buttonAddIngredient);
         listIngredient = (LinearLayout) view.findViewById(R.id.fragment_activity_recipe_create_s1_linearLayout_recipeView);
 
         //tabs
@@ -279,6 +303,7 @@ public class CreateIngredientsFragment extends Fragment {
         //Button Declaration
         buttonTakeImage = (Button)view.findViewById(R.id.buttonTakeImage);
         buttonUploadImage = (Button)view.findViewById(R.id.buttonUploadExisting);
+        buttonSubmitRecipe = (Button)view.findViewById(R.id.buttonSubmitRecipe);
 
 
     }
