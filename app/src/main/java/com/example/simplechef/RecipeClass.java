@@ -7,8 +7,9 @@ import java.util.ArrayList;
 public class RecipeClass {
 
     private ArrayList<Ingredients> ingredientList = new ArrayList<>();
-    private String name, description, cost, time, steps;
+    private String name, description, time, steps;
     private Bitmap image;
+    private Double cost = 0.0;
 
 
     //Constructor
@@ -24,6 +25,7 @@ public class RecipeClass {
     public void AddIngredient(String name, Double price, String quantity){
         Ingredients obj = new Ingredients(name, price, quantity);
         ingredientList.add(obj);
+        updateCost(price);
     }
 
 
@@ -56,12 +58,15 @@ public class RecipeClass {
         this.description = description;
     }
 
-    public String getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
+    }
+    public void updateCost(Double price){
+        this.cost += price;
     }
 
     public String getTime() {

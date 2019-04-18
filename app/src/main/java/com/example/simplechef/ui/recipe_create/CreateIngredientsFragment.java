@@ -22,16 +22,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.Recipe;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.api.Distribution;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -39,7 +51,7 @@ import java.util.ArrayList;
  */
 public class CreateIngredientsFragment extends Fragment {
     EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
-    EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity;
+    EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity, editTextDirections;
     Button buttonSubmitRecipe;
     LinearLayout listIngredient;
     TextView error, textToolbar;
@@ -103,8 +115,66 @@ public class CreateIngredientsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO:VALIDATION, FIELD VALUES,
+                Boolean stop = false;
+                if(editTextRecipeName.getText() != null) {
+                    recipeObject.setName(editTextRecipeName.getText().toString());
+                }
+                else{
+                    Toast.makeText(getActivity(), "Missing Recipe Name", Toast.LENGTH_SHORT).show();
+                    stop = true;
+                }
+                if(editTextRecipeCost.getText() == null) {
+                    //TODO::TAKE COST OF EACH INGREDIENT ADD IT UP AND PUT IN RECIPEOBJECT. IF COST > 15 THEN THROW ERROR;
 
-                String recipeName = editTextRecipeName.getText().toString();
+                    if(recipeObject.getCost() > 20.0){
+                        Toast.makeText(getActivity(), "Cost is to high", Toast.LENGTH_SHORT).show();
+                        stop = true;
+                    }
+                }
+                if(editTextRecipeTime.getText() != null) {
+                    recipeObject.setTime(editTextRecipeTime.getText().toString());
+                }
+                else{
+                    Toast.makeText(getActivity(), "Missing Recipe Time", Toast.LENGTH_SHORT).show();
+                    stop = true;
+                }
+                if(editTextDirections.getText() != null) {
+                    recipeObject.setSteps(editTextDirections.getText().toString());
+                }
+                else{
+                    Toast.makeText(getActivity(), "Missing Recipe Directions", Toast.LENGTH_SHORT).show();
+                    stop = true;
+                }
+                if(recipeObject.getIngredientList().size() > 0) {
+                    //Do Nothing
+                }
+                else{
+                    Toast.makeText(getActivity(), "You got no ingredients bro. C'mon", Toast.LENGTH_SHORT).show();
+                    stop = true;
+                }
+
+                if(!stop) {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    FirebaseAuth currentUser = FirebaseAuth.getInstance();
+                    //Document References
+                    DocumentReference newRecipeRef = db.collection("Recipe").document();
+
+                    //Adding recipes
+                    newRecipeRef.set(recipeObject);
+                    String recipeID = newRecipeRef.getId();
+                    Toast.makeText(getActivity(), recipeID, Toast.LENGTH_SHORT).show();
+
+                    //Mapping Recipe to user
+                    HashMap<String, Object> data = new HashMap<>();
+                    data.put("MyRecipes", FieldValue.arrayUnion(recipeID));
+                    DocumentReference newUserRef = db.collection("Users").document(currentUser.getUid());
+                    newUserRef.update(data);
+
+                }
+                else{
+                    Toast.makeText(getActivity(), "Failed to Create Recipe", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -120,7 +190,8 @@ public class CreateIngredientsFragment extends Fragment {
                 //Form validation
                 if(varIngredientQuantity.equals("") && varIngredientName.equals("") && varIngredientCost.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
-                }else {
+                }
+                else {
                     //ADD HEADERS
                     if(count == 0){
                         TextView j = new TextView(getActivity());
@@ -140,7 +211,7 @@ public class CreateIngredientsFragment extends Fragment {
 
                     //add ingredient to linear layout
                     TextView t = new TextView(getActivity());
-                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice());
+                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
                     t.setPadding(1,10,1,10);
                     t.setTextSize(20);
                     t.setTextColor(Color.BLACK);
@@ -280,8 +351,9 @@ public class CreateIngredientsFragment extends Fragment {
 
         //Adding Ingredient
         editTextIngredientName = (EditText) view.findViewById(R.id.editTextIngredientName);
-        editTextIngredientCost = (EditText) view.findViewById(R.id.editTextPrice);
+        editTextIngredientCost = (EditText) view.findViewById(R.id.editTextIngredientCost);
         editTextIngredientQuantity = (EditText) view.findViewById(R.id.editTextIngredientQuantity);
+        editTextDirections = (EditText)view.findViewById(R.id.editTextDirections);
 
         //?????
         addIngredient = (Button) view.findViewById(R.id.buttonAddIngredient);
