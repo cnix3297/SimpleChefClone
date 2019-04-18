@@ -56,7 +56,7 @@ public class AllRecipesFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         RecipeClass recipeobj = document.toObject(RecipeClass.class);
                         AddObject(recipeobj);
-                        Log.d("Recipes", document.getId() + " => " + recipeobj.getName() + ": " + recipeobj.getDescription());
+                        Log.d("Recipes", document.getId() + " => " + recipeobj.getName());
                     }
 
                     //Recycler View Init & Data Pass
