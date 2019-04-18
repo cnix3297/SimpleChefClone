@@ -210,27 +210,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
         });
 
-        tabIngredients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(visibleIngredients.getVisibility() == View.INVISIBLE) {
-                    visibleIngredients.setVisibility(View.VISIBLE);
-                    ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    visibleIngredients.setLayoutParams(params);
-
-                }
-                else {
-                    visibleIngredients.setVisibility(View.INVISIBLE);
-                    ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
-                    params.height = 0;
-                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    visibleIngredients.setLayoutParams(params);
-                }
-            }
-        });
-
         tabGeneral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,6 +227,27 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     params.height = 0;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     visibleGeneral.setLayoutParams(params);
+                }
+            }
+        });
+
+        tabIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(visibleIngredients.getVisibility() == View.INVISIBLE) {
+                    visibleIngredients.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    visibleIngredients.setLayoutParams(params);
+
+                }
+                else {
+                    visibleIngredients.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = visibleIngredients.getLayoutParams();
+                    params.height = 0;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    visibleIngredients.setLayoutParams(params);
                 }
             }
         });
@@ -373,7 +373,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
         //?????
         addIngredient = (Button) findViewById(R.id.buttonAddIngredient);
-        listIngredient = (LinearLayout) findViewById(R.id.fragment_activity_recipe_create_s1_linearLayout_recipeView);
+        listIngredient = (LinearLayout) findViewById(R.id.ingredientButtonBar);
 
         //tabs
         tabGeneral = (LinearLayout) findViewById(R.id.linearLayoutGeneral);
