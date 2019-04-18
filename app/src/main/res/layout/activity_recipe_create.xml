@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,23 +25,6 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="68dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/ostrich"
-                android:text="Create Recipe"
-                android:textColor="@color/colorWhite"
-                android:textSize="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +32,7 @@
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                 <LinearLayout
                     android:id="@+id/linearLayoutGeneral"
@@ -79,13 +62,12 @@
                         android:layout_weight="8"
                         android:alpha="1"
                         android:background="#fefbf7"
-                        android:fontFamily="@font/ostrich"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="General"
                         android:textColor="@color/colorGreyDarkNav"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="normal" />
 
 
@@ -131,7 +113,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
-                        app:fontFamily="@font/azoft_sans" />
+                         />
 
                     <EditText
                         android:id="@+id/editTextRecipeCost"
@@ -166,7 +148,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
-                        app:fontFamily="@font/azoft_sans" />
+                         />
 
                     <EditText
                         android:id="@+id/editTextRecipeTime"
@@ -202,7 +184,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
-                        app:fontFamily="@font/azoft_sans" />
+                         />
 
 
                 </LinearLayout>
@@ -234,13 +216,12 @@
                         android:layout_weight="8"
                         android:alpha="1"
                         android:background="#fefbf7"
-                        android:fontFamily="@font/ostrich"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="Ingredients"
                         android:textColor="@color/colorGreyDarkNav"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="normal" />
 
 
@@ -294,7 +275,6 @@
                                 android:layout_gravity="center"
                                 android:alpha=".7"
                                 android:background="@color/colorWhite"
-                                android:fontFamily="@font/azoft"
                                 android:text="Ingredient"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="16sp" />
@@ -336,7 +316,6 @@
                                 android:layout_gravity="center"
                                 android:alpha=".7"
                                 android:background="@color/colorWhite"
-                                android:fontFamily="@font/azoft"
                                 android:text="Price"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorBlack"
@@ -379,7 +358,6 @@
                                 android:layout_gravity="center"
                                 android:alpha=".7"
                                 android:background="@color/colorWhite"
-                                android:fontFamily="@font/azoft"
                                 android:text="Quantity"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorBlack"
@@ -453,13 +431,12 @@
                         android:layout_weight="8"
                         android:alpha="1"
                         android:background="#fefbf7"
-                        android:fontFamily="@font/ostrich"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="Directions"
                         android:textColor="@color/colorGreyDarkNav"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="normal" />
 
 
@@ -486,7 +463,6 @@
 
                             android:alpha=".7"
                             android:background="@color/colorWhite"
-                            android:fontFamily="@font/azoft"
                             android:paddingLeft="20dp"
                             android:text="Directions"
                             android:textColor="@color/colorBlack"
@@ -544,13 +520,12 @@
                         android:layout_weight="8"
                         android:alpha="1"
                         android:background="#fefbf7"
-                        android:fontFamily="@font/ostrich"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="Add Image"
                         android:textColor="@color/colorGreyDarkNav"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="normal" />
 
 

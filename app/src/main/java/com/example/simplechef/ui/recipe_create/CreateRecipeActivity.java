@@ -78,7 +78,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
         buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO:VALIDATION, FIELD VALUES,
                 Boolean stop = false;
                 if(editTextRecipeName.getText() != null) {
                     recipeObject.setName(editTextRecipeName.getText().toString());
@@ -314,7 +313,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Add Ingredients");
+        toolbarTitle.setText("Add Recipe");
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
