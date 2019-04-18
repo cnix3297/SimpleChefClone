@@ -6,10 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -47,6 +51,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         Log.d(TAG, "onBindViewHolder:  called.");
         RecipeClass currentRecipe = recipes.get(position);
         holder.recipeName.setText(currentRecipe.getName());
+
+        //Adding Image to views
+        // Reference to an image file in Firebase Storage
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference recipePictureReference = storage.getReference().child(currentRecipe.getImage());
+
+
         Log.d("RecipeHolder", currentRecipe.getName());
 
     }

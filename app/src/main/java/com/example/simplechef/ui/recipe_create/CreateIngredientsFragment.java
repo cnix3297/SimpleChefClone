@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,14 +30,26 @@ import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.Recipe;
+import com.example.simplechef.util.GlideApp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.api.Distribution;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
@@ -64,7 +77,8 @@ public class CreateIngredientsFragment extends Fragment {
     private Button buttonUploadImage, buttonTakeImage, addIngredient;
     private Uri imageURI;
     private RecipeClass recipeObject = new RecipeClass();
-
+    private static final String TAG = "AddRecipe";
+    private Bitmap image;
 
 
 
@@ -159,17 +173,38 @@ public class CreateIngredientsFragment extends Fragment {
                     //Document References
                     DocumentReference newRecipeRef = db.collection("Recipe").document();
 
+
                     //Adding recipes
                     newRecipeRef.set(recipeObject);
                     String recipeID = newRecipeRef.getId();
                     Toast.makeText(getActivity(), recipeID, Toast.LENGTH_SHORT).show();
-
                     //Mapping Recipe to user
-                    HashMap<String, Object> data = new HashMap<>();
+                    final HashMap<String, Object> data = new HashMap<>();
                     data.put("MyRecipes", FieldValue.arrayUnion(recipeID));
-                    DocumentReference newUserRef = db.collection("Users").document(currentUser.getUid());
-                    newUserRef.update(data);
+                    final DocumentReference newUserRef = db.collection("Users").document(currentUser.getUid());
+                    CollectionReference reference = db.collection("Users").document(currentUser.getUid()).collection("MyRecipes");
 
+                    // Create a reference to the document associate with user
+                    DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.contains("MyRecipes")) {
+                                    newUserRef.update(data);
+                                } else {
+                                    newUserRef.set(data);
+                                }
+
+                            } else {
+                                Log.d("DocumentFailed", "get failed with ", task.getException());
+                            }
+                        }
+                    });
+
+                    //Adding picture to firebase
+                    addRecipePicturetoFirebase(image, recipeID);
                 }
                 else{
                     Toast.makeText(getActivity(), "Failed to Create Recipe", Toast.LENGTH_SHORT).show();
@@ -401,10 +436,17 @@ public class CreateIngredientsFragment extends Fragment {
             Glide.with(this)
                     .load(imageURI)
                     .into(imageViewAddImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),imageURI);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
         else {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageViewAddImage.setImageBitmap(bitmap);
+            image = bitmap;
         }
     }
     private void openFileChooser(){
@@ -412,5 +454,28 @@ public class CreateIngredientsFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 1);
+    }
+    private void addRecipePicturetoFirebase(final Bitmap bitmap, String recipeID) {
+        final FirebaseStorage storage = FirebaseStorage.getInstance();
+        final StorageReference recipePictureReference = storage.getReference().child("Recipes/" + recipeID + "/recipe.jpg");
+        recipeObject.setImage("Recipes/" + recipeID + "/recipe.jpg");
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = recipePictureReference.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Failure uploading file");
+                Toast.makeText(getActivity(),"There was a problem uploading the image", Toast.LENGTH_LONG).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "Success uploading file");
+            }
+        });
     }
 }
