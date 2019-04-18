@@ -52,11 +52,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         RecipeClass currentRecipe = recipes.get(position);
         holder.recipeName.setText(currentRecipe.getName());
 
-        //Adding Image to views
-        // Reference to an image file in Firebase Storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference recipePictureReference = storage.getReference().child(currentRecipe.getImage());
-
 
         Log.d("RecipeHolder", currentRecipe.getName());
 

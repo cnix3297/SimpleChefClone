@@ -14,15 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.simplechef.R;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.login.LoginActivity;
-import com.example.simplechef.ui.shared.SectionsStatePagerAdapter;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
