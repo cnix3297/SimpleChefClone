@@ -38,8 +38,9 @@ import java.util.ArrayList;
 
  */
 public class CreateIngredientsFragment extends Fragment {
-    EditText quantity,ingredientName,price;
-    Button next, delete, buttonSubmitRecipe;
+    EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
+    EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity;
+    Button buttonSubmitRecipe;
     LinearLayout listIngredient;
     TextView error, textToolbar;
     Recipe recipe = new Recipe();
@@ -102,6 +103,8 @@ public class CreateIngredientsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO:VALIDATION, FIELD VALUES,
+
+                String recipeName = editTextRecipeName.getText().toString();
             }
         });
 
@@ -110,12 +113,12 @@ public class CreateIngredientsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String varQuantity = quantity.getText().toString();
-                String varIngredient = ingredientName.getText().toString();
-                String varPrice = price.getText().toString();
+                String varIngredientQuantity = editTextIngredientQuantity.getText().toString();
+                String varIngredientName = editTextIngredientName.getText().toString();
+                String varIngredientCost = editTextIngredientCost.getText().toString();
 
                 //Form validation
-                if(varQuantity.equals("") && varIngredient.equals("") && varPrice.equals("")){
+                if(varIngredientQuantity.equals("") && varIngredientName.equals("") && varIngredientCost.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
                 }else {
                     //ADD HEADERS
@@ -125,13 +128,13 @@ public class CreateIngredientsFragment extends Fragment {
                         listIngredient.addView(j);
                     }
 
-                    //ask the API for ingrident
-                    RecipeAPI getAPI = new RecipeAPI(ingredientName.getText().toString());
+                    //ask the API for ingredient
+                    RecipeAPI getAPI = new RecipeAPI(varIngredientName);
                     if(getAPI.getFoodName() == null) {
-                        recipeObject.AddIngredient(ingredientName.getText().toString(), Double.parseDouble(price.getText().toString()), (quantity.getText().toString()));
+                        recipeObject.AddIngredient(varIngredientName, Double.parseDouble(varIngredientCost), (varIngredientQuantity));
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }else {
-                        recipeObject.AddIngredient(getAPI.getFoodName(), Double.parseDouble(price.getText().toString()), (quantity.getText().toString()));
+                        recipeObject.AddIngredient(getAPI.getFoodName(), Double.parseDouble(varIngredientCost), (varIngredientQuantity));
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }
 
@@ -262,18 +265,23 @@ public class CreateIngredientsFragment extends Fragment {
         return view;
     }
     private void setObjectsEmpty(){
-        quantity.setText("");
-        ingredientName.setText("");
-        price.setText("");
+        editTextIngredientQuantity.setText("");
+        editTextIngredientName.setText("");
+        editTextIngredientCost.setText("");
 
     }
     private void getWindowObjects(View view){
         //measurement = (Spinner) view.findViewById(R.id.fragment_activity_recipe_create_s1_size_spinner);
 
+        // Recipe
+        editTextRecipeName = (EditText) view.findViewById(R.id.editTextRecipeName);
+        editTextRecipeCost = (EditText) view.findViewById(R.id.editTextRecipeCost);
+        editTextRecipeTime = (EditText) view.findViewById(R.id.editTextRecipeTime);
+
         //Adding Ingredient
-        ingredientName = (EditText) view.findViewById(R.id.editTextIngredient);
-        price = (EditText) view.findViewById(R.id.editTextPrice);
-        quantity = (EditText) view.findViewById(R.id.editTextQuantity);
+        editTextIngredientName = (EditText) view.findViewById(R.id.editTextIngredientName);
+        editTextIngredientCost = (EditText) view.findViewById(R.id.editTextPrice);
+        editTextIngredientQuantity = (EditText) view.findViewById(R.id.editTextIngredientQuantity);
 
         //?????
         addIngredient = (Button) view.findViewById(R.id.buttonAddIngredient);

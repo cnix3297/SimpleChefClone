@@ -94,7 +94,7 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:id="@+id/editTextName"
+                        android:id="@+id/editTextRecipeName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -129,7 +129,7 @@
                         app:fontFamily="@font/azoft_sans" />
 
                     <EditText
-                        android:id="@+id/editTextTotalPrice"
+                        android:id="@+id/editTextRecipeCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -164,7 +164,7 @@
                         app:fontFamily="@font/azoft_sans" />
 
                     <EditText
-                        android:id="@+id/editTextTime"
+                        android:id="@+id/editTextRecipeTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -262,7 +262,7 @@
                             android:paddingTop="10dp">
 
                             <EditText
-                                android:id="@+id/editTextIngredient"
+                                android:id="@+id/editTextIngredientName"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -283,7 +283,7 @@
                                 android:textSize="18sp" />
 
                             <TextView
-                                android:id="@+id/asdfjk"
+                                android:id="@+id/ingredientLabel"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -310,7 +310,7 @@
                             android:paddingTop="10dp">
 
                             <EditText
-                                android:id="@+id/editTextPrice"
+                                android:id="@+id/editTextIngredientCost"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -353,7 +353,7 @@
                             android:paddingTop="10dp">
 
                             <EditText
-                                android:id="@+id/editTextQuantity"
+                                android:id="@+id/editTextIngredientQuantity"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
