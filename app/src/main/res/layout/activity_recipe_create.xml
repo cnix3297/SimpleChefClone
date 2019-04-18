@@ -89,7 +89,7 @@
                         android:layout_marginRight="35dp"
                         android:background="@drawable/background_green_opacity_half"
                         android:ems="10"
-                        android:hint="Enter Name"
+                        android:hint="Enter name"
                         android:inputType="textCapSentences"
                         android:maxLength="25"
                         android:paddingTop="10dp"
@@ -157,7 +157,7 @@
                         android:layout_marginRight="35dp"
                         android:background="@drawable/background_green_opacity_half"
                         android:ems="10"
-                        android:hint="Enter Time"
+                        android:hint="Enter time"
                         android:inputType="text"
                         android:maxLength="25"
                         android:paddingTop="10dp"
@@ -226,9 +226,9 @@
                 <LinearLayout
                     android:id="@+id/visibleIngredients"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -244,17 +244,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
 
                             <EditText
                                 android:id="@+id/editTextIngredientName"
-                                android:layout_width="160dp"
+                                android:layout_width="180dp"
                                 android:layout_height="wrap_content"
                                 android:alpha="1"
-                                android:background="@color/colorPrimaryMain"
-                                android:gravity="start"
-                                android:hint=""
+                                android:background="@drawable/background_green_opacity_half"
+                                android:hint="Enter ingredient"
                                 android:inputType="text"
                                 android:paddingStart="15dp"
                                 android:paddingLeft="30dp"
@@ -262,82 +260,40 @@
                                 android:paddingEnd="15dp"
                                 android:paddingRight="30dp"
                                 android:paddingBottom="5dp"
-                                android:textAlignment="textStart"
+                                android:gravity="center"
                                 android:textColor="@color/colorWhite"
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/ingredientLabel"
-                                android:layout_width="160dp"
+                                android:layout_width="180dp"
                                 android:layout_height="wrap_content"
-                                android:alpha=".7"
-                                android:background="@color/colorWhite"
+                                android:alpha=".8"
+                                android:background="@color/colorPrimaryMain"
                                 android:gravity="center"
                                 android:text="Ingredient"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="101dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:paddingLeft="10dp"
-                            >
-
-                            <EditText
-                                android:id="@+id/editTextIngredientCost"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:alpha="1"
-                                android:background="@color/colorPrimaryMain"
-                                android:hint=""
-                                android:inputType="numberDecimal"
-                                android:paddingStart="15dp"
-                                android:paddingLeft="30dp"
-                                android:paddingTop="5dp"
-                                android:paddingEnd="15dp"
-                                android:paddingRight="30dp"
-                                android:paddingBottom="5dp"
-                                android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
-                                android:textColorHint="@color/colorWhite"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/textViewPrice"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:alpha=".7"
-                                android:background="@color/colorWhite"
-                                android:text="Price"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorBlack"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
 
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="101dp"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:orientation="vertical"
-                            android:paddingLeft="10dp"
-                            >
+                            android:paddingLeft="10dp">
 
                             <EditText
                                 android:id="@+id/editTextIngredientQuantity"
-                                android:layout_width="100dp"
+                                android:layout_width="140dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:alpha="1"
-                                android:background="@color/colorPrimaryMain"
-                                android:hint=""
+                                android:background="@drawable/background_green_opacity_half"
+                                android:hint="Enter quantity"
                                 android:inputType="text"
                                 android:paddingStart="15dp"
                                 android:paddingLeft="30dp"
@@ -352,18 +308,24 @@
 
                             <TextView
                                 android:id="@+id/textViewQuantity"
-                                android:layout_width="101dp"
+                                android:layout_width="140dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:alpha=".7"
-                                android:background="@color/colorWhite"
+                                android:alpha=".8"
+                                android:background="@color/colorPrimaryMain"
                                 android:text="Quantity"
                                 android:textAlignment="center"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/colorWhite"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
 
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/ingredientsListLayout">
                     </LinearLayout>
 
                     <LinearLayout
@@ -441,38 +403,25 @@
                     <LinearLayout
                         android:id="@+id/visibleDirections"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="invisible">
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:paddingTop="10dp"
                             android:orientation="vertical">
 
 
-                            <TextView
-                                android:layout_width="350dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-
-                                android:alpha=".7"
-                                android:background="@color/colorWhite"
-                                android:paddingLeft="20dp"
-                                android:text="Directions"
-                                android:textColor="@color/colorBlack"
-
-                                android:textSize="17sp" />
 
                             <EditText
                                 android:id="@+id/editTextDirections"
                                 android:layout_width="350dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginBottom="10dp"
                                 android:alpha="1"
-                                android:background="@color/colorPrimaryMain"
+                                android:background="@drawable/background_green_opacity_half"
                                 android:gravity="center"
                                 android:hint=""
                                 android:inputType="textMultiLine"
@@ -486,6 +435,17 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="15sp" />
 
+                            <TextView
+                                android:layout_width="350dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:alpha=".8"
+                                android:background="@color/colorPrimaryMain"
+                                android:gravity="center"
+                                android:text="Directions"
+                                android:textColor="@color/colorWhite"
+
+                                android:textSize="17sp" />
                         </LinearLayout>
 
                     </LinearLayout>

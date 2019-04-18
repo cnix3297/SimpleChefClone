@@ -94,6 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
 
+
                 createAccount(email, password);
 
             }

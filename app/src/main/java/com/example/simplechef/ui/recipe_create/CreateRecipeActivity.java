@@ -415,7 +415,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
         //Adding Ingredient
         editTextIngredientName = (EditText) findViewById(R.id.editTextIngredientName);
-        editTextIngredientCost = (EditText) findViewById(R.id.editTextIngredientCost);
         editTextIngredientQuantity = (EditText) findViewById(R.id.editTextIngredientQuantity);
         editTextDirections = (EditText) findViewById(R.id.editTextDirections);
 
