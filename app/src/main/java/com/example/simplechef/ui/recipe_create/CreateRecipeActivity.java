@@ -46,6 +46,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -78,7 +79,52 @@ public class CreateRecipeActivity extends AppCompatActivity {
         buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean stop = false;
+
+                String recipeName = editTextRecipeName.getText().toString();
+                String recipeCost = editTextRecipeCost.getText().toString();
+                String recipeTime = editTextRecipeTime.getText().toString();
+                String recipeDirections = editTextDirections.getText().toString();
+
+                //Double recipeCostDouble = Double.parseDouble(recipeCost);
+
+                ArrayList<String> inputProblems = new ArrayList<>();
+
+                Boolean isValidInput = true;
+
+                if (recipeName.isEmpty()) {
+                    inputProblems.add("Recipe name is missing");
+                    isValidInput = false;
+                }
+
+                if (recipeCost.isEmpty()) {
+                    inputProblems.add("Recipe cost is missing");
+                    isValidInput = false;
+                }
+
+                if (recipeTime.isEmpty()) {
+                    inputProblems.add("Recipe time is missing");
+                    isValidInput = false;
+                }
+
+                if (recipeDirections.isEmpty()) {
+                    inputProblems.add("Recipe directions are missing");
+                    isValidInput = false;
+                }
+
+                if (recipeObject.getIngredientList().size() == 0) {
+                    inputProblems.add("Recipe ingredients are missing");
+                    isValidInput = false;
+                }
+
+                if (recipeObject.getCost() > 15.0) {
+                    inputProblems.add("Recipe cost is above $15 limit");
+                    isValidInput = false;
+                }
+
+
+
+/*                Boolean stop = false;
+
                 if(editTextRecipeName.getText() != null) {
                     recipeObject.setName(editTextRecipeName.getText().toString());
                 }
@@ -87,7 +133,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     stop = true;
                 }
                 if(editTextRecipeCost.getText() == null) {
-                    //TODO::TAKE COST OF EACH INGREDIENT ADD IT UP AND PUT IN RECIPEOBJECT. IF COST > 15 THEN THROW ERROR;
 
                     if(recipeObject.getCost() > 20.0){
                         Toast.makeText(context, "Cost is to high", Toast.LENGTH_SHORT).show();
@@ -114,9 +159,10 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(context, "You got no ingredients bro. C'mon", Toast.LENGTH_SHORT).show();
                     stop = true;
-                }
+                }*/
 
-                if(!stop) {
+                if(isValidInput) {
+                    // input is good, lets process
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseAuth currentUser = FirebaseAuth.getInstance();
                     //Document References
@@ -154,10 +200,12 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
                     //Adding picture to firebase
                     addRecipePicturetoFirebase(image, recipeID);
-                }
-                else{
+                } else {
+                    // input is not good, display error dialog
                     Toast.makeText(context, "Failed to Create Recipe", Toast.LENGTH_SHORT).show();
 
+                    CreateRecipeAlertDialogFragment dialogFragment = CreateRecipeAlertDialogFragment.newInstance(inputProblems);
+                    dialogFragment.show(getSupportFragmentManager(), "dialog");
                 }
             }
         });
