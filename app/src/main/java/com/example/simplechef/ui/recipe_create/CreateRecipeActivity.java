@@ -85,8 +85,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 String recipeTime = editTextRecipeTime.getText().toString();
                 String recipeDirections = editTextDirections.getText().toString();
 
-                //Double recipeCostDouble = Double.parseDouble(recipeCost);
-
                 ArrayList<String> inputProblems = new ArrayList<>();
 
                 Boolean isValidInput = true;
@@ -161,8 +159,9 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     stop = true;
                 }*/
 
+
+                // if input is valid, lets process
                 if(isValidInput) {
-                    // input is good, lets process
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseAuth currentUser = FirebaseAuth.getInstance();
                     //Document References
@@ -172,7 +171,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     //Adding recipes
                     newRecipeRef.set(recipeObject);
                     String recipeID = newRecipeRef.getId();
-                    Toast.makeText(context, recipeID, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Recipe created!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Recipe added with id: " + recipeID);
                     //Mapping Recipe to user
                     final HashMap<String, Object> data = new HashMap<>();
                     data.put("MyRecipes", FieldValue.arrayUnion(recipeID));
@@ -201,7 +201,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     //Adding picture to firebase
                     addRecipePicturetoFirebase(image, recipeID);
                 } else {
-                    // input is not good, display error dialog
+                    // input is not valid, send list of messages to Dialog and display them
                     Toast.makeText(context, "Failed to Create Recipe", Toast.LENGTH_SHORT).show();
 
                     CreateRecipeAlertDialogFragment dialogFragment = CreateRecipeAlertDialogFragment.newInstance(inputProblems);

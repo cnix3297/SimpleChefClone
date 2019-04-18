@@ -33,16 +33,18 @@ public class CreateRecipeAlertDialogFragment extends DialogFragment {
 
         StringBuilder sb = new StringBuilder();
 
+        // iterate through all messages in the list and append to a StringBuilder
         Iterator<String> iterator = messageList.iterator();
-            while (iterator.hasNext()) {
-                String message = iterator.next();
-                sb.append(message);
-                if (!iterator.hasNext()) {
-                    // do nothing
-                } else {
-                   sb.append("\n");
-                }
+        while (iterator.hasNext()) {
+            String message = iterator.next();
+            sb.append(message);
+            if (!iterator.hasNext()) {
+                // do nothing
+            } else {
+                // only append new line if not the end of the list
+               sb.append("\n");
             }
+        }
 
 
         builder.setMessage(sb.toString());
