@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.RecipeClass;
@@ -52,7 +53,7 @@ import java.util.HashMap;
 
 public class CreateRecipeActivity extends AppCompatActivity {
     private EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
-    private EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity, editTextDirections;
+    private EditText editTextIngredientName, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
     private LinearLayout listIngredient;
     int count = 0;
@@ -114,10 +115,11 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     isValidInput = false;
                 }
 
-                if (recipeObject.getCost() > 15.0) {
+                if (Double.valueOf(recipeCost) > 15.0) {
                     inputProblems.add("Recipe cost is above $15 limit");
                     isValidInput = false;
                 }
+
 
 
 
@@ -162,15 +164,24 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
                 // if input is valid, lets process
                 if(isValidInput) {
+
+                    //Input data into RecipeObject
+                    recipeObject.setName(recipeName);
+                    recipeObject.setCost(Double.valueOf(recipeCost));
+                    recipeObject.setSteps(recipeDirections);
+                    recipeObject.setTime(recipeTime);
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseAuth currentUser = FirebaseAuth.getInstance();
                     //Document References
                     DocumentReference newRecipeRef = db.collection("Recipes").document();
 
-
+                    String recipeID = newRecipeRef.getId();
+                    //Adding picture to firebase
+                    addRecipePicturetoFirebase(image, recipeID);
+                    
                     //Adding recipes
                     newRecipeRef.set(recipeObject);
-                    String recipeID = newRecipeRef.getId();
+
                     Toast.makeText(context, "Recipe created!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Recipe added with id: " + recipeID);
                     //Mapping Recipe to user
@@ -198,8 +209,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
                         }
                     });
 
-                    //Adding picture to firebase
-                    addRecipePicturetoFirebase(image, recipeID);
+
+
                 } else {
                     // input is not valid, send list of messages to Dialog and display them
                     Toast.makeText(context, "Failed to Create Recipe", Toast.LENGTH_SHORT).show();
@@ -217,10 +228,9 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
                 String varIngredientQuantity = editTextIngredientQuantity.getText().toString();
                 String varIngredientName = editTextIngredientName.getText().toString();
-                String varIngredientCost = editTextIngredientCost.getText().toString();
 
                 //Form validation
-                if(varIngredientQuantity.equals("") && varIngredientName.equals("") && varIngredientCost.equals("")){
+                if(varIngredientQuantity.equals("") && varIngredientName.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
                 }
                 else {
@@ -234,16 +244,16 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     //ask the API for ingredient
                     RecipeAPI getAPI = new RecipeAPI(varIngredientName);
                     if(getAPI.getFoodName() == null) {
-                        recipeObject.AddIngredient(varIngredientName, Double.parseDouble(varIngredientCost), (varIngredientQuantity));
+                        recipeObject.AddIngredient(varIngredientName, (varIngredientQuantity));
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }else {
-                        recipeObject.AddIngredient(getAPI.getFoodName(), Double.parseDouble(varIngredientCost), (varIngredientQuantity));
+                        recipeObject.AddIngredient(getAPI.getFoodName(), (varIngredientQuantity));
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }
 
                     //add ingredient to linear layout
                     TextView t = new TextView(context);
-                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
+                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getQuantity());
                     t.setPadding(1,10,1,10);
                     t.setTextSize(20);
                     t.setTextColor(Color.BLACK);
@@ -403,15 +413,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private void setObjectsEmpty(){
         editTextIngredientQuantity.setText("");
         editTextIngredientName.setText("");
-        editTextIngredientCost.setText("");
 
     }
     private void getWindowObjects(){
 
         // Recipe
         editTextRecipeName = (EditText) findViewById(R.id.editTextRecipeName);
-        editTextRecipeCost = (EditText) findViewById(R.id.editTextRecipeCost);
         editTextRecipeTime = (EditText) findViewById(R.id.editTextRecipeTime);
+        editTextRecipeCost = (EditText) findViewById(R.id.editTextRecipeCost);
 
         //Adding Ingredient
         editTextIngredientName = (EditText) findViewById(R.id.editTextIngredientName);
@@ -451,6 +460,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
             // glide will follow imageview's width, height and scaleType
             Glide.with(this)
                     .load(imageURI)
+                    .centerCrop()
                     .into(imageViewAddImage);
             try {
                 image = MediaStore.Images.Media.getBitmap(context.getContentResolver(),imageURI);
@@ -458,10 +468,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
         }
         else {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imageViewAddImage.setImageBitmap(bitmap);
+            Glide.with(this)
+                    .load(bitmap)
+                    .centerCrop()
+                    .into(imageViewAddImage);
             image = bitmap;
         }
     }

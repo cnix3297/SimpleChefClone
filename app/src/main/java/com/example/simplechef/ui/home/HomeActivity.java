@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         setTitle(null);
 
         // Tabs setup with View Pager
-        tabLayout = findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabsHome);
         tabLayout.setupWithViewPager(viewPager);
 
 

@@ -25,10 +25,9 @@ public class RecipeClass {
         this.description = description;
         this.steps = steps;
     }
-    public void AddIngredient(String name, Double price, String quantity){
-        Ingredients obj = new Ingredients(name, price, quantity);
+    public void AddIngredient(String name, String quantity){
+        Ingredients obj = new Ingredients(name, quantity);
         ingredientList.add(obj);
-        updateCost(price);
     }
 
 
@@ -67,9 +66,6 @@ public class RecipeClass {
 
     public void setCost(Double cost) {
         this.cost = cost;
-    }
-    public void updateCost(Double price){
-        this.cost += price;
     }
 
     public String getTime() {

@@ -1,5 +1,7 @@
 package com.example.simplechef.ui.home;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,15 +14,20 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
     private final static String TAG = "RecipeListAdapter";
     private ArrayList<RecipeClass> recipes;
     private OnItemClickListener mListener;
+    private Context context;
 
 
     RecipeListAdapter(ArrayList<RecipeClass> list){
@@ -47,13 +54,42 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecipeHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder:  called.");
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+
+        //Getting object for Recipe
         RecipeClass currentRecipe = recipes.get(position);
         holder.recipeName.setText(currentRecipe.getName());
+        holder.recipeCost.setText(formatter.format(currentRecipe.getCost()));
+        holder.recipeDescription.setText(currentRecipe.getSteps());
+
+
+        //Adding Image to Recycler view item
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference recipePictureReference = storage.getReference().child(currentRecipe.getImage());
+        recipePictureReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context)
+                        .load(uri)
+                        .centerCrop()
+                        .into(holder.recipeImage);
+                Log.d("SUCCESS", uri.toString());
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("FAILURE", e.toString());
+
+            }
+        });
 
 
         Log.d("RecipeHolder", currentRecipe.getName());
+        Log.d("RecipeHolder", currentRecipe.getImage());
 
     }
 
@@ -63,11 +99,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     public class RecipeHolder extends RecyclerView.ViewHolder {
-        public TextView recipeName;
+        public TextView recipeName, recipeCost, recipeDescription;
+        public ImageView recipeImage;
 
         public RecipeHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
+            context = itemView.getContext();
             recipeName = itemView.findViewById(R.id.textViewRecipeName);
+            recipeCost = itemView.findViewById(R.id.textViewRecipeCost);
+            recipeDescription = itemView.findViewById(R.id.textViewRecipeDescription);
+            recipeImage = itemView.findViewById(R.id.imageViewRecipeImage);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -46,13 +46,13 @@ public class AllRecipesFragment extends Fragment {
         //DocumentReference docRef = db.collection("Recipe").document("4S0ycFz9A05IWKs3249d");
 
         //Get Info from Recipe Collection
-        db.collection("Recipe")
+        db.collection("Recipes")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-
+                    ClearObject(true);
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         RecipeClass recipeobj = document.toObject(RecipeClass.class);
                         AddObject(recipeobj);
@@ -92,5 +92,8 @@ public class AllRecipesFragment extends Fragment {
     public void AddObject(RecipeClass obj){
         this.list.add(obj);
     }
-
+    public void ClearObject(Boolean clear){
+        if(clear)
+            this.list.clear();
+    }
 }
