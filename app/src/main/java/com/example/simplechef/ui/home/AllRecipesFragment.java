@@ -23,7 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class AllRecipesFragment extends Fragment {
+public class AllRecipesFragment extends Fragment  {
 
     private ArrayList<RecipeClass> list = new ArrayList<>();
     public static AllRecipesFragment newInstance() {
@@ -67,7 +67,7 @@ public class AllRecipesFragment extends Fragment {
                     RecipeListAdapter recipeListAdapter = new RecipeListAdapter(list);
                     recyclerView.setAdapter(recipeListAdapter);
 
-                    recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {
+                    recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             // TODO bundle recipe data to send
@@ -76,7 +76,17 @@ public class AllRecipesFragment extends Fragment {
                             Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
                             startActivity(intent);
                         }
+
+                        @Override
+                        public void onFavoriteItemClick(int position) {
+                            Log.d("Favorites", "is clicked") ;
+                        }
+
+
                     });
+
+
+
 
                 } else {
                     Log.d("TAG", "get failed with ", task.getException());
@@ -96,4 +106,5 @@ public class AllRecipesFragment extends Fragment {
         if(clear)
             this.list.clear();
     }
+
 }

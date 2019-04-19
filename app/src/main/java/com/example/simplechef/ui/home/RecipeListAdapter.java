@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
     private final static String TAG = "RecipeListAdapter";
     private ArrayList<RecipeClass> recipes;
-    private OnItemClickListener mListener;
+    private OnRecipeItemClickListener mListener;
     private Context context;
     private View view;
 
@@ -39,11 +39,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     }
 
-    public interface OnItemClickListener {
+    public interface OnRecipeItemClickListener {
         void onItemClick(int position);
+        void onFavoriteItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnRecipeItemClickListener listener) {
         mListener = listener;
     }
 
@@ -105,7 +106,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public TextView recipeName, recipeCost, recipeDescription;
         public ImageView recipeImage;
         public ImageButton recipeAddToFavorites;
-        public RecipeHolder(View itemView, final OnItemClickListener listener) {
+        public RecipeHolder(View itemView, final OnRecipeItemClickListener listener) {
             super(itemView);
             context = itemView.getContext();
             view = itemView;
@@ -125,15 +126,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                     }
                 }
             });
+
             recipeAddToFavorites.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            RecipeClass currentRecipe = recipes.get(position);
-                            FirebaseAuth currentUser = FirebaseAuth.getInstance();
-
+                            listener.onFavoriteItemClick(position);
                         }
                     }
                 }
