@@ -115,6 +115,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             recipeDescription = itemView.findViewById(R.id.textViewRecipeDescription);
             recipeImage = itemView.findViewById(R.id.imageViewRecipeImage);
             recipeAddToFavorites = itemView.findViewById(R.id.imageButtonFavorite);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
