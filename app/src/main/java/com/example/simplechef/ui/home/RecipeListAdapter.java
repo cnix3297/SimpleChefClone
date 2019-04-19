@@ -134,6 +134,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onFavoriteItemClick(position);
+                            recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
                         }
                     }
                 }

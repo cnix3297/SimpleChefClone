@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
+import com.example.simplechef.Users;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,13 +25,21 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AllRecipesFragment extends Fragment  {
 
-    private ArrayList<RecipeClass> list = new ArrayList<>();
+    //Firebase
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseAuth currentUser = FirebaseAuth.getInstance();
+    final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+
+    private ArrayList<RecipeClass> recipeList = new ArrayList<>();
+    private ArrayList<String> favoritesList = new ArrayList<>();
     public static AllRecipesFragment newInstance() {
         AllRecipesFragment fragment = new AllRecipesFragment();
         return fragment;
@@ -45,9 +54,32 @@ public class AllRecipesFragment extends Fragment  {
         //View To Return
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
+        //Get Favorite List
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.contains("MyFavorites")) {
+                        Users favoritesObj = document.toObject(Users.class);
+
+                        Object favorites = document.get("MyFavorites");
+                        for (String temp : favoritesObj.getMyFavorites().keySet()) {
+
+                            favoritesList.add(favoritesObj.getMyFavoritesAtIndex(temp).toString());
+                            Log.d("Favorites", temp);
+                        }
+                    } else {
+                        Log.d("Favorites", "USER HAS NO FAVORITES");
+                    }
+
+                } else {
+                    Log.d("DocumentFailed", "get failed with ", task.getException());
+                }
+            }
+        });
 
         //Access NoSql Database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         //DocumentReference docRef = db.collection("Recipe").document("4S0ycFz9A05IWKs3249d");
 
         //Get Info from Recipe Collection
@@ -68,8 +100,8 @@ public class AllRecipesFragment extends Fragment  {
                     RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                    Log.d("BEFORE", list.toString());
-                    RecipeListAdapter recipeListAdapter = new RecipeListAdapter(list);
+                    Log.d("BEFORE", recipeList.toString());
+                    RecipeListAdapter recipeListAdapter = new RecipeListAdapter(recipeList);
                     recyclerView.setAdapter(recipeListAdapter);
 
                     recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
@@ -85,15 +117,12 @@ public class AllRecipesFragment extends Fragment  {
                         @Override
                         public void onFavoriteItemClick(int position) {
                             Log.d("Favorites", "is clicked") ;
-                            RecipeClass currentRecipe = list.get(position);
+                            RecipeClass currentRecipe = recipeList.get(position);
                             String recipeID = currentRecipe.getID();
                             // Create a reference to the document associate with user
-                            final FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            final FirebaseAuth currentUser = FirebaseAuth.getInstance();
-                            final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+
                             final HashMap<String, Object> data = new HashMap<>();
                             data.put("MyFavorites", FieldValue.arrayUnion(recipeID));
-                            data.put("MyRecipes", FieldValue.arrayUnion(recipeID));
 
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
@@ -103,7 +132,7 @@ public class AllRecipesFragment extends Fragment  {
                                         if (document.contains("MyFavorites")) {
                                             docRef.update(data);
                                         } else {
-                                            docRef.set(data);
+                                            docRef.set(data, SetOptions.merge());
                                         }
 
                                     } else {
@@ -132,11 +161,11 @@ public class AllRecipesFragment extends Fragment  {
         return view;
     }
     public void AddObject(RecipeClass obj){
-        this.list.add(obj);
+        this.recipeList.add(obj);
     }
     public void ClearObject(Boolean clear){
         if(clear)
-            this.list.clear();
+            this.recipeList.clear();
     }
 
 }
