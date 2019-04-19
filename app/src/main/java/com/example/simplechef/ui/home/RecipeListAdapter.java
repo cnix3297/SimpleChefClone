@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -28,6 +30,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     private ArrayList<RecipeClass> recipes;
     private OnItemClickListener mListener;
     private Context context;
+    private View view;
 
 
     RecipeListAdapter(ArrayList<RecipeClass> list){
@@ -101,14 +104,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public class RecipeHolder extends RecyclerView.ViewHolder {
         public TextView recipeName, recipeCost, recipeDescription;
         public ImageView recipeImage;
-
+        public ImageButton recipeAddToFavorites;
         public RecipeHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             context = itemView.getContext();
+            view = itemView;
             recipeName = itemView.findViewById(R.id.textViewRecipeName);
             recipeCost = itemView.findViewById(R.id.textViewRecipeCost);
             recipeDescription = itemView.findViewById(R.id.textViewRecipeDescription);
             recipeImage = itemView.findViewById(R.id.imageViewRecipeImage);
+            recipeAddToFavorites = itemView.findViewById(R.id.imageButtonFavorite);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,6 +121,19 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+            recipeAddToFavorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            RecipeClass currentRecipe = recipes.get(position);
+                            FirebaseAuth currentUser = FirebaseAuth.getInstance();
+
                         }
                     }
                 }
