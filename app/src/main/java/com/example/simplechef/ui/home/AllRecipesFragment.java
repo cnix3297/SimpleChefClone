@@ -17,6 +17,7 @@ import com.example.simplechef.RecipeClass;
 import com.example.simplechef.Users;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,10 +30,13 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AllRecipesFragment extends Fragment  {
-
+    private static final String TAG = "AllRecipesFragment";
     //Firebase
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     final FirebaseAuth currentUser = FirebaseAuth.getInstance();
@@ -55,8 +59,17 @@ public class AllRecipesFragment extends Fragment  {
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
         //Get Favorite List
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+
+                    ArrayList<String> favoritesList = (ArrayList<String>)documentSnapshot.get("MyFavorites");
+
+
+                }
+            }
+/*            @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
@@ -76,7 +89,8 @@ public class AllRecipesFragment extends Fragment  {
                 } else {
                     Log.d("DocumentFailed", "get failed with ", task.getException());
                 }
-            }
+            }*/
+
         });
 
         //Access NoSql Database
