@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class RecipeClass {
 
     private ArrayList<Ingredients> ingredientList = new ArrayList<>();
-    private String name, description, time, steps;
+    private String ID, name, description, time, steps;
     private String image;
     private Double cost = 0.0;
 
@@ -20,7 +20,8 @@ public class RecipeClass {
 
     }
     //Constructor
-    public RecipeClass(String name, String description, String steps) {
+    public RecipeClass(String ID, String name, String description, String steps) {
+        this.ID = ID;
         this.name = name;
         this.description = description;
         this.steps = steps;
@@ -90,5 +91,13 @@ public class RecipeClass {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

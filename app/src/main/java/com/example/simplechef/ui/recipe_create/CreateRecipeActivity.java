@@ -176,6 +176,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     DocumentReference newRecipeRef = db.collection("Recipes").document();
 
                     String recipeID = newRecipeRef.getId();
+                    recipeObject.setID(recipeID);
                     //Adding picture to firebase
                     addRecipePicturetoFirebase(image, recipeID);
                     

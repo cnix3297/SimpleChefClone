@@ -17,11 +17,16 @@ import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AllRecipesFragment extends Fragment  {
 
@@ -80,6 +85,33 @@ public class AllRecipesFragment extends Fragment  {
                         @Override
                         public void onFavoriteItemClick(int position) {
                             Log.d("Favorites", "is clicked") ;
+                            RecipeClass currentRecipe = list.get(position);
+                            String recipeID = currentRecipe.getID();
+                            // Create a reference to the document associate with user
+                            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            final FirebaseAuth currentUser = FirebaseAuth.getInstance();
+                            final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+                            final HashMap<String, Object> data = new HashMap<>();
+                            data.put("MyFavorites", FieldValue.arrayUnion(recipeID));
+                            data.put("MyRecipes", FieldValue.arrayUnion(recipeID));
+
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.contains("MyFavorites")) {
+                                            docRef.update(data);
+                                        } else {
+                                            docRef.set(data);
+                                        }
+
+                                    } else {
+                                        Log.d("DocumentFailed", "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+
                         }
 
 
