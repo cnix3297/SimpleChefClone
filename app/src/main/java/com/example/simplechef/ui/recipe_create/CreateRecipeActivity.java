@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -54,7 +55,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
     private EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
-    private LinearLayout listIngredient;
+    //private LinearLayout listIngredient;
+    private RecyclerView ingredientRecyclerView;
     int count = 0;
     //Tabs
     private LinearLayout tabGeneral, visibleGeneral, tabIngredients, visibleIngredients, tabDirections, visibleDirections, tabAddImage, visibleAddImage;
@@ -73,8 +75,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         setupToolbar();
-
         getWindowObjects();
+        setupIngredientsRecyclerList();
 
         buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +189,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     if(count == 0){
                         TextView j = new TextView(context);
                         j.setText("Amount \t Measurement \t Ingredient \t Price ");
-                        listIngredient.addView(j);
+                        //listIngredient.addView(j);
                     }
 
                     //ask the API for ingredient
@@ -206,7 +208,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     t.setPadding(1,10,1,10);
                     t.setTextSize(20);
                     t.setTextColor(Color.BLACK);
-                    listIngredient.addView(t);
+                    //listIngredient.addView(t);
                     count++;
                     setObjectsEmpty();
                     //Log.d("linear layout", "onClick: " + list.size());
@@ -377,9 +379,12 @@ public class CreateRecipeActivity extends AppCompatActivity {
         editTextIngredientQuantity = (EditText) findViewById(R.id.editTextIngredientQuantity);
         editTextDirections = (EditText) findViewById(R.id.editTextDirections);
 
+        // RecyclerView
+        ingredientRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewIngredients);
+
         //?????
         addIngredient = (Button) findViewById(R.id.buttonAddIngredient);
-        listIngredient = (LinearLayout) findViewById(R.id.ingredientButtonBar);
+        //listIngredient = (LinearLayout) findViewById(R.id.ingredientButtonBar);
 
         //tabs
         tabGeneral = (LinearLayout) findViewById(R.id.linearLayoutGeneral);
@@ -454,5 +459,9 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 Log.d(TAG, "Success uploading file");
             }
         });
+    }
+
+    private void setupIngredientsRecyclerList() {
+
     }
 }
