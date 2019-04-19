@@ -99,13 +99,13 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     isValidInput = false;
                 }
 
-                if (recipeTime.isEmpty()) {
-                    inputProblems.add("Recipe time is missing");
+                if (recipeObject.getCost() > 15.0) {
+                    inputProblems.add("Recipe cost is above $15 limit");
                     isValidInput = false;
                 }
 
-                if (recipeDirections.isEmpty()) {
-                    inputProblems.add("Recipe directions are missing");
+                if (recipeTime.isEmpty()) {
+                    inputProblems.add("Recipe time is missing");
                     isValidInput = false;
                 }
 
@@ -114,51 +114,10 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     isValidInput = false;
                 }
 
-                if (recipeObject.getCost() > 15.0) {
-                    inputProblems.add("Recipe cost is above $15 limit");
+                if (recipeDirections.isEmpty()) {
+                    inputProblems.add("Recipe directions are missing");
                     isValidInput = false;
                 }
-
-
-
-/*                Boolean stop = false;
-
-                if(editTextRecipeName.getText() != null) {
-                    recipeObject.setName(editTextRecipeName.getText().toString());
-                }
-                else{
-                    Toast.makeText(context, "Missing Recipe Name", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }
-                if(editTextRecipeCost.getText() == null) {
-
-                    if(recipeObject.getCost() > 20.0){
-                        Toast.makeText(context, "Cost is to high", Toast.LENGTH_SHORT).show();
-                        stop = true;
-                    }
-                }
-                if(editTextRecipeTime.getText() != null) {
-                    recipeObject.setTime(editTextRecipeTime.getText().toString());
-                }
-                else{
-                    Toast.makeText(context, "Missing Recipe Time", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }
-                if(editTextDirections.getText() != null) {
-                    recipeObject.setSteps(editTextDirections.getText().toString());
-                }
-                else{
-                    Toast.makeText(context, "Missing Recipe Directions", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }
-                if(recipeObject.getIngredientList().size() > 0) {
-                    //Do Nothing
-                }
-                else{
-                    Toast.makeText(context, "You got no ingredients bro. C'mon", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }*/
-
 
                 // if input is valid, lets process
                 if(isValidInput) {
