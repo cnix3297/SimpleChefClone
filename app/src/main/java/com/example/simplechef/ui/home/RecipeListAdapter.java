@@ -28,13 +28,15 @@ import java.util.ArrayList;
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
     private final static String TAG = "RecipeListAdapter";
     private ArrayList<RecipeClass> recipes;
+    private ArrayList<String> favoritesList;
     private OnRecipeItemClickListener mListener;
     private Context context;
     private View view;
 
 
-    RecipeListAdapter(ArrayList<RecipeClass> list){
+    RecipeListAdapter(ArrayList<RecipeClass> list, ArrayList<String> favoritesList){
         this.recipes = list;
+        this.favoritesList = favoritesList;
         Log.d("CONSTRUCTOR CALLED", this.recipes.toString());
 
     }
@@ -91,6 +93,20 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             }
         });
 
+        //On Create Check Favorites
+        for(int i = 0; i < favoritesList.size(); i++){
+            String currentFavorite = favoritesList.get(i);
+            if(currentRecipe.getID().equals(currentFavorite)){
+                holder.recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
+                break;
+            }
+            else{
+                holder.recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_off);
+
+            }
+
+        }
+
 
         Log.d("RecipeHolder", currentRecipe.getName());
         Log.d("RecipeHolder", currentRecipe.getImage());
@@ -128,14 +144,26 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                 }
             });
 
+
             recipeAddToFavorites.setOnClickListener(new View.OnClickListener() {
+                Boolean isFavorited = false;
                 @Override
                 public void onClick(View v) {
+
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onFavoriteItemClick(position);
-                            recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
+                            if(isFavorited) {
+                                recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_off);
+
+                                isFavorited = false;
+                            }
+                            else{
+                                recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
+                                isFavorited = true;
+                            }
+
                         }
                     }
                 }

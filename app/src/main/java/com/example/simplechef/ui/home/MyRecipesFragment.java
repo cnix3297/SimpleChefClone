@@ -34,7 +34,7 @@ public class MyRecipesFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(new ArrayList<RecipeClass>());
+        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(new ArrayList<RecipeClass>(), new ArrayList<String>() );
         recyclerView.setAdapter(recipeListAdapter);
 
         recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
