@@ -3,16 +3,116 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:layout_marginTop="90dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="Suzan's Crazy Recipe"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+    <ImageView
+        android:id="@+id/imageViewGreyBackground"
+        android:layout_width="match_parent"
+        android:layout_height="403dp"
+        android:maxHeight="403dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewClock"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/alarm_clock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description Here"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="8dp"
+        android:maxLength="15"
+        android:text="1 Hour"
+        android:alpha=".7"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+        app:layout_constraintStart_toEndOf="@id/imageViewClock"
+        app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <ImageView
+        android:id="@+id/imageViewTime"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/coin"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground" />
+
+    <TextView
+        android:id="@+id/textViewCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="8dp"
+        android:maxLength="15"
+        android:text="~ $4.34"
+        android:alpha=".7"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+        app:layout_constraintStart_toEndOf="@+id/imageViewTime"
+        app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground"
+        app:layout_constraintVertical_bias="0.38" />
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:gravity="center"
+        android:text="This is the descriptions"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:alpha=".8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground" />
 </android.support.constraint.ConstraintLayout>
