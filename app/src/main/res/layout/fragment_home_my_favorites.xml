@@ -8,8 +8,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:paddingTop="105dp"
-    android:tag="FragmentAllRecipes"
-    >
+    android:tag="FragmentMyRecipes">
 
 
     <android.support.v7.widget.RecyclerView

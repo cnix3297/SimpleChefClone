@@ -31,12 +31,6 @@ import java.util.ArrayList;
 
 public class FavoriteRecipesFragment extends Fragment {
 
-
-    public static FavoriteRecipesFragment newInstance() {
-        FavoriteRecipesFragment fragment = new FavoriteRecipesFragment();
-        return fragment;
-    }
-
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     final FirebaseAuth currentUser = FirebaseAuth.getInstance();
     final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
@@ -47,12 +41,19 @@ public class FavoriteRecipesFragment extends Fragment {
     private RecyclerView recyclerView;
     private View fragView;
 
+
+    public static FavoriteRecipesFragment newInstance() {
+        FavoriteRecipesFragment fragment = new FavoriteRecipesFragment();
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //View To Return
-        View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_favorites_recipe_list, container, false);
         fragView = view;
         //See if the current user has any favorites
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -113,6 +114,11 @@ public class FavoriteRecipesFragment extends Fragment {
 
 
         return view;
+    }
+
+    public void removeFavorite(int position) {
+        favoritesList.remove(position);
+        recipeListAdapter.notifyDataSetChanged();
     }
 
 }
