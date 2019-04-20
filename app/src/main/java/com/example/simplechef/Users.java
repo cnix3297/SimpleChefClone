@@ -5,33 +5,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Users {
-    private HashMap<String, Object> myFavorites;
-    private HashMap<String, Object> myRecipes;
+    private ArrayList<String> myFavorites;
+    private ArrayList<String> myRecipes;
 
     public Users(){
 
     }
-    public Users(HashMap<String, Object> myFavorites, HashMap<String, Object> myRecipes){
+    public Users(ArrayList<String> myFavorites, ArrayList<String> myRecipes){
         this.myFavorites = myFavorites;
         this.myRecipes = myRecipes;
     }
 
-    public HashMap<String, Object> getMyFavorites() {
+    public ArrayList<String> getMyFavorites() {
         return myFavorites;
     }
 
-    public void setMyFavorites(HashMap<String, Object> myFavorites) {
+    public void setMyFavorites(ArrayList<String> myFavorites) {
         this.myFavorites = myFavorites;
     }
 
-    public HashMap<String, Object> getMyRecipes() {
+    public ArrayList<String> getMyRecipes() {
         return myRecipes;
     }
 
-    public void setMyRecipes(HashMap<String, Object> myRecipes) {
+    public void setMyRecipes(ArrayList<String> myRecipes) {
         this.myRecipes = myRecipes;
     }
-    public Object getMyFavoritesAtIndex(String index){
+    public String getMyFavoritesAtIndex(Integer index){
         return myFavorites.get(index);
     }
 
