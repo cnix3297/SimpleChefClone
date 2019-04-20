@@ -21,7 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,7 +36,6 @@ public class FavoriteRecipesFragment extends Fragment {
     final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
     private ArrayList<String> favoritesList = new ArrayList<>();
     private ArrayList<RecipeClass> recipeObject = new ArrayList<>();
-    public Boolean remove = false;
     //Recycler View
     private RecipeListAdapter recipeListAdapter;
     private RecyclerView recyclerView;
@@ -55,7 +53,7 @@ public class FavoriteRecipesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //View To Return
-        View view = inflater.inflate(R.layout.fragment_home_favorites_recipe_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
         fragView = view;
         //See if the current user has any favorites
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -95,36 +93,8 @@ public class FavoriteRecipesFragment extends Fragment {
 
                                          @Override
                                          public void onFavoriteItemClick(int position) {
-                                             final RecipeClass currentRecipe = recipeObject.get(position);
-
-                                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                 @Override
-                                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                     if (task.isSuccessful()) {
-                                                         int position = -1;
-                                                         for (int i = 0; i < favoritesList.size(); i++) {
-                                                             if (currentRecipe.getID().equals(favoritesList.get(i))) {
-                                                                 remove = true;
-                                                                 position = i;
-                                                             }
-                                                         }
-                                                         if (remove) {
-                                                             docRef.update("MyFavorites", FieldValue.arrayRemove(currentRecipe.getID()));
-                                                             if (position != -1) {
-                                                                 favoritesList.remove(position);
-                                                                 recyclerView.removeViewAt(position);
-                                                                 recipeListAdapter.notifyItemRemoved(position);
-                                                                 recipeListAdapter.notifyItemRangeChanged(position, favoritesList.size());
-                                                             }
-                                                         }
-                                                         remove = false;
-                                                     } else {
-                                                         Log.d("DocumentFailed", "get failed with ", task.getException());
-                                                     }
-                                                 }
-                                             });
-
-
+                                             favoritesList.remove(position);
+                                             recipeListAdapter.notifyDataSetChanged();
                                          }
 
                                      });

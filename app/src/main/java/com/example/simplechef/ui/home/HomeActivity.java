@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity implements AllRecipesFragment.OnFavoriteRemovedListener {
+public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private final static String TAG = "HomeActivity";
@@ -117,14 +116,5 @@ public class HomeActivity extends AppCompatActivity implements AllRecipesFragmen
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public void onFavoriteRemoved(int position) {
-        Fragment frg = null;
-        frg = getSupportFragmentManager().findFragmentByTag("FragmentFavoritesTag");
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();
-    }
 
 }
