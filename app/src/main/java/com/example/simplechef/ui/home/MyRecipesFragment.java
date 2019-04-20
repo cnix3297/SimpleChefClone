@@ -81,10 +81,37 @@ public class MyRecipesFragment extends Fragment {
                                 recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                                     @Override
                                     public void onItemClick(int position) {
-                                        // TODO bundle recipe data to send
-                                        Bundle bundle = new Bundle();
-                                        // TODO fix later - go to item at position!
+
                                         Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+                                        if(myRecipeObjects.get(position).getName() != null)
+                                            intent.putExtra("Name", myRecipeObjects.get(position).getName());
+                                        else
+                                            intent.putExtra("Name", "MF NULL");
+                                        if(myRecipeObjects.get(position).getCost() != null)
+                                            intent.putExtra("Cost", myRecipeObjects.get(position).getCost().toString());
+                                        else
+                                            intent.putExtra("Cost", "MF NULL");
+                                        if(myRecipeObjects.get(position).getDescription() != null)
+                                            intent.putExtra("Description", myRecipeObjects.get(position).getDescription());
+                                        else
+                                            intent.putExtra("Description", "MF NULL");
+                                        if(myRecipeObjects.get(position).getIngredientList() != null)
+                                            intent.putExtra("Ingredients", myRecipeObjects.get(position).getIngredientList().toString());
+                                        else
+                                            intent.putExtra("Ingredients", "MF NULL");
+                                        if(myRecipeObjects.get(position).getTime() != null)
+                                            intent.putExtra("Time", myRecipeObjects.get(position).getTime().toString());
+                                        else
+                                            intent.putExtra("Time", "MF NULL");
+                                        if(myRecipeObjects.get(position).getTime() != null)
+                                            intent.putExtra("Steps", myRecipeObjects.get(position).getSteps().toString());
+                                        else
+                                            intent.putExtra("Steps", "MF NULL");
+                                        if(myRecipeObjects.get(position).getTime() != null)
+                                            intent.putExtra("Image", myRecipeObjects.get(position).getImage().toString());
+                                        else
+                                            intent.putExtra("Image", "MF NULL");
+
                                         startActivity(intent);
                                     }
 

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,15 @@ public class ViewRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view);
+
+        Log.d("Name", getIntent().getExtras().getString("Name"));
+        Log.d("Description", getIntent().getExtras().getString("Description"));
+        Log.d("Ingredients", getIntent().getExtras().getString("Ingredients"));
+        Log.d("Cost", getIntent().getExtras().getString("Cost"));
+        Log.d("Time", getIntent().getExtras().getString("Time"));
+        Log.d("Steps", getIntent().getExtras().getString("Steps"));
+        Log.d("Image", getIntent().getExtras().getString("Image"));
+
 
 
         viewPager = findViewById(R.id.pager);
