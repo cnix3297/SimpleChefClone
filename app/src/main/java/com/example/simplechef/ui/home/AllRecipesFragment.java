@@ -45,6 +45,7 @@ public class AllRecipesFragment extends Fragment  {
     public Boolean remove = false;
     private ArrayList<RecipeClass> recipeList = new ArrayList<>();
     private ArrayList<String> favoritesList = new ArrayList<>();
+    private RecipeListAdapter recipeListAdapter;
     public static AllRecipesFragment newInstance() {
         AllRecipesFragment fragment = new AllRecipesFragment();
         return fragment;
@@ -59,40 +60,8 @@ public class AllRecipesFragment extends Fragment  {
         //View To Return
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
-        //Get Favorite List
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-
-                    ArrayList<String> favoritesList = (ArrayList<String>)documentSnapshot.get("MyFavorites");
-
-
-                }
-            }
-/*            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.contains("MyFavorites")) {
-                        Users favoritesObj = document.toObject(Users.class);
-
-                        Object favorites = document.get("MyFavorites");
-                        for (String temp : favoritesObj.getMyFavorites().keySet()) {
-
-                            favoritesList.add(favoritesObj.getMyFavoritesAtIndex(temp).toString());
-                            Log.d("Favorites", temp);
-                        }
-                    } else {
-                        Log.d("Favorites", "USER HAS NO FAVORITES");
-                    }
-
-                } else {
-                    Log.d("DocumentFailed", "get failed with ", task.getException());
-                }
-            }*/
-
-        });
+        //Get Favorites List
+        initiateFavoritesList();
 
         //Access NoSql Database
         //DocumentReference docRef = db.collection("Recipe").document("4S0ycFz9A05IWKs3249d");
@@ -116,7 +85,7 @@ public class AllRecipesFragment extends Fragment  {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
                     Log.d("BEFORE", recipeList.toString());
-                    RecipeListAdapter recipeListAdapter = new RecipeListAdapter(recipeList);
+                    recipeListAdapter = new RecipeListAdapter(recipeList, favoritesList);
                     recyclerView.setAdapter(recipeListAdapter);
 
 
@@ -143,7 +112,6 @@ public class AllRecipesFragment extends Fragment  {
 
 
                             //Executes if we do not remove the recipe id
-
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -152,7 +120,7 @@ public class AllRecipesFragment extends Fragment  {
 
                                         if (document.contains("MyFavorites")) {
 
-                                            ArrayList<String> favoritesList = (ArrayList<String>) document.get("MyFavorites");
+                                            favoritesList = (ArrayList<String>) document.get("MyFavorites");
                                             for (int i = 0; i < favoritesList.size(); i++) {
                                                 if (currentRecipe.getID().equals(favoritesList.get(i))) {
                                                     remove = true;
@@ -178,7 +146,6 @@ public class AllRecipesFragment extends Fragment  {
 
                         }
 
-
                     });
 
 
@@ -201,6 +168,22 @@ public class AllRecipesFragment extends Fragment  {
     public void ClearObject(Boolean clear){
         if(clear)
             this.recipeList.clear();
+    }
+    public void initiateFavoritesList(){
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.contains("MyFavorites")) {
+                        favoritesList = (ArrayList<String>) document.get("MyFavorites");
+                    }
+
+                } else {
+                    Log.d("DocumentFailed", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
 }

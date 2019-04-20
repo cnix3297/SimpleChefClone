@@ -42,7 +42,11 @@ public class FavoriteRecipesFragment extends Fragment {
     final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
     private ArrayList<String> favoritesList = new ArrayList<>();
     private ArrayList<RecipeClass> recipeObject = new ArrayList<>();
+    //Recycler View
+    private RecipeListAdapter recipeListAdapter;
+    private RecyclerView recyclerView;
     private View fragView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,10 +74,10 @@ public class FavoriteRecipesFragment extends Fragment {
                                      Log.d("FAVORITE ITEMS", document.getID());
 
                                      //Recycler View
-                                     RecyclerView recyclerView = fragView.findViewById(R.id.recyclerView);
+                                     recyclerView = fragView.findViewById(R.id.recyclerView);
                                      recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                                     RecipeListAdapter recipeListAdapter = new RecipeListAdapter(recipeObject);
+                                     recipeListAdapter = new RecipeListAdapter(recipeObject, favoritesList);
                                      recyclerView.setAdapter(recipeListAdapter);
 
                                      recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
@@ -88,8 +92,10 @@ public class FavoriteRecipesFragment extends Fragment {
 
                                          @Override
                                          public void onFavoriteItemClick(int position) {
-
+                                             favoritesList.remove(position);
+                                             recipeListAdapter.notifyDataSetChanged();
                                          }
+
                                      });
                                  }
                              });
