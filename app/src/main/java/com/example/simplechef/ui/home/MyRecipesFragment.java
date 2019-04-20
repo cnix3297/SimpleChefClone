@@ -34,10 +34,10 @@ public class MyRecipesFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(new ArrayList<RecipeClass>());
+        RecipeListAdapter recipeListAdapter = new RecipeListAdapter(new ArrayList<RecipeClass>(), new ArrayList<String>() );
         recyclerView.setAdapter(recipeListAdapter);
 
-        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnItemClickListener() {
+        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // TODO bundle recipe data to send
@@ -45,6 +45,11 @@ public class MyRecipesFragment extends Fragment {
                 // TODO fix later - go to item at position!
                 Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onFavoriteItemClick(int position) {
+
             }
         });
 

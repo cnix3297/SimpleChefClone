@@ -3,15 +3,13 @@ package com.example.simplechef;
 public class Ingredients {
 
     private String name, quantity;
-    private Double price;
 
     public Ingredients()
     {
 
     }
-    public Ingredients(String name, Double price, String quantity){
+    public Ingredients(String name, String quantity){
         this.name = name;
-        this.price = price;
         this.quantity = quantity;
 
     }
@@ -31,11 +29,5 @@ public class Ingredients {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-    public Double getPrice() {
-        return price;
-    }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }

@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         setTitle(null);
 
         // Tabs setup with View Pager
-        tabLayout = findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabsHome);
         tabLayout.setupWithViewPager(viewPager);
 
 
@@ -113,7 +115,6 @@ public class HomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_home, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
 }

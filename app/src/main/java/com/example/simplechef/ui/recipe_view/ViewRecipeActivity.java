@@ -36,7 +36,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
         setupToolbar();
 
-        tabLayout = findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabsHome);
         tabLayout.setupWithViewPager(viewPager);
 
 
