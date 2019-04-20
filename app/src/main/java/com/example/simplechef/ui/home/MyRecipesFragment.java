@@ -28,7 +28,7 @@ public class MyRecipesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //View To Return
-        View view = inflater.inflate(R.layout.fragment_home_my_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);

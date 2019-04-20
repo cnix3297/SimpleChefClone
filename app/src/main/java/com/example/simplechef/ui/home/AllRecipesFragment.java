@@ -47,7 +47,6 @@ public class AllRecipesFragment extends Fragment  {
     private ArrayList<RecipeClass> recipeList = new ArrayList<>();
     private ArrayList<String> favoritesList = new ArrayList<>();
     private RecipeListAdapter recipeListAdapter;
-    OnFavoriteRemovedListener callback;
 
     public static AllRecipesFragment newInstance() {
         AllRecipesFragment fragment = new AllRecipesFragment();
@@ -55,13 +54,6 @@ public class AllRecipesFragment extends Fragment  {
     }
 
 
-    public void setOnFavoriteRemovedListener(OnFavoriteRemovedListener callback) {
-        this.callback = callback;
-    }
-
-    public interface OnFavoriteRemovedListener {
-        public void onFavoriteRemoved(int position);
-    }
 
     @Nullable
     @Override
@@ -70,8 +62,6 @@ public class AllRecipesFragment extends Fragment  {
 
         //View To Return
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
-        Activity activity = (Activity)getContext();
-        callback = (OnFavoriteRemovedListener) activity;
         //Get Favorites List
         initiateFavoritesList();
 
@@ -113,8 +103,6 @@ public class AllRecipesFragment extends Fragment  {
 
                         @Override
                         public void onFavoriteItemClick(int position) {
-                            callback.onFavoriteRemoved();
-                            FavoriteRecipesFragment.
                             Log.d("Favorites", "is clicked");
                             final RecipeClass currentRecipe = recipeList.get(position);
                             String recipeID = currentRecipe.getID();

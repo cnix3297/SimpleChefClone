@@ -24,7 +24,7 @@ import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity implements AllRecipesFragment.OnFavoriteRemovedListener {
+public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private final static String TAG = "HomeActivity";
@@ -117,7 +117,4 @@ public class HomeActivity extends AppCompatActivity implements AllRecipesFragmen
     }
 
 
-    @Override
-    public FavoriteRecipesFragment onFavoriteRemoved() {
-    }
 }

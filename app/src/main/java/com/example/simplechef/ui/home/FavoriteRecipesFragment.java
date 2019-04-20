@@ -53,7 +53,7 @@ public class FavoriteRecipesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //View To Return
-        View view = inflater.inflate(R.layout.fragment_home_favorites_recipe_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
         fragView = view;
         //See if the current user has any favorites
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
