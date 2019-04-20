@@ -462,6 +462,5 @@ public class CreateRecipeActivity extends AppCompatActivity {
     }
 
     private void setupIngredientsRecyclerList() {
-
     }
 }
