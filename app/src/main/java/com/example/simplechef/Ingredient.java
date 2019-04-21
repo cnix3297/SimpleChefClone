@@ -2,16 +2,17 @@ package com.example.simplechef;
 
 public class Ingredient {
 
-    private String name, quantity;
+    private String name, quantity, image;
 
     public Ingredient() {
 
     }
 
 
-    public Ingredient(String name, String quantity) {
+    public Ingredient(String name, String quantity, String image) {
         this.name = name;
         this.quantity = quantity;
+        this.image = image;
     }
 
 
@@ -31,4 +32,11 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

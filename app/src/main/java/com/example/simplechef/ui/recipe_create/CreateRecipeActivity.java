@@ -217,7 +217,9 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
                 }
                 else {
-                    Ingredient ingredient = new Ingredient(varIngredientName, varIngredientQuantity);
+                    RecipeAPI getAPI = new RecipeAPI(varIngredientName);
+                    Ingredient ingredient = new Ingredient(varIngredientName, varIngredientQuantity, getAPI.getSearchImage());
+
                     //ADD HEADERS
                     //if(count == 0){
                     //    TextView j = new TextView(context);
@@ -226,14 +228,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     //}
 
                     //ask the API for ingredient
-                    RecipeAPI getAPI = new RecipeAPI(varIngredientName);
+
                     if(getAPI.getFoodName() == null) {
-                        recipeObject.AddIngredient(varIngredientName, varIngredientQuantity);
+                        recipeObject.AddIngredient(varIngredientName, varIngredientQuantity,getAPI.getSearchImage() );
                         ingredientList.add(ingredient);
                         mAdapter.notifyItemInserted(ingredientList.size());
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }else {
-                        recipeObject.AddIngredient(getAPI.getFoodName(), varIngredientQuantity);
+                        recipeObject.AddIngredient(getAPI.getFoodName(), varIngredientQuantity,getAPI.getSearchImage());
                         ingredientList.add(ingredient);
                         mAdapter.notifyItemInserted(ingredientList.size());
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);

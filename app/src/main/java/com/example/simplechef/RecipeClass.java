@@ -22,8 +22,8 @@ public class RecipeClass {
         this.steps = steps;
     }
 
-    public void AddIngredient(String name, String quantity){
-        Ingredient obj = new Ingredient(name, quantity);
+    public void AddIngredient(String name, String quantity, String image){
+        Ingredient obj = new Ingredient(name, quantity, image);
         ingredientList.add(obj);
     }
 
