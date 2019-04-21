@@ -28,15 +28,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/linearLayoutGeneral"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:elevation="4dp"
                     android:background="@color/colorWhite"
                     android:orientation="horizontal">
 
@@ -190,6 +188,7 @@
                     android:id="@+id/linearLayoutIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="4dp"
                     android:background="@color/colorWhite"
                     android:orientation="horizontal">
 
@@ -233,41 +232,36 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:paddingLeft="10dp"
+                        android:orientation="horizontal"
                         android:paddingStart="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingEnd="10dp"
+                        android:paddingLeft="10dp"
                         android:paddingTop="10dp"
-                        android:orientation="horizontal">
+                        android:paddingEnd="10dp"
+                        android:paddingRight="10dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
                             android:orientation="vertical">
 
                             <EditText
                                 android:id="@+id/editTextIngredientName"
-                                android:layout_width="180dp"
+                                android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:alpha="1"
                                 android:background="@drawable/background_green_opacity_half"
-                                android:hint="Enter ingredient"
-                                android:inputType="text"
-                                android:paddingStart="15dp"
-                                android:paddingLeft="30dp"
-                                android:paddingTop="5dp"
-                                android:paddingEnd="15dp"
-                                android:paddingRight="30dp"
-                                android:paddingBottom="5dp"
                                 android:gravity="center"
+                                android:hint="Ingredient"
+                                android:inputType="text"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
                                 android:textColor="@color/colorWhite"
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/ingredientLabel"
-                                android:layout_width="180dp"
+                                android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:alpha=".8"
                                 android:background="@color/colorPrimaryMain"
@@ -282,24 +276,19 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="101dp"
-                            android:layout_weight="1.5"
-                            android:orientation="vertical"
-                            android:paddingLeft="10dp">
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
 
                             <EditText
                                 android:id="@+id/editTextIngredientQuantity"
-                                android:layout_width="140dp"
+                                android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:alpha="1"
                                 android:background="@drawable/background_green_opacity_half"
-                                android:hint="Enter quantity"
+                                android:hint="Quantity"
                                 android:inputType="text"
-                                android:paddingStart="15dp"
-                                android:paddingLeft="30dp"
                                 android:paddingTop="5dp"
-                                android:paddingEnd="15dp"
-                                android:paddingRight="30dp"
                                 android:paddingBottom="5dp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
@@ -308,7 +297,7 @@
 
                             <TextView
                                 android:id="@+id/textViewQuantity"
-                                android:layout_width="140dp"
+                                android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:alpha=".8"
@@ -320,231 +309,229 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/ingredientsListLayout">
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ingredientButtonBar"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:id="@+id/relativeLayout1"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:id="@+id/ingredientButton"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            >
+                            android:layout_marginStart="30dp"
+                            android:layout_marginLeft="30dp"
+                            android:orientation="vertical">
+
 
                             <Button
                                 android:id="@+id/buttonAddIngredient"
-                                android:layout_width="80dp"
-                                android:layout_height="35dp"
-                                android:layout_toStartOf="@+id/buttonDeleteIngredient"
-                                android:layout_toLeftOf="@+id/buttonDeleteIngredient"
+                                android:layout_width="70dp"
+                                android:layout_height="30dp"
                                 android:background="@color/blue"
                                 android:text="Add"
                                 android:textColor="@color/colorWhite" />
 
                             <Button
-                                android:id="@+id/buttonDeleteIngredient"
-                                android:layout_width="80dp"
-                                android:layout_height="35dp"
-                                android:background="#999999"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentEnd="true"
-                                android:text="Delete" />
-                        </RelativeLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutDirections"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/buttonDirections"
-                            android:layout_width="20dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight=".2"
-                            android:alpha=".8"
-                            android:background="@drawable/add_circle"
-                            android:backgroundTint="@color/colorPrimaryMain"
-                            android:text="+ Add Item"
-                            android:textColor="@color/colorWhite" />
-
-                        <TextView
-                            android:id="@+id/textViewDirections"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="8"
-                            android:alpha="1"
-                            android:background="#fefbf7"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="Directions"
-                            android:textColor="@color/colorGreyDarkNav"
-                            android:textSize="22sp"
-                            android:textStyle="normal" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/visibleDirections"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="visible">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="10dp"
-                            android:orientation="vertical">
-
-
-
-                            <EditText
-                                android:id="@+id/editTextDirections"
-                                android:layout_width="350dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:alpha="1"
-                                android:background="@drawable/background_green_opacity_half"
-                                android:gravity="center"
-                                android:hint=""
-                                android:inputType="textMultiLine"
-                                android:paddingStart="10dp"
-                                android:paddingLeft="10dp"
-                                android:paddingTop="5dp"
-                                android:paddingEnd="10dp"
-                                android:paddingRight="10dp"
-                                android:paddingBottom="5dp"
-                                android:textColor="@color/colorWhite"
-                                android:textColorHint="@color/colorWhite"
-                                android:textSize="15sp" />
-
-                            <TextView
-                                android:layout_width="350dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:alpha=".8"
-                                android:background="@color/colorPrimaryMain"
-                                android:gravity="center"
-                                android:text="Directions"
-                                android:textColor="@color/colorWhite"
-
-                                android:textSize="17sp" />
+                                android:id="@+id/buttonClearAllIngredients"
+                                android:layout_width="70dp"
+                                android:layout_height="30dp"
+                                android:background="@color/colorGreyDarkest"
+                                android:text="Clear"
+                                android:textColor="@color/colorWhite" />
                         </LinearLayout>
 
+
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/linearLayoutAddImage"
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewIngredients"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
 
-                        <ImageButton
-                            android:layout_width="20dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight=".2"
-                            android:alpha=".8"
-                            android:background="@drawable/add_circle"
-                            android:backgroundTint="@color/purple"
-                            android:text="+ Add Item"
-                            android:textColor="@color/colorWhite" />
-
-                        <TextView
-                            android:id="@+id/textViewAddImage"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="8"
-                            android:alpha="1"
-                            android:background="#fefbf7"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="Add Image"
-                            android:textColor="@color/colorGreyDarkNav"
-                            android:textSize="22sp"
-                            android:textStyle="normal" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/visibleAddImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="150dp"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_weight=".1"
-                                android:orientation="vertical">
-
-                                <Button
-                                    android:id="@+id/buttonUploadExisting"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/blue"
-                                    android:text="Upload Existing" />
-
-                                <Button
-                                    android:id="@+id/buttonTakeImage"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/colorPrimaryMainOpacityFull"
-                                    android:text="Take Image" />
-                            </LinearLayout>
-
-                            <ImageView
-                                android:id="@+id/imageViewAddImage"
-                                android:layout_width="match_parent"
-                                android:layout_height="150dp"
-                                android:layout_weight="1"
-                                android:src="@android:drawable/ic_menu_report_image" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
+                    </android.support.v7.widget.RecyclerView>
 
                 </LinearLayout>
 
-
-                <Button
-                    android:id="@+id/buttonSubmitRecipe"
+                <LinearLayout
+                    android:id="@+id/linearLayoutDirections"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimaryMainOpacityFull"
-                    android:text="@string/Submit" />
+                    android:elevation="4dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/buttonDirections"
+                        android:layout_width="20dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight=".2"
+                        android:alpha=".8"
+                        android:background="@drawable/add_circle"
+                        android:backgroundTint="@color/colorPrimaryMain"
+                        android:text="+ Add Item"
+                        android:textColor="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/textViewDirections"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:alpha="1"
+                        android:background="#fefbf7"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Directions"
+                        android:textColor="@color/colorGreyDarkNav"
+                        android:textSize="22sp"
+                        android:textStyle="normal" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/visibleDirections"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+
+
+                        <EditText
+                            android:id="@+id/editTextDirections"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha="1"
+                            android:background="@drawable/background_green_opacity_half"
+                            android:gravity="center"
+                            android:hint=""
+                            android:inputType="textMultiLine"
+                            android:paddingStart="10dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha=".8"
+                            android:background="@color/colorPrimaryMain"
+                            android:gravity="center"
+                            android:text="Directions"
+                            android:textColor="@color/colorWhite"
+
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutAddImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="4dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="20dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight=".2"
+                        android:alpha=".8"
+                        android:background="@drawable/add_circle"
+                        android:backgroundTint="@color/purple"
+                        android:text="+ Add Item"
+                        android:textColor="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/textViewAddImage"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:alpha="1"
+                        android:background="#fefbf7"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Add Image"
+                        android:textColor="@color/colorGreyDarkNav"
+                        android:textSize="22sp"
+                        android:textStyle="normal" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/visibleAddImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight=".1"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/buttonUploadExisting"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/blue"
+                                android:text="Upload Existing" />
+
+                            <Button
+                                android:id="@+id/buttonTakeImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/colorPrimaryMainOpacityFull"
+                                android:text="Take Image" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/imageViewAddImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_weight="1"
+                            android:src="@android:drawable/ic_menu_report_image" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
+
+
+            <Button
+                android:id="@+id/buttonSubmitRecipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryMainOpacityFull"
+                android:text="@string/Submit" />
+
+        </LinearLayout>
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

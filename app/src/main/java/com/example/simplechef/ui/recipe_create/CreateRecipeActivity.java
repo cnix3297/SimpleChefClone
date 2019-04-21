@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.simplechef.Ingredient;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
@@ -55,17 +57,21 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
     private EditText editTextIngredientName, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
-    private LinearLayout listIngredient;
+    //private LinearLayout listIngredient;
+    private RecyclerView ingredientsRecyclerView;
     int count = 0;
     //Tabs
     private LinearLayout tabGeneral, visibleGeneral, tabIngredients, visibleIngredients, tabDirections, visibleDirections, tabAddImage, visibleAddImage;
     private ImageView imageViewAddImage;
-    private Button buttonUploadImage, buttonTakeImage, addIngredient;
+    private Button buttonUploadImage, buttonTakeImage, buttonAddIngredient, buttonClearAllIngredients;
     private Uri imageURI;
     private RecipeClass recipeObject = new RecipeClass();
     private static final String TAG = "AddRecipe";
     private Bitmap image;
     private Context context;
+    private IngredientsListAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Ingredient> ingredientList;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +79,26 @@ public class CreateRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_create);
         context = getApplicationContext();
 
-        setupToolbar();
+        ingredientList = new ArrayList<>();
 
+        setupToolbar();
         getWindowObjects();
+
+        layoutManager = new LinearLayoutManager(this);
+        ingredientsRecyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new IngredientsListAdapter(ingredientList);
+        ingredientsRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new IngredientsListAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteIngredientItemClick(int position) {
+                Toast.makeText(context, "Ingredient removed", Toast.LENGTH_SHORT).show();
+                ingredientList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+        });
 
         buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +123,13 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     isValidInput = false;
                 }
 
-                if (recipeTime.isEmpty()) {
-                    inputProblems.add("Recipe time is missing");
+                if (recipeObject.getCost() > 15.0) {
+                    inputProblems.add("Recipe cost is above $15 limit");
                     isValidInput = false;
                 }
 
-                if (recipeDirections.isEmpty()) {
-                    inputProblems.add("Recipe directions are missing");
+                if (recipeTime.isEmpty()) {
+                    inputProblems.add("Recipe time is missing");
                     isValidInput = false;
                 }
 
@@ -115,52 +138,10 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     isValidInput = false;
                 }
 
-                if (Double.valueOf(recipeCost) > 15.0) {
-                    inputProblems.add("Recipe cost is above $15 limit");
+                if (recipeDirections.isEmpty()) {
+                    inputProblems.add("Recipe directions are missing");
                     isValidInput = false;
                 }
-
-
-
-
-/*                Boolean stop = false;
-
-                if(editTextRecipeName.getText() != null) {
-                    recipeObject.setName(editTextRecipeName.getText().toString());
-                }
-                else{
-                    Toast.makeText(context, "Missing Recipe Name", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }
-                if(editTextRecipeCost.getText() == null) {
-
-                    if(recipeObject.getCost() > 20.0){
-                        Toast.makeText(context, "Cost is to high", Toast.LENGTH_SHORT).show();
-                        stop = true;
-                    }
-                }
-                if(editTextRecipeTime.getText() != null) {
-                    recipeObject.setTime(editTextRecipeTime.getText().toString());
-                }
-                else{
-                    Toast.makeText(context, "Missing Recipe Time", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }
-                if(editTextDirections.getText() != null) {
-                    recipeObject.setSteps(editTextDirections.getText().toString());
-                }
-                else{
-                    Toast.makeText(context, "Missing Recipe Directions", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }
-                if(recipeObject.getIngredientList().size() > 0) {
-                    //Do Nothing
-                }
-                else{
-                    Toast.makeText(context, "You got no ingredients bro. C'mon", Toast.LENGTH_SHORT).show();
-                    stop = true;
-                }*/
-
 
                 // if input is valid, lets process
                 if(isValidInput) {
@@ -179,7 +160,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     recipeObject.setID(recipeID);
                     //Adding picture to firebase
                     addRecipePicturetoFirebase(image, recipeID);
-                    
+
                     //Adding recipes
                     newRecipeRef.set(recipeObject);
 
@@ -222,45 +203,51 @@ public class CreateRecipeActivity extends AppCompatActivity {
             }
         });
 
-        addIngredient.setOnClickListener(new View.OnClickListener() {
+        buttonAddIngredient.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 String varIngredientQuantity = editTextIngredientQuantity.getText().toString();
                 String varIngredientName = editTextIngredientName.getText().toString();
+                //String varIngredientCost = editTextIngredientCost.getText().toString();
 
                 //Form validation
                 if(varIngredientQuantity.equals("") && varIngredientName.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
                 }
                 else {
+                    Ingredient ingredient = new Ingredient(varIngredientName, varIngredientQuantity);
                     //ADD HEADERS
-                    if(count == 0){
-                        TextView j = new TextView(context);
-                        j.setText("Amount \t Measurement \t Ingredient \t Price ");
-                        listIngredient.addView(j);
-                    }
+                    //if(count == 0){
+                    //    TextView j = new TextView(context);
+                    //    j.setText("Amount \t Measurement \t Ingredient \t Price ");
+                    //    //listIngredient.addView(j);
+                    //}
 
                     //ask the API for ingredient
                     RecipeAPI getAPI = new RecipeAPI(varIngredientName);
                     if(getAPI.getFoodName() == null) {
-                        recipeObject.AddIngredient(varIngredientName, (varIngredientQuantity));
+                        recipeObject.AddIngredient(varIngredientName, varIngredientQuantity);
+                        ingredientList.add(ingredient);
+                        mAdapter.notifyItemInserted(ingredientList.size());
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }else {
-                        recipeObject.AddIngredient(getAPI.getFoodName(), (varIngredientQuantity));
+                        recipeObject.AddIngredient(getAPI.getFoodName(), varIngredientQuantity);
+                        ingredientList.add(ingredient);
+                        mAdapter.notifyItemInserted(ingredientList.size());
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }
 
                     //add ingredient to linear layout
-                    TextView t = new TextView(context);
-                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getQuantity());
-                    t.setPadding(1,10,1,10);
-                    t.setTextSize(20);
-                    t.setTextColor(Color.BLACK);
-                    listIngredient.addView(t);
-                    count++;
-                    setObjectsEmpty();
+                    //TextView t = new TextView(context);
+                    //t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
+                    //t.setPadding(1,10,1,10);
+                    //t.setTextSize(20);
+                    //t.setTextColor(Color.BLACK);
+                    //listIngredient.addView(t);
+                    //count++;
+                    //setObjectsEmpty();
                     //Log.d("linear layout", "onClick: " + list.size());
 
                 }
@@ -367,6 +354,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
+
+        buttonClearAllIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllIngredients();
+            }
+        });
+
     }
 
     private void setupToolbar() {
@@ -428,9 +423,13 @@ public class CreateRecipeActivity extends AppCompatActivity {
         editTextIngredientQuantity = (EditText) findViewById(R.id.editTextIngredientQuantity);
         editTextDirections = (EditText) findViewById(R.id.editTextDirections);
 
+        // RecyclerView
+        ingredientsRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewIngredients);
+
         //?????
-        addIngredient = (Button) findViewById(R.id.buttonAddIngredient);
-        listIngredient = (LinearLayout) findViewById(R.id.ingredientButtonBar);
+        buttonAddIngredient = (Button) findViewById(R.id.buttonAddIngredient);
+        buttonClearAllIngredients = (Button) findViewById(R.id.buttonClearAllIngredients);
+        //listIngredient = (LinearLayout) findViewById(R.id.ingredientButtonBar);
 
         //tabs
         tabGeneral = (LinearLayout) findViewById(R.id.linearLayoutGeneral);
@@ -510,5 +509,12 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 Log.d(TAG, "Success uploading file");
             }
         });
+    }
+
+
+    public void clearAllIngredients() {
+        Toast.makeText(context, "Ingredient list cleared", Toast.LENGTH_SHORT).show();
+        ingredientList.clear();
+        mAdapter.notifyDataSetChanged();
     }
 }

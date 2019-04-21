@@ -1,15 +1,10 @@
 package com.example.simplechef;
 
-import android.graphics.Bitmap;
-
-import com.google.firebase.storage.StorageReference;
-
-import java.net.URI;
 import java.util.ArrayList;
 
 public class RecipeClass {
 
-    private ArrayList<Ingredients> ingredientList = new ArrayList<>();
+    private ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private String ID, name, description, time, steps;
     private String image;
     private Double cost = 0.0;
@@ -26,22 +21,22 @@ public class RecipeClass {
         this.description = description;
         this.steps = steps;
     }
+
     public void AddIngredient(String name, String quantity){
-        Ingredients obj = new Ingredients(name, quantity);
+        Ingredient obj = new Ingredient(name, quantity);
         ingredientList.add(obj);
     }
 
 
-
     //GETTERS && SETTERS
-    public ArrayList<Ingredients> getIngredientList() {
+    public ArrayList<Ingredient> getIngredientList() {
         return ingredientList;
     }
 
-    public void setIngredientList(ArrayList<Ingredients> ingredientList) {
+    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
     }
-    public Ingredients getIngredientAtIndex(int index){
+    public Ingredient getIngredientAtIndex(int index){
         return ingredientList.get(index);
     }
 

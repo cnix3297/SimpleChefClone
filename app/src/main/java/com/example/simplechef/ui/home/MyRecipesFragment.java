@@ -63,66 +63,68 @@ public class MyRecipesFragment extends Fragment {
                     myRecipeObjects.clear();
                     myRecipes = (ArrayList<String>) document.get("MyRecipes");
 
-                    for (int i = 0; i < myRecipes.size(); i++) {
-                        db.collection("Recipes").document(myRecipes.get(i)).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                RecipeClass document = documentSnapshot.toObject(RecipeClass.class);
-                                myRecipeObjects.add(document);
-                                Log.d("MYITEMS", document.getID());
+                    if (myRecipes != null) {
+                        for (int i = 0; i < myRecipes.size(); i++) {
+                            db.collection("Recipes").document(myRecipes.get(i)).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    RecipeClass document = documentSnapshot.toObject(RecipeClass.class);
+                                    myRecipeObjects.add(document);
+                                    Log.d("MYITEMS", document.getID());
 
-                                recyclerView = view.findViewById(R.id.recyclerView);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                    recyclerView = view.findViewById(R.id.recyclerView);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                                recipeListAdapter = new RecipeListAdapter(myRecipeObjects, new ArrayList<String>());
-                                recyclerView.setAdapter(recipeListAdapter);
+                                    recipeListAdapter = new RecipeListAdapter(myRecipeObjects, new ArrayList<String>());
+                                    recyclerView.setAdapter(recipeListAdapter);
 
 
-                                recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
-                                    @Override
-                                    public void onItemClick(int position) {
+                                    recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
+                                        @Override
+                                        public void onItemClick(int position) {
 
-                                        Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                                        if(myRecipeObjects.get(position).getName() != null)
-                                            intent.putExtra("Name", myRecipeObjects.get(position).getName());
-                                        else
-                                            intent.putExtra("Name", "MF NULL");
-                                        if(myRecipeObjects.get(position).getCost() != null)
-                                            intent.putExtra("Cost", myRecipeObjects.get(position).getCost().toString());
-                                        else
-                                            intent.putExtra("Cost", "MF NULL");
-                                        if(myRecipeObjects.get(position).getDescription() != null)
-                                            intent.putExtra("Description", myRecipeObjects.get(position).getDescription());
-                                        else
-                                            intent.putExtra("Description", "MF NULL");
-                                        if(myRecipeObjects.get(position).getIngredientList() != null)
-                                            intent.putExtra("Ingredients", myRecipeObjects.get(position).getIngredientList().toString());
-                                        else
-                                            intent.putExtra("Ingredients", "MF NULL");
-                                        if(myRecipeObjects.get(position).getTime() != null)
-                                            intent.putExtra("Time", myRecipeObjects.get(position).getTime().toString());
-                                        else
-                                            intent.putExtra("Time", "MF NULL");
-                                        if(myRecipeObjects.get(position).getTime() != null)
-                                            intent.putExtra("Steps", myRecipeObjects.get(position).getSteps().toString());
-                                        else
-                                            intent.putExtra("Steps", "MF NULL");
-                                        if(myRecipeObjects.get(position).getTime() != null)
-                                            intent.putExtra("Image", myRecipeObjects.get(position).getImage().toString());
-                                        else
-                                            intent.putExtra("Image", "MF NULL");
+                                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+                                            if (myRecipeObjects.get(position).getName() != null)
+                                                intent.putExtra("Name", myRecipeObjects.get(position).getName());
+                                            else
+                                                intent.putExtra("Name", "MF NULL");
+                                            if (myRecipeObjects.get(position).getCost() != null)
+                                                intent.putExtra("Cost", myRecipeObjects.get(position).getCost().toString());
+                                            else
+                                                intent.putExtra("Cost", "MF NULL");
+                                            if (myRecipeObjects.get(position).getDescription() != null)
+                                                intent.putExtra("Description", myRecipeObjects.get(position).getDescription());
+                                            else
+                                                intent.putExtra("Description", "MF NULL");
+                                            if (myRecipeObjects.get(position).getIngredientList() != null)
+                                                intent.putExtra("Ingredients", myRecipeObjects.get(position).getIngredientList().toString());
+                                            else
+                                                intent.putExtra("Ingredients", "MF NULL");
+                                            if (myRecipeObjects.get(position).getTime() != null)
+                                                intent.putExtra("Time", myRecipeObjects.get(position).getTime().toString());
+                                            else
+                                                intent.putExtra("Time", "MF NULL");
+                                            if (myRecipeObjects.get(position).getTime() != null)
+                                                intent.putExtra("Steps", myRecipeObjects.get(position).getSteps().toString());
+                                            else
+                                                intent.putExtra("Steps", "MF NULL");
+                                            if (myRecipeObjects.get(position).getTime() != null)
+                                                intent.putExtra("Image", myRecipeObjects.get(position).getImage().toString());
+                                            else
+                                                intent.putExtra("Image", "MF NULL");
 
-                                        startActivity(intent);
-                                    }
+                                            startActivity(intent);
+                                        }
 
-                                    @Override
-                                    public void onFavoriteItemClick(int position) {
+                                        @Override
+                                        public void onFavoriteItemClick(int position) {
 
-                                    }
-                                });
-                            }
-                        });
+                                        }
+                                    });
+                                }
+                            });
 
+                        }
                     }
                 }
             }
