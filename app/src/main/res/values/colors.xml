@@ -27,5 +27,6 @@
     <color name="greenOpacityThird">#7559EB75</color>
     <color name="blueOpacityHalf">#503399FF</color>
     <color name="blackOpacityLow">#50FFFFFF</color>
+    <color name="lightGrey">#F2F3F5</color>
 
 </resources>
