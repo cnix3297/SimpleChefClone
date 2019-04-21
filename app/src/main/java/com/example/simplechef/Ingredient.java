@@ -1,15 +1,21 @@
 package com.example.simplechef;
 
-public class Ingredients {
+public class Ingredient {
 
     private String name, quantity;
     private Double price;
 
-    public Ingredients()
+    public Ingredient()
     {
 
     }
-    public Ingredients(String name, Double price, String quantity){
+
+    public Ingredient(String name, String quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
+    public Ingredient(String name, Double price, String quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
