@@ -79,6 +79,7 @@
 
                     <EditText
                         android:id="@+id/editTextRecipeName"
+                        android:selectAllOnFocus="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -113,6 +114,7 @@
 
                     <EditText
                         android:id="@+id/editTextRecipeCost"
+                        android:selectAllOnFocus="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -147,6 +149,7 @@
 
                     <EditText
                         android:id="@+id/editTextRecipeTime"
+                        android:selectAllOnFocus="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -246,6 +249,7 @@
 
                             <EditText
                                 android:id="@+id/editTextIngredientName"
+                                android:selectAllOnFocus="true"
                                 android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:alpha="1"
@@ -281,6 +285,7 @@
 
                             <EditText
                                 android:id="@+id/editTextIngredientQuantity"
+                                android:selectAllOnFocus="true"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -341,6 +346,7 @@
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerViewIngredients"
+                        android:layout_marginBottom="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
