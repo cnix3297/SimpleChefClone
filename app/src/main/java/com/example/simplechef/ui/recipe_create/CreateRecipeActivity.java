@@ -95,7 +95,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
             public void onDeleteIngredientItemClick(int position) {
                 Toast.makeText(context, "Ingredient removed", Toast.LENGTH_SHORT).show();
                 ingredientList.remove(position);
-                mAdapter.notifyItemRemoved(ingredientList.size() + 1);
+                mAdapter.notifyItemRemoved(position);
             }
         });
 

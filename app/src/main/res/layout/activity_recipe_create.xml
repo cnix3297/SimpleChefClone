@@ -330,7 +330,7 @@
                                 android:id="@+id/buttonClearAllIngredients"
                                 android:layout_width="70dp"
                                 android:layout_height="30dp"
-                                android:background="#999999"
+                                android:background="@color/colorGreyDarkest"
                                 android:text="Clear"
                                 android:textColor="@color/colorWhite" />
                         </LinearLayout>
