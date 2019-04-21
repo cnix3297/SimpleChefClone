@@ -1,7 +1,12 @@
 package com.example.simplechef.ui.recipe_view;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,36 +15,43 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.login.LoginActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ViewRecipeActivity extends AppCompatActivity {
     private final static String TAG = "ViewRecipeActivity";
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
-
+    public String name, description, ingredients, cost, time, steps, image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view);
 
-        Log.d("Name", getIntent().getStringExtra("Name"));
-        Log.d("Description", getIntent().getStringExtra("Description"));
-        Log.d("Ingredients", getIntent().getStringExtra("Ingredients"));
-        Log.d("Cost", getIntent().getStringExtra("Cost"));
-        Log.d("Time", getIntent().getStringExtra("Time"));
-        Log.d("Steps", getIntent().getStringExtra("Steps"));
-        Log.d("Image", getIntent().getStringExtra("Image"));
+        //Get Data
+        this.name = getIntent().getStringExtra("Name");
+        this.description = getIntent().getStringExtra("Description");
+        this.ingredients = getIntent().getStringExtra("Ingredients");
+        this.cost = getIntent().getStringExtra("Cost");
+        this.time = getIntent().getStringExtra("Time");
+        this.steps = getIntent().getStringExtra("Steps");
+        this.image = getIntent().getStringExtra("Image");
 
 
-
+        //Fragment Setup
         viewPager = findViewById(R.id.pager);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
@@ -48,8 +60,6 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabsHome);
         tabLayout.setupWithViewPager(viewPager);
-
-
     }
 
 
