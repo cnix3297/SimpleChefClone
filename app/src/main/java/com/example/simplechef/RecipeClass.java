@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 public class RecipeClass {
 
-    private ArrayList<Ingredients> ingredientList = new ArrayList<>();
-    private String ID, name, description, time, steps;
     private ArrayList<Ingredient> ingredientList = new ArrayList<>();
-    private String name, description, time, steps;
+    private String ID, name, description, time, steps;
     private String image;
     private Double cost = 0.0;
 
@@ -23,13 +21,11 @@ public class RecipeClass {
         this.description = description;
         this.steps = steps;
     }
-    public void AddIngredient(String name, String quantity){
-        Ingredients obj = new Ingredients(name, quantity);
+
     public void AddIngredient(String name, String quantity){
         Ingredient obj = new Ingredient(name, quantity);
         ingredientList.add(obj);
     }
-
 
 
     //GETTERS && SETTERS
