@@ -308,25 +308,25 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ingredientButtonBar"
+                            android:id="@+id/ingredientButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginLeft="30dp"
                             android:orientation="vertical">
 
 
                             <Button
                                 android:id="@+id/buttonAddIngredient"
-                                android:layout_width="60dp"
+                                android:layout_width="70dp"
                                 android:layout_height="30dp"
                                 android:background="@color/blue"
                                 android:text="Add"
                                 android:textColor="@color/colorWhite" />
 
                             <Button
-                                android:id="@+id/buttonClearIngredient"
-                                android:layout_width="60dp"
+                                android:id="@+id/buttonClearAllIngredients"
+                                android:layout_width="70dp"
                                 android:layout_height="30dp"
                                 android:background="#999999"
                                 android:text="Clear"

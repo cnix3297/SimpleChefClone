@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.simplechef.Ingredient;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.RecipeClass;
@@ -56,17 +57,20 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private EditText editTextIngredientName, editTextIngredientCost, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
     //private LinearLayout listIngredient;
-    private RecyclerView ingredientRecyclerView;
+    private RecyclerView ingredientsRecyclerView;
     int count = 0;
     //Tabs
     private LinearLayout tabGeneral, visibleGeneral, tabIngredients, visibleIngredients, tabDirections, visibleDirections, tabAddImage, visibleAddImage;
     private ImageView imageViewAddImage;
-    private Button buttonUploadImage, buttonTakeImage, addIngredient;
+    private Button buttonUploadImage, buttonTakeImage, buttonAddIngredient, buttonClearAllIngredients;
     private Uri imageURI;
     private RecipeClass recipeObject = new RecipeClass();
     private static final String TAG = "AddRecipe";
     private Bitmap image;
     private Context context;
+    private IngredientsListAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Ingredient> ingredientList;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +78,26 @@ public class CreateRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_create);
         context = getApplicationContext();
 
+        ingredientList = new ArrayList<>();
+
         setupToolbar();
         getWindowObjects();
-        setupIngredientsRecyclerList();
+
+        layoutManager = new LinearLayoutManager(this);
+        ingredientsRecyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new IngredientsListAdapter(ingredientList);
+        ingredientsRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new IngredientsListAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteIngredientItemClick(int position) {
+                Toast.makeText(context, "Ingredient removed", Toast.LENGTH_SHORT).show();
+                ingredientList.remove(position);
+                mAdapter.notifyItemRemoved(ingredientList.size() + 1);
+            }
+        });
 
         buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,46 +192,51 @@ public class CreateRecipeActivity extends AppCompatActivity {
             }
         });
 
-        addIngredient.setOnClickListener(new View.OnClickListener() {
+        buttonAddIngredient.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 String varIngredientQuantity = editTextIngredientQuantity.getText().toString();
                 String varIngredientName = editTextIngredientName.getText().toString();
-                String varIngredientCost = editTextIngredientCost.getText().toString();
+                //String varIngredientCost = editTextIngredientCost.getText().toString();
 
                 //Form validation
-                if(varIngredientQuantity.equals("") && varIngredientName.equals("") && varIngredientCost.equals("")){
+                if(varIngredientQuantity.equals("") && varIngredientName.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
                 }
                 else {
+                    Ingredient ingredient = new Ingredient(varIngredientName, varIngredientQuantity);
                     //ADD HEADERS
-                    if(count == 0){
-                        TextView j = new TextView(context);
-                        j.setText("Amount \t Measurement \t Ingredient \t Price ");
-                        //listIngredient.addView(j);
-                    }
+                    //if(count == 0){
+                    //    TextView j = new TextView(context);
+                    //    j.setText("Amount \t Measurement \t Ingredient \t Price ");
+                    //    //listIngredient.addView(j);
+                    //}
 
                     //ask the API for ingredient
                     RecipeAPI getAPI = new RecipeAPI(varIngredientName);
                     if(getAPI.getFoodName() == null) {
-                        recipeObject.AddIngredient(varIngredientName, Double.parseDouble(varIngredientCost), (varIngredientQuantity));
+                        recipeObject.AddIngredient(varIngredientName, varIngredientQuantity);
+                        ingredientList.add(ingredient);
+                        mAdapter.notifyItemInserted(ingredientList.size());
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }else {
-                        recipeObject.AddIngredient(getAPI.getFoodName(), Double.parseDouble(varIngredientCost), (varIngredientQuantity));
+                        recipeObject.AddIngredient(getAPI.getFoodName(), varIngredientQuantity);
+                        ingredientList.add(ingredient);
+                        mAdapter.notifyItemInserted(ingredientList.size());
                         //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
                     }
 
                     //add ingredient to linear layout
-                    TextView t = new TextView(context);
-                    t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
-                    t.setPadding(1,10,1,10);
-                    t.setTextSize(20);
-                    t.setTextColor(Color.BLACK);
+                    //TextView t = new TextView(context);
+                    //t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
+                    //t.setPadding(1,10,1,10);
+                    //t.setTextSize(20);
+                    //t.setTextColor(Color.BLACK);
                     //listIngredient.addView(t);
-                    count++;
-                    setObjectsEmpty();
+                    //count++;
+                    //setObjectsEmpty();
                     //Log.d("linear layout", "onClick: " + list.size());
 
                 }
@@ -317,6 +343,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
+
+        buttonClearAllIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllIngredients();
+            }
+        });
+
     }
 
     private void setupToolbar() {
@@ -380,10 +414,11 @@ public class CreateRecipeActivity extends AppCompatActivity {
         editTextDirections = (EditText) findViewById(R.id.editTextDirections);
 
         // RecyclerView
-        ingredientRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewIngredients);
+        ingredientsRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewIngredients);
 
         //?????
-        addIngredient = (Button) findViewById(R.id.buttonAddIngredient);
+        buttonAddIngredient = (Button) findViewById(R.id.buttonAddIngredient);
+        buttonClearAllIngredients = (Button) findViewById(R.id.buttonClearAllIngredients);
         //listIngredient = (LinearLayout) findViewById(R.id.ingredientButtonBar);
 
         //tabs
@@ -461,7 +496,10 @@ public class CreateRecipeActivity extends AppCompatActivity {
         });
     }
 
-    private void setupIngredientsRecyclerList() {
 
+    public void clearAllIngredients() {
+        Toast.makeText(context, "Ingredient list cleared", Toast.LENGTH_SHORT).show();
+        ingredientList.clear();
+        mAdapter.notifyDataSetChanged();
     }
 }
