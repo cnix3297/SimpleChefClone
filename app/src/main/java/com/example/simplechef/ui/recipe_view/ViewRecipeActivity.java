@@ -2,6 +2,7 @@ package com.example.simplechef.ui.recipe_view;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,10 +40,23 @@ public class ViewRecipeActivity extends AppCompatActivity {
         Log.d("Image", getIntent().getStringExtra("Image"));
 
 
+        //bundle
+        Bundle bundle = new Bundle();
+        bundle.putString("name", getIntent().getStringExtra("Name"));
+        bundle.putString("description", getIntent().getStringExtra("Description"));
+        bundle.putString("ingredients", getIntent().getStringExtra("Ingredients"));
+        bundle.putString("cost", getIntent().getStringExtra("Cost"));
+        bundle.putString("time", getIntent().getStringExtra("Time"));
+        bundle.putString("steps", getIntent().getStringExtra("Steps"));
+        bundle.putString("image", getIntent().getStringExtra("Image"));
+
+
 
         viewPager = findViewById(R.id.pager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), bundle);
         viewPager.setAdapter(viewPagerAdapter);
+
+
 
         setupToolbar();
 
