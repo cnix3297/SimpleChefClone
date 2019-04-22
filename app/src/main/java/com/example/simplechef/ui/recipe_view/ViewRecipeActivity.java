@@ -34,8 +34,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_view);
 
         Log.d("Name", getIntent().getStringExtra("Name"));
-        Log.d("Description", getIntent().getStringExtra("Description"));
-        Log.d("Ingredients", getIntent().getStringExtra("Ingredients"));
+       /* Log.d("Description", getIntent().getStringExtra("Description"));*/
         Log.d("Cost", getIntent().getStringExtra("Cost"));
         Log.d("Time", getIntent().getStringExtra("Time"));
         Log.d("Steps", getIntent().getStringExtra("Steps"));
@@ -47,11 +46,17 @@ public class ViewRecipeActivity extends AppCompatActivity {
         bundle.putString("name", getIntent().getStringExtra("Name"));
         bundle.putString("ID", getIntent().getStringExtra("ID"));
         bundle.putString("description", getIntent().getStringExtra("Description"));
-        bundle.putString("ingredients", getIntent().getStringExtra("Ingredients"));
         bundle.putString("cost", getIntent().getStringExtra("Cost"));
         bundle.putString("time", getIntent().getStringExtra("Time"));
         bundle.putString("steps", getIntent().getStringExtra("Steps"));
         bundle.putString("image", getIntent().getStringExtra("Image"));
+        for (int i = 0; getIntent().getStringExtra("IngredientsName" + i) != null; i++){
+            bundle.putString("IngredientsName" + i, getIntent().getStringExtra("IngredientsName" + i));
+            Log.d(TAG, "onCreate: " + bundle.getString("IngredientsName" + i));
+            bundle.putString("IngredientsQuantity" + i, getIntent().getStringExtra("IngredientsQuantity" + i));
+            bundle.putString("IngredientsImage" + i, getIntent().getStringExtra("IngredientsImage" + i));
+        }
+
 
 
 

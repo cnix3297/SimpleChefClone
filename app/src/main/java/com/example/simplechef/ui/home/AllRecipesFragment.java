@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.example.simplechef.Ingredient;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
 import com.example.simplechef.Users;
@@ -95,41 +94,38 @@ public class AllRecipesFragment extends Fragment  {
                     recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                            if(recipeList.get(position).getName() != null)
+                            /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);*/
+                            Intent intent = recipeList.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
+
+                            /*if(recipeList.get(position).getName() != null)
                                 intent.putExtra("Name", recipeList.get(position).getName());
                             else
-                                intent.putExtra("Name", "No Name");
-                            if(recipeList.get(position).getID() != null)
-                                intent.putExtra("ID", recipeList.get(position).getID());
-                            else
-                                intent.putExtra("ID", "No ID");
+                                intent.putExtra("Name", "MF NULL");
                             if(recipeList.get(position).getCost() != null)
                                 intent.putExtra("Cost", recipeList.get(position).getCost().toString());
                             else
-                                intent.putExtra("Cost", "No Cost");
+                                intent.putExtra("Cost", "MF NULL");
                             if(recipeList.get(position).getDescription() != null)
                                 intent.putExtra("Description", recipeList.get(position).getDescription());
                             else
-                                intent.putExtra("Description", "No Description");
+                                intent.putExtra("Description", "MF NULL");
                             if(recipeList.get(position).getIngredientList() != null) {
-
                                 intent.putExtra("Ingredients", recipeList.get(position).getIngredientList().toString());
-                            }
-                            else
-                                intent.putExtra("Ingredients", "No Ingredients");
+                                Log.d(TAG, "onItemClick: " + intent.getStringExtra("Ingredients"));
+                            }else
+                                intent.putExtra("Ingredients", "MF NULL");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Time", recipeList.get(position).getTime().toString());
                             else
-                                intent.putExtra("Time", "No Time");
+                                intent.putExtra("Time", "MF NULL");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Steps", recipeList.get(position).getSteps().toString());
                             else
-                                intent.putExtra("Steps", "No Steps");
+                                intent.putExtra("Steps", "MF NULL");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Image", recipeList.get(position).getImage().toString());
                             else
-                                intent.putExtra("Image", "No Image");
+                                intent.putExtra("Image", "MF NULL");*/
 
                             startActivity(intent);
                         }

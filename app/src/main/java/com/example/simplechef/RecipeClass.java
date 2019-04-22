@@ -1,7 +1,8 @@
 package com.example.simplechef;
 
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,6 @@ public class RecipeClass {
 
     private ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private String ID, name, description, time, steps;
-    private String[] array;
     private String image;
     private Double cost = 0.0;
 
@@ -92,19 +92,29 @@ public class RecipeClass {
         this.image = image;
     }
 
-    public String[] getArray() {
-        return array;
-    }
-
-    public void setArray(String[] array) {
-        this.array = array;
-    }
-
     public String getID() {
         return ID;
     }
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public Intent toIntent(Context context, Class hold){
+        Intent intent = new Intent(context, hold);
+        intent.putExtra("Name", name);
+        intent.putExtra("Description", description);
+        intent.putExtra("Ingredients", "");
+        intent.putExtra("Cost", cost.toString());
+        intent.putExtra("Time", time);
+        intent.putExtra("Steps", steps);
+        intent.putExtra("Image", image);
+        for (int i = 0; i < ingredientList.size(); i++){
+            intent.putExtra("IngredientsName" + i, ingredientList.get(i).getName());
+            Log.d("Object", "toIntent: name" + intent.getStringExtra("IngredientsName0"));
+            intent.putExtra("IngredientsQuantity" + i, ingredientList.get(i).getQuantity());
+            intent.putExtra("IngredientsImage" + i, ingredientList.get(i).getImage());
+        }
+        return intent;
     }
 }
