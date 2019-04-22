@@ -51,7 +51,7 @@ public class ViewIngredientsFragment extends Fragment {
         textViewID.setText(bundle.getString("ID"));
         final DocumentReference docRef = db.collection("Recipes").document(bundle.getString("ID"));
 
-      
+
 
         // Inflate the layout for this fragment
         return view;
