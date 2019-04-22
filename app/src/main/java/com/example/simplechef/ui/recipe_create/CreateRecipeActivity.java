@@ -210,10 +210,11 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     inputProblems.add("Recipe cost is missing");
                     isValidInput = false;
                 }
-
-                if (Double.valueOf(recipeCost) > 15.0) {
-                    inputProblems.add("Recipe cost is above $15 limit");
-                    isValidInput = false;
+                if(!recipeCost.isEmpty()) {
+                    if (Double.valueOf(recipeCost) > 15.0) {
+                        inputProblems.add("Recipe cost is above $15 limit");
+                        isValidInput = false;
+                    }
                 }
 
                 if (recipeTime.isEmpty()) {

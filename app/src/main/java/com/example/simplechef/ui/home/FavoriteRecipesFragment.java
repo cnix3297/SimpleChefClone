@@ -86,36 +86,6 @@ public class FavoriteRecipesFragment extends Fragment {
                                          public void onItemClick(int position) {
                                              Intent intent = recipeObject.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
 
-                                             /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                                             if(recipeObject.get(position).getName() != null)
-                                                 intent.putExtra("Name", recipeObject.get(position).getName());
-                                             else
-                                                 intent.putExtra("Name", "MF NULL");
-                                             if(recipeObject.get(position).getCost() != null)
-                                                 intent.putExtra("Cost", recipeObject.get(position).getCost().toString());
-                                             else
-                                                 intent.putExtra("Cost", "MF NULL");
-                                             if(recipeObject.get(position).getDescription() != null)
-                                                 intent.putExtra("Description", recipeObject.get(position).getDescription());
-                                             else
-                                                 intent.putExtra("Description", "MF NULL");
-                                             if(recipeObject.get(position).getIngredientList() != null)
-                                                 intent.putExtra("Ingredients", recipeObject.get(position).getIngredientList().toString());
-                                             else
-                                                 intent.putExtra("Ingredients", "MF NULL");
-                                             if(recipeObject.get(position).getTime() != null)
-                                                 intent.putExtra("Time", recipeObject.get(position).getTime().toString());
-                                             else
-                                                 intent.putExtra("Time", "MF NULL");
-                                             if(recipeObject.get(position).getTime() != null)
-                                                 intent.putExtra("Steps", recipeObject.get(position).getSteps().toString());
-                                             else
-                                                 intent.putExtra("Steps", "MF NULL");
-                                             if(recipeObject.get(position).getTime() != null)
-                                                 intent.putExtra("Image", recipeObject.get(position).getImage().toString());
-                                             else
-                                                 intent.putExtra("Image", "MF NULL");*/
-
                                              startActivity(intent);
                                          }
 
