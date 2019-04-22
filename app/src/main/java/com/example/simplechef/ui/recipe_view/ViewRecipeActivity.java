@@ -47,8 +47,9 @@ public class ViewRecipeActivity extends AppCompatActivity {
         bundle.putString("time", getIntent().getStringExtra("Time"));
         bundle.putString("steps", getIntent().getStringExtra("Steps"));
         bundle.putString("image", getIntent().getStringExtra("Image"));
-        for (int i = 0; getIntent().getStringExtra("IngredientsName" + i) == "" || getIntent().getStringExtra("IngredientsName" + i) == null; i++){
+        for (int i = 0; getIntent().getStringExtra("IngredientsName" + i) != null; i++){
             bundle.putString("IngredientsName" + i, getIntent().getStringExtra("IngredientsName" + i));
+            Log.d(TAG, "onCreate: " + bundle.getString("IngredientsName" + i));
             bundle.putString("IngredientsQuantity" + i, getIntent().getStringExtra("IngredientsQuantity" + i));
             bundle.putString("IngredientsImage" + i, getIntent().getStringExtra("IngredientsImage" + i));
         }

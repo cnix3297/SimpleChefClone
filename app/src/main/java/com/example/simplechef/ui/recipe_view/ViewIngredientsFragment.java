@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
+import com.google.api.LogDescriptor;
 
 public class ViewIngredientsFragment extends Fragment {
     LinearLayout vertical;
@@ -26,7 +27,7 @@ public class ViewIngredientsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_view_ingredients, container, false);
         vertical = (LinearLayout) view.findViewById(R.id.LinearLayoutViewRecipeVertical);
         Bundle bundle = getArguments();
-        /*for (int i = 0; bundle.getString("IngredientsName" + i) =="" || bundle.getString("IngredientsName" + i) == null; i++){
+        for (int i = 0; bundle.getString("IngredientsName" + i) != null; i++){
             LinearLayout horizontal = new LinearLayout(getContext());
             horizontal.setOrientation(LinearLayout.HORIZONTAL);
             horizontal.setPadding(10,10,10,10);
@@ -38,7 +39,8 @@ public class ViewIngredientsFragment extends Fragment {
             picture.setPadding(10,10,10,10);
             picture.setMaxWidth(20);
             picture.setMaxHeight(20);
-            Log.d("", "onCreateView: " + bundle.getString("IngredientsImage" + i));
+            Log.d("Image", "onCreateView: " + bundle.getString("IngredientsImage" + i));
+            Log.d("Name", "onCreateView: " + bundle.getString("IngredientsName" + i));
             Glide.with(getContext())
                     .load(bundle.getString("IngredientsImage" + i))
                     .centerInside()
@@ -47,11 +49,11 @@ public class ViewIngredientsFragment extends Fragment {
             quantity.setTextSize(20);
             name.setText(bundle.getString("IngredientsName" + i));
             name.setTextSize(20);
-            horizontal.addView(quantity);
+            horizontal.addView(picture);
             horizontal.addView(name);
             horizontal.addView(picture);
             vertical.addView(horizontal);
-        }*/
+        }
         // Inflate the layout for this fragment
         return view;
     }
