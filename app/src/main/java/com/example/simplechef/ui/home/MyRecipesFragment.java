@@ -1,5 +1,6 @@
 package com.example.simplechef.ui.home;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,23 +28,30 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 public class MyRecipesFragment extends Fragment {
-
-    private ArrayList<String> myRecipes = new ArrayList<>();
-    private ArrayList<RecipeClass> myRecipeObjects = new ArrayList<>();
-    //Recycler View
-    RecipeListAdapter recipeListAdapter;
-    RecyclerView recyclerView;
-    final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    final FirebaseAuth currentUser = FirebaseAuth.getInstance();
-    final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+    private final static String TAG = "MyRecipesFragment";
+    private RecipeListAdapter recipeListAdapter;
+    private RecyclerView recyclerView;
+    private MyRecipesViewModel myRecipesViewModel;
 
 
 
     public static MyRecipesFragment newInstance() {
         MyRecipesFragment fragment = new MyRecipesFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        myRecipesViewModel = ViewModelProviders.of(this).get(MyRecipesViewModel.class);
+        myRecipesViewModel.getRecipes().observe(this, ver() {
+            // update UI
+        });
+
     }
 
     @Nullable
@@ -53,6 +61,7 @@ public class MyRecipesFragment extends Fragment {
         //View To Return
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
 
+/*
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -129,6 +138,7 @@ public class MyRecipesFragment extends Fragment {
                 }
             }
         });
+*/
 
 
 
