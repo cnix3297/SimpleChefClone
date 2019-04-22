@@ -19,6 +19,8 @@ import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.lang.reflect.Array;
+
 public class ViewRecipeActivity extends AppCompatActivity {
     private final static String TAG = "ViewRecipeActivity";
     private ViewPager viewPager;
@@ -43,6 +45,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         //bundle
         Bundle bundle = new Bundle();
         bundle.putString("name", getIntent().getStringExtra("Name"));
+        bundle.putString("ID", getIntent().getStringExtra("ID"));
         bundle.putString("description", getIntent().getStringExtra("Description"));
         bundle.putString("ingredients", getIntent().getStringExtra("Ingredients"));
         bundle.putString("cost", getIntent().getStringExtra("Cost"));

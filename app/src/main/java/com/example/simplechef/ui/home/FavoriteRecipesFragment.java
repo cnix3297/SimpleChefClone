@@ -88,31 +88,35 @@ public class FavoriteRecipesFragment extends Fragment {
                                              if(recipeObject.get(position).getName() != null)
                                                  intent.putExtra("Name", recipeObject.get(position).getName());
                                              else
-                                                 intent.putExtra("Name", "MF NULL");
+                                                 intent.putExtra("Name", "No Name");
+                                             if(recipeObject.get(position).getID() != null)
+                                                 intent.putExtra("ID", recipeObject.get(position).getID());
+                                             else
+                                                 intent.putExtra("ID", "No ID");
                                              if(recipeObject.get(position).getCost() != null)
                                                  intent.putExtra("Cost", recipeObject.get(position).getCost().toString());
                                              else
-                                                 intent.putExtra("Cost", "MF NULL");
+                                                 intent.putExtra("Cost", "No Cost");
                                              if(recipeObject.get(position).getDescription() != null)
                                                  intent.putExtra("Description", recipeObject.get(position).getDescription());
                                              else
-                                                 intent.putExtra("Description", "MF NULL");
+                                                 intent.putExtra("Description", "No Description");
                                              if(recipeObject.get(position).getIngredientList() != null)
                                                  intent.putExtra("Ingredients", recipeObject.get(position).getIngredientList().toString());
                                              else
-                                                 intent.putExtra("Ingredients", "MF NULL");
+                                                 intent.putExtra("Ingredients", "No Ingredients");
                                              if(recipeObject.get(position).getTime() != null)
                                                  intent.putExtra("Time", recipeObject.get(position).getTime().toString());
                                              else
-                                                 intent.putExtra("Time", "MF NULL");
+                                                 intent.putExtra("Time", "No Time");
                                              if(recipeObject.get(position).getTime() != null)
                                                  intent.putExtra("Steps", recipeObject.get(position).getSteps().toString());
                                              else
-                                                 intent.putExtra("Steps", "MF NULL");
+                                                 intent.putExtra("Steps", "No Steps");
                                              if(recipeObject.get(position).getTime() != null)
                                                  intent.putExtra("Image", recipeObject.get(position).getImage().toString());
                                              else
-                                                 intent.putExtra("Image", "MF NULL");
+                                                 intent.putExtra("Image", "No Image");
 
                                              startActivity(intent);
                                          }

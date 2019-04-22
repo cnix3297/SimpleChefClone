@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.example.simplechef.Ingredient;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
 import com.example.simplechef.Users;
@@ -98,31 +99,37 @@ public class AllRecipesFragment extends Fragment  {
                             if(recipeList.get(position).getName() != null)
                                 intent.putExtra("Name", recipeList.get(position).getName());
                             else
-                                intent.putExtra("Name", "MF NULL");
+                                intent.putExtra("Name", "No Name");
+                            if(recipeList.get(position).getID() != null)
+                                intent.putExtra("ID", recipeList.get(position).getID());
+                            else
+                                intent.putExtra("ID", "No ID");
                             if(recipeList.get(position).getCost() != null)
                                 intent.putExtra("Cost", recipeList.get(position).getCost().toString());
                             else
-                                intent.putExtra("Cost", "MF NULL");
+                                intent.putExtra("Cost", "No Cost");
                             if(recipeList.get(position).getDescription() != null)
                                 intent.putExtra("Description", recipeList.get(position).getDescription());
                             else
-                                intent.putExtra("Description", "MF NULL");
-                            if(recipeList.get(position).getIngredientList() != null)
+                                intent.putExtra("Description", "No Description");
+                            if(recipeList.get(position).getIngredientList() != null) {
+
                                 intent.putExtra("Ingredients", recipeList.get(position).getIngredientList().toString());
+                            }
                             else
-                                intent.putExtra("Ingredients", "MF NULL");
+                                intent.putExtra("Ingredients", "No Ingredients");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Time", recipeList.get(position).getTime().toString());
                             else
-                                intent.putExtra("Time", "MF NULL");
+                                intent.putExtra("Time", "No Time");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Steps", recipeList.get(position).getSteps().toString());
                             else
-                                intent.putExtra("Steps", "MF NULL");
+                                intent.putExtra("Steps", "No Steps");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Image", recipeList.get(position).getImage().toString());
                             else
-                                intent.putExtra("Image", "MF NULL");
+                                intent.putExtra("Image", "No Image");
 
                             startActivity(intent);
                         }

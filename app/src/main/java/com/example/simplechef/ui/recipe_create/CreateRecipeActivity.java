@@ -1,13 +1,22 @@
 package com.example.simplechef.ui.recipe_create;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.bumptech.glide.Glide;
 import com.example.simplechef.Ingredient;
@@ -33,6 +43,8 @@ import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.login.LoginActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,7 +67,7 @@ import java.util.HashMap;
 
 public class CreateRecipeActivity extends AppCompatActivity {
     private EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
-    private EditText editTextIngredientName, editTextIngredientQuantity, editTextDirections;
+    private EditText editTextIngredientName,editTextRecipeDescription, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
     //private LinearLayout listIngredient;
     private RecyclerView ingredientsRecyclerView;
@@ -72,7 +84,33 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private IngredientsListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Ingredient> ingredientList;
+    private ArrayList<Double> array = new ArrayList<>();
+    LocationManager locationManager;
+    LocationListener locationListener;
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 1){
+            FusedLocationProviderClient location = LocationServices.getFusedLocationProviderClient(getApplication());
+            location.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                // Logic to handle location object
+                                array.add( location.getLatitude());
+                                array.add( location.getLongitude());
+                                Log.d("coordinates", array.toString());
+                            }
+                            Log.d("triggered", array.toString());
+
+                        }
+                    });
+
+        }
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,12 +137,59 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 mAdapter.notifyItemRemoved(position);
             }
         });
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                FusedLocationProviderClient location = LocationServices.getFusedLocationProviderClient(getApplication());
+                location.getLastLocation()
+                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                if (location != null) {
+                                    // Logic to handle location object
+                                    array.add( location.getLatitude());
+                                    array.add( location.getLongitude());
+                                    Log.d("coordinates", array.toString());
+                                }
+                            }
+                        });
+
+            } else {
+                // Permission is not granted
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                            1);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+                // Show rationale and request permission.
+            }
+
+            return;
+        }
 
         buttonSubmitRecipe.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+                //location services
+                //Getting current location
+
+
 
                 String recipeName = editTextRecipeName.getText().toString();
+                String recipeDescription = editTextRecipeDescription.getText().toString();
                 String recipeCost = editTextRecipeCost.getText().toString();
                 String recipeTime = editTextRecipeTime.getText().toString();
                 String recipeDirections = editTextDirections.getText().toString();
@@ -117,7 +202,10 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     inputProblems.add("Recipe name is missing");
                     isValidInput = false;
                 }
-
+                if (recipeDescription.isEmpty()) {
+                    inputProblems.add("Recipe description is missing");
+                    isValidInput = false;
+                }
                 if (recipeCost.isEmpty()) {
                     inputProblems.add("Recipe cost is missing");
                     isValidInput = false;
@@ -151,6 +239,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     recipeObject.setCost(Double.valueOf(recipeCost));
                     recipeObject.setSteps(recipeDirections);
                     recipeObject.setTime(recipeTime);
+                    recipeObject.setDescription(recipeDescription);
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseAuth currentUser = FirebaseAuth.getInstance();
                     //Document References
@@ -192,7 +281,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     });
 
 
-
+                    Intent myIntent = new Intent(getBaseContext(), HomeActivity.class);
+                    startActivity(myIntent);
                 } else {
                     // input is not valid, send list of messages to Dialog and display them
                     Toast.makeText(context, "Failed to Create Recipe", Toast.LENGTH_SHORT).show();
@@ -422,6 +512,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
         //Adding Ingredient
         editTextIngredientName = (EditText) findViewById(R.id.editTextIngredientName);
+        editTextRecipeDescription = (EditText)findViewById(R.id.editTextRecipeDescription);
         editTextIngredientQuantity = (EditText) findViewById(R.id.editTextIngredientQuantity);
         editTextDirections = (EditText) findViewById(R.id.editTextDirections);
 

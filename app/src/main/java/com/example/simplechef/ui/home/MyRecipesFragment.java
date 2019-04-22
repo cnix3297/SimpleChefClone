@@ -84,34 +84,38 @@ public class MyRecipesFragment extends Fragment {
                                         public void onItemClick(int position) {
 
                                             Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                                            if (myRecipeObjects.get(position).getName() != null)
+                                            if(myRecipeObjects.get(position).getName() != null)
                                                 intent.putExtra("Name", myRecipeObjects.get(position).getName());
                                             else
-                                                intent.putExtra("Name", "MF NULL");
-                                            if (myRecipeObjects.get(position).getCost() != null)
+                                                intent.putExtra("Name", "No Name");
+                                            if(myRecipeObjects.get(position).getID() != null)
+                                                intent.putExtra("ID", myRecipeObjects.get(position).getID());
+                                            else
+                                                intent.putExtra("ID", "No ID");
+                                            if(myRecipeObjects.get(position).getCost() != null)
                                                 intent.putExtra("Cost", myRecipeObjects.get(position).getCost().toString());
                                             else
-                                                intent.putExtra("Cost", "MF NULL");
-                                            if (myRecipeObjects.get(position).getDescription() != null)
+                                                intent.putExtra("Cost", "No Cost");
+                                            if(myRecipeObjects.get(position).getDescription() != null)
                                                 intent.putExtra("Description", myRecipeObjects.get(position).getDescription());
                                             else
-                                                intent.putExtra("Description", "MF NULL");
-                                            if (myRecipeObjects.get(position).getIngredientList() != null)
+                                                intent.putExtra("Description", "No Description");
+                                            if(myRecipeObjects.get(position).getIngredientList() != null)
                                                 intent.putExtra("Ingredients", myRecipeObjects.get(position).getIngredientList().toString());
                                             else
-                                                intent.putExtra("Ingredients", "MF NULL");
-                                            if (myRecipeObjects.get(position).getTime() != null)
+                                                intent.putExtra("Ingredients", "No Ingredients");
+                                            if(myRecipeObjects.get(position).getTime() != null)
                                                 intent.putExtra("Time", myRecipeObjects.get(position).getTime().toString());
                                             else
-                                                intent.putExtra("Time", "MF NULL");
-                                            if (myRecipeObjects.get(position).getTime() != null)
+                                                intent.putExtra("Time", "No Time");
+                                            if(myRecipeObjects.get(position).getTime() != null)
                                                 intent.putExtra("Steps", myRecipeObjects.get(position).getSteps().toString());
                                             else
-                                                intent.putExtra("Steps", "MF NULL");
-                                            if (myRecipeObjects.get(position).getTime() != null)
+                                                intent.putExtra("Steps", "No Steps");
+                                            if(myRecipeObjects.get(position).getTime() != null)
                                                 intent.putExtra("Image", myRecipeObjects.get(position).getImage().toString());
                                             else
-                                                intent.putExtra("Image", "MF NULL");
+                                                intent.putExtra("Image", "No Image");
 
                                             startActivity(intent);
                                         }

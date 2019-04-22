@@ -1,11 +1,15 @@
 package com.example.simplechef;
 
+import android.location.LocationListener;
+import android.location.LocationManager;
+
 import java.util.ArrayList;
 
 public class RecipeClass {
 
     private ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private String ID, name, description, time, steps;
+    private String[] array;
     private String image;
     private Double cost = 0.0;
 
@@ -86,6 +90,14 @@ public class RecipeClass {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String[] getArray() {
+        return array;
+    }
+
+    public void setArray(String[] array) {
+        this.array = array;
     }
 
     public String getID() {

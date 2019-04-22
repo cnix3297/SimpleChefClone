@@ -110,6 +110,40 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp" />
+                    <EditText
+                        android:id="@+id/editTextRecipeDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="35dp"
+                        android:background="@drawable/background_green_opacity_half"
+                        android:ems="10"
+                        android:hint="Enter Description"
+                        android:inputType="text"
+                        android:maxLength="25"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textColorHint="@color/colorWhite"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_marginBottom="10dp"
+                        android:alpha="1"
+                        android:background="@color/colorPrimaryMain"
+                        android:text="Description"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/editTextRecipeCost"
