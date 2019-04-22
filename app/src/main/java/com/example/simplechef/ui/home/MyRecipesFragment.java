@@ -83,8 +83,10 @@ public class MyRecipesFragment extends Fragment {
                                         @Override
                                         public void onItemClick(int position) {
 
-                                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                                            if (myRecipeObjects.get(position).getName() != null)
+                                            /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);*/
+                                            Intent intent = myRecipeObjects.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
+
+                                            /*if (myRecipeObjects.get(position).getName() != null)
                                                 intent.putExtra("Name", myRecipeObjects.get(position).getName());
                                             else
                                                 intent.putExtra("Name", "MF NULL");
@@ -111,7 +113,7 @@ public class MyRecipesFragment extends Fragment {
                                             if (myRecipeObjects.get(position).getTime() != null)
                                                 intent.putExtra("Image", myRecipeObjects.get(position).getImage().toString());
                                             else
-                                                intent.putExtra("Image", "MF NULL");
+                                                intent.putExtra("Image", "MF NULL");*/
 
                                             startActivity(intent);
                                         }

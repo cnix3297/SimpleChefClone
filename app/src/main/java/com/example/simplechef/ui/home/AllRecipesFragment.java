@@ -94,8 +94,10 @@ public class AllRecipesFragment extends Fragment  {
                     recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                            if(recipeList.get(position).getName() != null)
+                            /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);*/
+                            Intent intent = recipeList.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
+
+                            /*if(recipeList.get(position).getName() != null)
                                 intent.putExtra("Name", recipeList.get(position).getName());
                             else
                                 intent.putExtra("Name", "MF NULL");
@@ -107,9 +109,10 @@ public class AllRecipesFragment extends Fragment  {
                                 intent.putExtra("Description", recipeList.get(position).getDescription());
                             else
                                 intent.putExtra("Description", "MF NULL");
-                            if(recipeList.get(position).getIngredientList() != null)
+                            if(recipeList.get(position).getIngredientList() != null) {
                                 intent.putExtra("Ingredients", recipeList.get(position).getIngredientList().toString());
-                            else
+                                Log.d(TAG, "onItemClick: " + intent.getStringExtra("Ingredients"));
+                            }else
                                 intent.putExtra("Ingredients", "MF NULL");
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Time", recipeList.get(position).getTime().toString());
@@ -122,7 +125,7 @@ public class AllRecipesFragment extends Fragment  {
                             if(recipeList.get(position).getTime() != null)
                                 intent.putExtra("Image", recipeList.get(position).getImage().toString());
                             else
-                                intent.putExtra("Image", "MF NULL");
+                                intent.putExtra("Image", "MF NULL");*/
 
                             startActivity(intent);
                         }

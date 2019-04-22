@@ -1,5 +1,8 @@
 package com.example.simplechef;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.util.ArrayList;
 
 public class RecipeClass {
@@ -94,5 +97,22 @@ public class RecipeClass {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public Intent toIntent(Context context, Class hold){
+        Intent intent = new Intent(context, hold);
+        intent.putExtra("Name", name);
+        intent.putExtra("Description", description);
+        intent.putExtra("Ingredients", "");
+        intent.putExtra("Cost", cost.toString());
+        intent.putExtra("Time", time);
+        intent.putExtra("Steps", steps);
+        intent.putExtra("Image", image);
+        for (int i = 0; i < ingredientList.size(); i++){
+            intent.putExtra("IngredientsName" + i, ingredientList.get(i).getName());
+            intent.putExtra("IngredientsQuantity" + i, ingredientList.get(i).getQuantity());
+            intent.putExtra("IngredientsImage" + i, ingredientList.get(i).getImage());
+        }
+        return intent;
     }
 }
