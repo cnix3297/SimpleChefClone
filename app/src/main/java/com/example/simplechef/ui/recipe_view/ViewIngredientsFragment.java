@@ -26,6 +26,7 @@ public class ViewIngredientsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_view_ingredients, container, false);
         vertical = (LinearLayout) view.findViewById(R.id.LinearLayoutViewRecipeVertical);
+
         Bundle bundle = getArguments();
         for (int i = 0; bundle.getString("IngredientsName" + i) != null; i++){
             LinearLayout horizontal = new LinearLayout(getContext());
@@ -51,7 +52,8 @@ public class ViewIngredientsFragment extends Fragment {
             name.setTextSize(20);
             horizontal.addView(picture);
             horizontal.addView(name);
-            horizontal.addView(picture);
+            horizontal.addView(quantity);
+
             vertical.addView(horizontal);
         }
         // Inflate the layout for this fragment

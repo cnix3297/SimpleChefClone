@@ -211,7 +211,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     isValidInput = false;
                 }
 
-                if (recipeObject.getCost() > 15.0) {
+                if (Double.valueOf(recipeCost) > 15.0) {
                     inputProblems.add("Recipe cost is above $15 limit");
                     isValidInput = false;
                 }
