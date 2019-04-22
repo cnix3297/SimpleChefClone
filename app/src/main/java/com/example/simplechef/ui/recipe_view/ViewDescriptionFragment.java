@@ -10,27 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
+import com.example.simplechef.RecipeClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 public class ViewDescriptionFragment extends Fragment {
     private ImageView imageViewImage;
-    public String name, description, ingredients, cost, time, steps, image;
-    public Bundle desriptionBundle;
+    RecipeClass recipeClass;
+    private TextView nameTextView, costTextView, timeTextView, descriptionTextView;
+    /*public String name, description, ingredients, cost, time, steps, image;
+    public Bundle desriptionBundle;*/
 
-    public static ViewDescriptionFragment newInstance() {
+    public static ViewDescriptionFragment newInstance(RecipeClass recipe) {
         ViewDescriptionFragment fragment = new ViewDescriptionFragment();
+        fragment.recipeClass = recipe;
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
     /*
         this.name = desriptionBundle.getString("name");
         this.description = desriptionBundle.getString("description");
@@ -42,11 +50,17 @@ public class ViewDescriptionFragment extends Fragment {
 */
         View view = inflater.inflate(R.layout.fragment_recipe_view_description, container, false);
         imageViewImage = (ImageView)view.findViewById(R.id.imageViewImage);
-
-        /*
+        nameTextView = (TextView) view.findViewById(R.id.textViewName);
+        nameTextView.setText(recipeClass.getName());
+        costTextView = (TextView) view.findViewById(R.id.textViewCost);
+        costTextView.setText("~ $" + recipeClass.getCost());
+        timeTextView = (TextView) view.findViewById(R.id.textViewTime);
+        timeTextView.setText(recipeClass.getTime());
+        descriptionTextView = (TextView) view.findViewById(R.id.textViewDescription);
+        descriptionTextView.setText(recipeClass.getDescription());
         //Adding Image to Recycler view item
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference recipePictureReference = storage.getReference().child(image);
+        StorageReference recipePictureReference = storage.getReference().child(recipeClass.getImage());
         recipePictureReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -65,7 +79,6 @@ public class ViewDescriptionFragment extends Fragment {
 
             }
         });
-*/
         // Inflate the layout for this fragment
         return view;
     }

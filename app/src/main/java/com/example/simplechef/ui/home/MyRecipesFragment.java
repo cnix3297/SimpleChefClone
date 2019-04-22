@@ -82,8 +82,9 @@ public class MyRecipesFragment extends Fragment {
                                     recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                                         @Override
                                         public void onItemClick(int position) {
+                                            Intent intent = myRecipeObjects.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
 
-                                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+                                            /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
                                             if (myRecipeObjects.get(position).getName() != null)
                                                 intent.putExtra("Name", myRecipeObjects.get(position).getName());
                                             else
@@ -111,7 +112,7 @@ public class MyRecipesFragment extends Fragment {
                                             if (myRecipeObjects.get(position).getTime() != null)
                                                 intent.putExtra("Image", myRecipeObjects.get(position).getImage().toString());
                                             else
-                                                intent.putExtra("Image", "MF NULL");
+                                                intent.putExtra("Image", "MF NULL");*/
 
                                             startActivity(intent);
                                         }

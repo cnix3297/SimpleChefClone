@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.simplechef.R;
+import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.home.HomeActivity;
 import com.example.simplechef.ui.login.LoginActivity;
@@ -35,6 +36,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
     public String name, description, ingredients, cost, time, steps, image;
+    private RecipeClass recipeClass = new RecipeClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +44,23 @@ public class ViewRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_view);
 
         //Get Data
-        this.name = getIntent().getStringExtra("Name");
-        this.description = getIntent().getStringExtra("Description");
-        this.ingredients = getIntent().getStringExtra("Ingredients");
-        this.cost = getIntent().getStringExtra("Cost");
-        this.time = getIntent().getStringExtra("Time");
-        this.steps = getIntent().getStringExtra("Steps");
-        this.image = getIntent().getStringExtra("Image");
+        recipeClass.setName(getIntent().getStringExtra("Name"));
+        recipeClass.setDescription(getIntent().getStringExtra("Description"));
+
+        /*this.ingredients = getIntent().getStringExtra("Ingredients");*/
+        recipeClass.setCost(Double.parseDouble(getIntent().getStringExtra("Cost")));
+        recipeClass.setTime(getIntent().getStringExtra("Time"));
+        recipeClass.setSteps(getIntent().getStringExtra("Steps"));
+        recipeClass.setImage(getIntent().getStringExtra("Image"));
+        for (int i = 0; getIntent().getStringExtra("IngredientsName" + i) == "" ||getIntent().getStringExtra("IngredientsName" + i) != null; i++){
+            recipeClass.AddIngredient(getIntent().getStringExtra("IngredientsName" + i), getIntent().getStringExtra("IngredientsQuantity" + i), getIntent().getStringExtra("IngredientsImage" + i));
+        }
 
 
         //Fragment Setup
         viewPager = findViewById(R.id.pager);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.recipeClass = recipeClass;
         viewPager.setAdapter(viewPagerAdapter);
 
         setupToolbar();

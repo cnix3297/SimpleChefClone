@@ -84,7 +84,9 @@ public class FavoriteRecipesFragment extends Fragment {
                                      recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                                          @Override
                                          public void onItemClick(int position) {
-                                             Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+
+                                             Intent intent = recipeObject.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
+                                             /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
                                              if(recipeObject.get(position).getName() != null)
                                                  intent.putExtra("Name", recipeObject.get(position).getName());
                                              else
@@ -112,7 +114,7 @@ public class FavoriteRecipesFragment extends Fragment {
                                              if(recipeObject.get(position).getTime() != null)
                                                  intent.putExtra("Image", recipeObject.get(position).getImage().toString());
                                              else
-                                                 intent.putExtra("Image", "MF NULL");
+                                                 intent.putExtra("Image", "MF NULL");*/
 
                                              startActivity(intent);
                                          }

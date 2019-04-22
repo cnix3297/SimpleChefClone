@@ -5,13 +5,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.simplechef.R;
+import com.example.simplechef.RecipeClass;
 
 public class ViewStepsFragment extends Fragment {
-
-    public static ViewStepsFragment newInstance() {
+    private RecipeClass recipeClass;
+    private TextView stepsTextView;
+    public static ViewStepsFragment newInstance(RecipeClass recipe) {
         ViewStepsFragment fragment = new ViewStepsFragment();
+        fragment.recipeClass = recipe;
         return fragment;
     }
 
@@ -19,7 +23,8 @@ public class ViewStepsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_view_steps, container, false);
-
+        stepsTextView = (TextView) view.findViewById(R.id.textViewSteps);
+        stepsTextView.setText(recipeClass.getSteps());
 
         // Inflate the layout for this fragment
         return view;

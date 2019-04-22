@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -77,7 +77,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/coin"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/textViewTime"
             app:layout_constraintTop_toTopOf="@+id/imageViewGreyBackground" />
 
         <TextView

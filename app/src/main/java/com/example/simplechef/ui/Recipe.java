@@ -134,6 +134,9 @@ public class Recipe {
     private String measurementType;
     private double measurementAmount;
 
+    public Ingredient(){
+
+    }
     public Ingredient(String name, double price, String measurementType, double measurementAmount) {
         this.name = name;
         this.price = price;

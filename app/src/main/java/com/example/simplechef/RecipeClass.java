@@ -1,6 +1,12 @@
 package com.example.simplechef;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RecipeClass {
 
@@ -27,7 +33,22 @@ public class RecipeClass {
         ingredientList.add(obj);
     }
 
-
+    public Intent toIntent(Context context, Class hold){
+        Intent intent = new Intent(context, hold);
+        intent.putExtra("Name", name);
+        intent.putExtra("Description", description);
+        intent.putExtra("Ingredients", "");
+        intent.putExtra("Cost", cost.toString());
+        intent.putExtra("Time", time);
+        intent.putExtra("Steps", steps);
+        intent.putExtra("Image", image);
+        for (int i = 0; i < ingredientList.size(); i++){
+            intent.putExtra("IngredientsName" + i, ingredientList.get(i).getName());
+            intent.putExtra("IngredientsQuantity" + i, ingredientList.get(i).getQuantity());
+            intent.putExtra("IngredientsImage" + i, ingredientList.get(i).getImage());
+        }
+    return intent;
+    }
     //GETTERS && SETTERS
     public ArrayList<Ingredient> getIngredientList() {
         return ingredientList;
