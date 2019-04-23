@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +16,12 @@ import android.view.ViewGroup;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 public class AllRecipesFragment extends Fragment  {
     private static final String TAG = "AllRecipesFragment";
     //Firebase
-    final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    final FirebaseAuth currentUser = FirebaseAuth.getInstance();
-    final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
-    public Boolean remove = false;
     private RecipeListAdapter recipeListAdapter;
     private RecipesViewModel recipesViewModel;
     private RecyclerView recyclerView;
