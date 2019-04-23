@@ -8,7 +8,7 @@ public class RecipeClass {
     private String ID, name, description, time, steps;
     private String image;
     private Double cost = 0.0;
-
+    private Boolean favorite = false;
 
     //Constructor
     public RecipeClass() {
@@ -27,6 +27,12 @@ public class RecipeClass {
         ingredientList.add(obj);
     }
 
+    public void setFavorite(Boolean a) {
+        favorite = a;
+    }
+    public Boolean isFavorite() {
+        return favorite;
+    }
 
     //GETTERS && SETTERS
     public ArrayList<Ingredient> getIngredientList() {

@@ -107,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
         };
 
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 4000);
+        mHandler.postDelayed(mRunnable, 5000);
 
     }
 

@@ -146,24 +146,20 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
 
             recipeAddToFavorites.setOnClickListener(new View.OnClickListener() {
-                Boolean isFavorited = false;
                 @Override
                 public void onClick(View v) {
 
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onFavoriteItemClick(position);
-                            if(isFavorited) {
-                                recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_off);
-
-                                isFavorited = false;
+                            if (recipes.get(position).isFavorite()) {
+                                recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
                             }
                             else{
-                                recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
-                                isFavorited = true;
+                                recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_off);
                             }
 
+                            listener.onFavoriteItemClick(position);
                         }
                     }
                 }

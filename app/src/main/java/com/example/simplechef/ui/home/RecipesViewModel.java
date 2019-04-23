@@ -30,7 +30,7 @@ public class RecipesViewModel extends ViewModel {
     private MutableLiveData<List<RecipeClass>> myFavoriteRecipes;
     private MutableLiveData<List<RecipeClass>> myRecipes;
     private ArrayList<RecipeClass> allRecipesDataset = new ArrayList<>();
-    private ArrayList<RecipeClass> favsDataset = new ArrayList<>();
+    private ArrayList<RecipeClass> myFavoritesDataset = new ArrayList<>();
     private ArrayList<RecipeClass> myRecipesDataset = new ArrayList<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth currentUser = FirebaseAuth.getInstance();
@@ -116,7 +116,7 @@ public class RecipesViewModel extends ViewModel {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                                             RecipeClass document = documentSnapshot.toObject(RecipeClass.class);
-                                            favsDataset.add(document);
+                                            myFavoritesDataset.add(document);
                                             Log.d(TAG, "Adding recipe to the favoritesDataset: " + document.getName());
                                         }
                                     });
@@ -125,7 +125,7 @@ public class RecipesViewModel extends ViewModel {
                         }
                     }
                 });
-                return favsDataset;
+                return myFavoritesDataset;
             }
 
             @Override
@@ -184,52 +184,62 @@ public class RecipesViewModel extends ViewModel {
     }
 
     public RecipeClass getRecipeFromFavoritesRecipes(int position) {
-        return allRecipesDataset.get(position);
+        return myFavoritesDataset.get(position);
     }
 
     public void addRecipeToFavorites(RecipeClass recipe) {
-        favsDataset.add(recipe);
-        // update firebase
-        final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
-        final RecipeClass recipeToAddToFirebase = recipe;
-        String recipeID = recipe.getID();
-        final HashMap<String, Object> data = new HashMap<>();
-        data.put("MyFavorites", FieldValue.arrayUnion(recipeID));
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            ArrayList<String> favoritesList;
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                Boolean remove = false;
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
+        // check to make sure recipe doesnt already exist
 
-                    if (document.contains("MyFavorites")) {
+        if (myFavoritesDataset.contains(recipe)) {
+            //do nothing
+        } else {
 
-                        favoritesList = (ArrayList<String>) document.get("MyFavorites");
-                        for (int i = 0; i < favoritesList.size(); i++) {
-                            if (recipeToAddToFirebase.getID().equals(favoritesList.get(i))) {
-                                remove = true;
+            myFavoritesDataset.add(recipe);
+            myFavoriteRecipes.setValue(myFavoritesDataset);
+
+            // update firebase
+            final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+            final RecipeClass recipeToAddToFirebase = recipe;
+            String recipeID = recipe.getID();
+            final HashMap<String, Object> data = new HashMap<>();
+            data.put("MyFavorites", FieldValue.arrayUnion(recipeID));
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                ArrayList<String> favoritesList;
+
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    Boolean remove = false;
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+
+                        if (document.contains("MyFavorites")) {
+
+                            favoritesList = (ArrayList<String>) document.get("MyFavorites");
+                            for (int i = 0; i < favoritesList.size(); i++) {
+                                if (recipeToAddToFirebase.getID().equals(favoritesList.get(i))) {
+                                    remove = true;
+                                }
                             }
-                        }
-                        if (remove) {
-                            docRef.update("MyFavorites", FieldValue.arrayRemove(recipeToAddToFirebase.getID()));
+                            if (remove) {
+                                docRef.update("MyFavorites", FieldValue.arrayRemove(recipeToAddToFirebase.getID()));
 
+                            } else {
+                                docRef.update(data);
+                            }
                         } else {
-                            docRef.update(data);
+                            docRef.set(data, SetOptions.merge());
                         }
-                    } else {
-                        docRef.set(data, SetOptions.merge());
-                    }
 
-                } else {
-                    Log.d("DocumentFailed", "get failed with ", task.getException());
+                    } else {
+                        Log.d("DocumentFailed", "get failed with ", task.getException());
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public RecipeClass getRecipeFromMyRecipes(int position) {
-        return allRecipesDataset.get(position);
+        return myRecipesDataset.get(position);
     }
 
     public void insert(RecipeClass recipe) {
