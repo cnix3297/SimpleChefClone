@@ -53,6 +53,7 @@ dependencies {
     //Bottom Navigation View
     implementation 'com.android.support:design:28.0.0'
 
+    implementation 'com.google.android.gms:play-services-location:+'
 
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'

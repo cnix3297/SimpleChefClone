@@ -11,18 +11,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.simplechef.R;
+import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
+import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -55,6 +66,17 @@ public class HomeActivity extends AppCompatActivity {
         // Tabs setup with View Pager
         tabLayout = findViewById(R.id.tabsHome);
         tabLayout.setupWithViewPager(viewPager);
+
+
+        //Search
+        editTextSearchPopUp = (EditText) findViewById(R.id.editTextSearch);
+        editTextSearchPopUp.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                search();
+                return false;
+            }
+        });
 
 
         // Bottom Nav setup
@@ -91,7 +113,31 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+    public void search(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        CollectionReference reference = db.collection("Recipes");
+        Query query = reference.whereEqualTo("name", editTextSearchPopUp.getText().toString());
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        RecipeClass recipe = document.toObject(RecipeClass.class);
+                        Log.d(TAG, "onComplete: " + recipe.getName());
+                        Intent intent = recipe.toIntent(getApplicationContext(), ViewRecipeActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                }else{
+                    Toast toast = Toast.makeText(context, "Search Error", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+            }
+        });
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
 
     <uses-feature android:name="android.hardware.camera2"
         android:required="true"/>
@@ -64,6 +66,10 @@
             android:name=".ui.home.HomeActivity"
             android:label="HomeActivity" />
         <activity android:name=".ui.account.AccountActivity" />
+        <meta-data
+            android:name="com.google.android.geo.AIzaSyDNAjhjUTEwfbBSCO6dCGAa0GQbbmY1dcE"
+            android:value="AIzaSyDNAjhjUTEwfbBSCO6dCGAa0GQbbmY1dcE"/>
+
     </application>
 
 </manifest>
