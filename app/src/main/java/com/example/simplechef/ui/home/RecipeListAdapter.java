@@ -17,27 +17,22 @@ import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeHolder> {
     private final static String TAG = "RecipeListAdapter";
-    private ArrayList<RecipeClass> recipes;
-    private ArrayList<String> favoritesList;
+    private List<RecipeClass> recipes = new ArrayList<>();
     private OnRecipeItemClickListener mListener;
     private Context context;
     private View view;
 
 
-    RecipeListAdapter(ArrayList<RecipeClass> list, ArrayList<String> favoritesList){
-        this.recipes = list;
-        this.favoritesList = favoritesList;
-        Log.d("CONSTRUCTOR CALLED", this.recipes.toString());
+    RecipeListAdapter(){
 
     }
 
@@ -94,7 +89,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         });
 
         //On Create Check Favorites
-        for(int i = 0; i < favoritesList.size(); i++){
+        /*for(int i = 0; i < favoritesList.size(); i++){
             String currentFavorite = favoritesList.get(i);
             if(currentRecipe.getID().equals(currentFavorite)){
                 holder.recipeAddToFavorites.setImageResource(android.R.drawable.btn_star_big_on);
@@ -105,12 +100,17 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
             }
 
-        }
+        }*/
 
 
         Log.d("RecipeHolder", currentRecipe.getName());
         Log.d("RecipeHolder", currentRecipe.getImage());
 
+    }
+
+    public void setRecipes(List<RecipeClass> recipes) {
+        this.recipes = recipes;
+        notifyDataSetChanged();
     }
 
     @Override

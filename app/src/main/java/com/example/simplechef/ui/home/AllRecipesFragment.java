@@ -1,6 +1,7 @@
 package com.example.simplechef.ui.home;
 
-import android.app.Activity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,30 +13,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
-import com.example.simplechef.Users;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AllRecipesFragment extends Fragment  {
     private static final String TAG = "AllRecipesFragment";
@@ -44,15 +30,26 @@ public class AllRecipesFragment extends Fragment  {
     final FirebaseAuth currentUser = FirebaseAuth.getInstance();
     final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
     public Boolean remove = false;
-    private ArrayList<RecipeClass> recipeList = new ArrayList<>();
-    private ArrayList<String> favoritesList = new ArrayList<>();
     private RecipeListAdapter recipeListAdapter;
+    private RecipesViewModel recipesViewModel;
+    private RecyclerView recyclerView;
 
     public static AllRecipesFragment newInstance() {
         AllRecipesFragment fragment = new AllRecipesFragment();
         return fragment;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        recipesViewModel = ViewModelProviders.of(getActivity()).get(RecipesViewModel.class);
+        recipesViewModel.getAllRecipes().observe(getViewLifecycleOwner(), new Observer<List<RecipeClass>>() {
+            @Override
+            public void onChanged(@Nullable List<RecipeClass> recipes) {
+                recipeListAdapter.setRecipes(recipes);
+            }
+        });
+    }
 
 
     @Nullable
@@ -62,156 +59,63 @@ public class AllRecipesFragment extends Fragment  {
 
         //View To Return
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
-        //Get Favorites List
-        initiateFavoritesList();
 
-        //Access NoSql Database
-        //DocumentReference docRef = db.collection("Recipe").document("4S0ycFz9A05IWKs3249d");
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Get Info from Recipe Collection
-        db.collection("Recipes")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        recipeListAdapter = new RecipeListAdapter();
+        recyclerView.setAdapter(recipeListAdapter);
 
+        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    ClearObject(true);
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        RecipeClass recipeobj = document.toObject(RecipeClass.class);
-                        AddObject(recipeobj);
-                        Log.d("Recipes", document.getId() + " => " + recipeobj.getName());
-                    }
+            public void onItemClick(int position) {
 
-                    //Recycler View Init & Data Pass
-                    final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getName() != null)
+                    intent.putExtra("Name", recipesViewModel.getRecipeFromAllRecipes(position).getName());
+                else
+                    intent.putExtra("Name", "MF NULL");
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getCost() != null)
+                    intent.putExtra("Cost", recipesViewModel.getRecipeFromAllRecipes(position).getCost().toString());
+                else
+                    intent.putExtra("Cost", "MF NULL");
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getDescription() != null)
+                    intent.putExtra("Description", recipesViewModel.getRecipeFromAllRecipes(position).getDescription());
+                else
+                    intent.putExtra("Description", "MF NULL");
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getIngredientList() != null)
+                    intent.putExtra("Ingredients", recipesViewModel.getRecipeFromAllRecipes(position).getIngredientList().toString());
+                else
+                    intent.putExtra("Ingredients", "MF NULL");
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getTime() != null)
+                    intent.putExtra("Time", recipesViewModel.getRecipeFromAllRecipes(position).getTime().toString());
+                else
+                    intent.putExtra("Time", "MF NULL");
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getTime() != null)
+                    intent.putExtra("Steps", recipesViewModel.getRecipeFromAllRecipes(position).getSteps().toString());
+                else
+                    intent.putExtra("Steps", "MF NULL");
+                if (recipesViewModel.getRecipeFromAllRecipes(position).getTime() != null)
+                    intent.putExtra("Image", recipesViewModel.getRecipeFromAllRecipes(position).getImage().toString());
+                else
+                    intent.putExtra("Image", "MF NULL");
 
-                    Log.d("BEFORE", recipeList.toString());
-                    recipeListAdapter = new RecipeListAdapter(recipeList, favoritesList);
-                    recyclerView.setAdapter(recipeListAdapter);
-
-
-                    recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                            if(recipeList.get(position).getName() != null)
-                                intent.putExtra("Name", recipeList.get(position).getName());
-                            else
-                                intent.putExtra("Name", "MF NULL");
-                            if(recipeList.get(position).getCost() != null)
-                                intent.putExtra("Cost", recipeList.get(position).getCost().toString());
-                            else
-                                intent.putExtra("Cost", "MF NULL");
-                            if(recipeList.get(position).getDescription() != null)
-                                intent.putExtra("Description", recipeList.get(position).getDescription());
-                            else
-                                intent.putExtra("Description", "MF NULL");
-                            if(recipeList.get(position).getIngredientList() != null)
-                                intent.putExtra("Ingredients", recipeList.get(position).getIngredientList().toString());
-                            else
-                                intent.putExtra("Ingredients", "MF NULL");
-                            if(recipeList.get(position).getTime() != null)
-                                intent.putExtra("Time", recipeList.get(position).getTime().toString());
-                            else
-                                intent.putExtra("Time", "MF NULL");
-                            if(recipeList.get(position).getTime() != null)
-                                intent.putExtra("Steps", recipeList.get(position).getSteps().toString());
-                            else
-                                intent.putExtra("Steps", "MF NULL");
-                            if(recipeList.get(position).getTime() != null)
-                                intent.putExtra("Image", recipeList.get(position).getImage().toString());
-                            else
-                                intent.putExtra("Image", "MF NULL");
-
-                            startActivity(intent);
-                        }
-
-                        @Override
-                        public void onFavoriteItemClick(int position) {
-                            Log.d("Favorites", "is clicked");
-                            final RecipeClass currentRecipe = recipeList.get(position);
-                            String recipeID = currentRecipe.getID();
-
-                            // Create a reference to the document associate with user
-
-                            final HashMap<String, Object> data = new HashMap<>();
-                            data.put("MyFavorites", FieldValue.arrayUnion(recipeID));
-
-
-                            //Executes if we do not remove the recipe id
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-
-                                        if (document.contains("MyFavorites")) {
-
-                                            favoritesList = (ArrayList<String>) document.get("MyFavorites");
-                                            for (int i = 0; i < favoritesList.size(); i++) {
-                                                if (currentRecipe.getID().equals(favoritesList.get(i))) {
-                                                    remove = true;
-                                                }
-                                            }
-                                            if (remove) {
-                                                docRef.update("MyFavorites", FieldValue.arrayRemove(currentRecipe.getID()));
-
-                                            } else {
-                                                docRef.update(data);
-                                            }
-                                            remove = false;
-                                        } else {
-                                            docRef.set(data, SetOptions.merge());
-                                        }
-
-                                    } else {
-                                        Log.d("DocumentFailed", "get failed with ", task.getException());
-                                    }
-                                }
-                            });
-
-
-                        }
-
-                    });
-
-
-
-
-                } else {
-                    Log.d("TAG", "get failed with ", task.getException());
-                }
+                startActivity(intent);
             }
 
-        });
+            @Override
+            public void onFavoriteItemClick(int position) {
+                // get the recipe at the current position in the recyclerview
+                RecipeClass recipe = recipesViewModel.getRecipeFromAllRecipes(position);
+                // add it to the favorites recyclerview
+                recipesViewModel.addRecipeToFavorites(recipe);
 
+            }
+        });
 
 
         return view;
-    }
-    public void AddObject(RecipeClass obj){
-        this.recipeList.add(obj);
-    }
-    public void ClearObject(Boolean clear){
-        if(clear)
-            this.recipeList.clear();
-    }
-    public void initiateFavoritesList(){
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.contains("MyFavorites")) {
-                        favoritesList = (ArrayList<String>) document.get("MyFavorites");
-                    }
-
-                } else {
-                    Log.d("DocumentFailed", "get failed with ", task.getException());
-                }
-            }
-        });
     }
 
 }

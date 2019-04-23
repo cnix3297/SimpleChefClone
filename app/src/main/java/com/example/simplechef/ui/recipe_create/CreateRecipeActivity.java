@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.simplechef.Ingredient;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeAPI;
 import com.example.simplechef.RecipeClass;
@@ -78,6 +77,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_create);
         context = getApplicationContext();
+
+
 
         ingredientList = new ArrayList<>();
 

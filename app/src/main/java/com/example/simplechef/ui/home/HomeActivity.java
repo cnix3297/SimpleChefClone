@@ -1,16 +1,16 @@
 package com.example.simplechef.ui.home;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +34,9 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
+    private RecipesViewModel recipesViewModel;
+    private Handler mHandler;
+    private Runnable mRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,53 +45,69 @@ public class HomeActivity extends AppCompatActivity {
         context = this;
         view = ((HomeActivity) context).view;
 
-        viewPager = findViewById(R.id.pager);
-        viewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
 
+        recipesViewModel = ViewModelProviders.of(this).get(RecipesViewModel.class);
+        recipesViewModel.getAllRecipes();
+        recipesViewModel.getFavoriteRecipes();
+        recipesViewModel.getMyRecipes();
 
-        // ToolBar setup
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle(null);
-
-        // Tabs setup with View Pager
-        tabLayout = findViewById(R.id.tabsHome);
-        tabLayout.setupWithViewPager(viewPager);
-
-
-        // Bottom Nav setup
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mRunnable = new Runnable() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.menuHome:
-                        //TODO:home menu
-                        return true;
-                    case R.id.menuSearch:
-                        //TODO:this is where the animation will go for search
-                        if(findViewById(R.id.editTextPopUpSearch).getVisibility() == View.VISIBLE){
-                            findViewById(R.id.editTextPopUpSearch).setVisibility(View.INVISIBLE);
+            public void run() {
+
+                viewPager = findViewById(R.id.pager);
+                viewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager());
+                viewPager.setAdapter(viewPagerAdapter);
+
+
+                // ToolBar setup
+                Toolbar toolbar = findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                setTitle(null);
+
+                // Tabs setup with View Pager
+                tabLayout = findViewById(R.id.tabsHome);
+                tabLayout.setupWithViewPager(viewPager);
+
+
+                // Bottom Nav setup
+                bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+                bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menuHome:
+                                //TODO:home menu
+                                return true;
+                            case R.id.menuSearch:
+                                //TODO:this is where the animation will go for search
+                                if(findViewById(R.id.editTextPopUpSearch).getVisibility() == View.VISIBLE){
+                                    findViewById(R.id.editTextPopUpSearch).setVisibility(View.INVISIBLE);
+                                }
+                                else{
+                                    findViewById(R.id.editTextPopUpSearch).setVisibility(View.VISIBLE);
+                                    Animation a = AnimationUtils.loadAnimation(context, R.anim.slide_bottom);
+                                    a.reset();
+                                    findViewById(R.id.editTextPopUpSearch).clearAnimation();
+                                    findViewById(R.id.editTextPopUpSearch).startAnimation(a);
+                                }
+                                return true;
+                            case R.id.imageViewAdd:
+                                Intent myIntent = new Intent(getBaseContext(), CreateRecipeActivity.class);
+                                startActivity(myIntent);
+                                return true;
                         }
-                        else{
-                            findViewById(R.id.editTextPopUpSearch).setVisibility(View.VISIBLE);
-                            Animation a = AnimationUtils.loadAnimation(context, R.anim.slide_bottom);
-                            a.reset();
-                            findViewById(R.id.editTextPopUpSearch).clearAnimation();
-                            findViewById(R.id.editTextPopUpSearch).startAnimation(a);
-                        }
-                        return true;
-                    case R.id.imageViewAdd:
-                        Intent myIntent = new Intent(getBaseContext(), CreateRecipeActivity.class);
-                        startActivity(myIntent);
-                        return true;
-                }
-                return false;
+                        return false;
+                    }
+                });
+
+
+
             }
-        });
+        };
 
-
+        mHandler = new Handler();
+        mHandler.postDelayed(mRunnable, 4000);
 
     }
 
