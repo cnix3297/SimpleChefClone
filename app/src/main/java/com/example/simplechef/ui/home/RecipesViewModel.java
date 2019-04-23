@@ -220,12 +220,14 @@ public class RecipesViewModel extends ViewModel {
                                     remove = true;
                                 }
                             }
+
                             if (remove) {
                                 docRef.update("MyFavorites", FieldValue.arrayRemove(recipeToAddToFirebase.getID()));
 
                             } else {
                                 docRef.update(data);
                             }
+
                         } else {
                             docRef.set(data, SetOptions.merge());
                         }
@@ -236,6 +238,11 @@ public class RecipesViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    public void removeRecipeFromFavorites(RecipeClass recipe) {
+        myFavoritesDataset.remove(recipe);
+        myFavoriteRecipes.setValue(myFavoritesDataset);
     }
 
     public RecipeClass getRecipeFromMyRecipes(int position) {

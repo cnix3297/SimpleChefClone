@@ -69,11 +69,14 @@ public class AllRecipesFragment extends Fragment  {
             @Override
             public void onFavoriteItemClick(int position) {
                 // get the recipe at the current position in the recyclerview
-                RecipeClass recipe = recipesViewModel.getRecipeFromAllRecipes(position);
-                // set it to favorite
-                recipe.setFavorite(true);
-                // add it to the favorites recyclerview
-                recipesViewModel.addRecipeToFavorites(recipe);
+                RecipeClass selectedRecipe = recipesViewModel.getRecipeFromAllRecipes(position);
+
+                if (selectedRecipe.isFavorite()) {
+                    recipesViewModel.removeRecipeFromFavorites(selectedRecipe);
+                } else {
+                    // add it to the favorites
+                    recipesViewModel.addRecipeToFavorites(selectedRecipe);
+                }
 
             }
         });
