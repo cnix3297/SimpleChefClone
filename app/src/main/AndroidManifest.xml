@@ -70,6 +70,9 @@
             android:label="HomeActivity"
             android:launchMode="singleTop" />
         <activity android:name=".ui.account.AccountActivity" />
+        <meta-data
+            android:name="com.google.android.geo.AIzaSyDNAjhjUTEwfbBSCO6dCGAa0GQbbmY1dcE"
+            android:value="AIzaSyDNAjhjUTEwfbBSCO6dCGAa0GQbbmY1dcE"/>
     </application>
 
 </manifest>

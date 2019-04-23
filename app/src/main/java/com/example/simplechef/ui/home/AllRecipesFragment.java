@@ -62,37 +62,7 @@ public class AllRecipesFragment extends Fragment  {
         recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
-                Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getName() != null)
-                    intent.putExtra("Name", recipesViewModel.getRecipeFromAllRecipes(position).getName());
-                else
-                    intent.putExtra("Name", "MF NULL");
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getCost() != null)
-                    intent.putExtra("Cost", recipesViewModel.getRecipeFromAllRecipes(position).getCost().toString());
-                else
-                    intent.putExtra("Cost", "MF NULL");
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getDescription() != null)
-                    intent.putExtra("Description", recipesViewModel.getRecipeFromAllRecipes(position).getDescription());
-                else
-                    intent.putExtra("Description", "MF NULL");
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getIngredientList() != null)
-                    intent.putExtra("Ingredients", recipesViewModel.getRecipeFromAllRecipes(position).getIngredientList().toString());
-                else
-                    intent.putExtra("Ingredients", "MF NULL");
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getTime() != null)
-                    intent.putExtra("Time", recipesViewModel.getRecipeFromAllRecipes(position).getTime().toString());
-                else
-                    intent.putExtra("Time", "MF NULL");
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getTime() != null)
-                    intent.putExtra("Steps", recipesViewModel.getRecipeFromAllRecipes(position).getSteps().toString());
-                else
-                    intent.putExtra("Steps", "MF NULL");
-                if (recipesViewModel.getRecipeFromAllRecipes(position).getTime() != null)
-                    intent.putExtra("Image", recipesViewModel.getRecipeFromAllRecipes(position).getImage().toString());
-                else
-                    intent.putExtra("Image", "MF NULL");
-
+                Intent intent = recipesViewModel.getRecipeFromAllRecipes(position).toIntent(getActivity(), ViewRecipeActivity.class);
                 startActivity(intent);
             }
 

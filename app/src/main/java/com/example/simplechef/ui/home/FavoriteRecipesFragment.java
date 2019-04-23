@@ -2,6 +2,7 @@ package com.example.simplechef.ui.home;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
+import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
+
 import java.util.List;
 
 public class FavoriteRecipesFragment extends Fragment {
@@ -55,6 +58,25 @@ public class FavoriteRecipesFragment extends Fragment {
         recipeListAdapter = new RecipeListAdapter();
         recyclerView.setAdapter(recipeListAdapter);
 
+        recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                Intent intent = recipesViewModel.getRecipeFromFavoritesRecipes(position).toIntent(getActivity(), ViewRecipeActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFavoriteItemClick(int position) {
+                // get the recipe at the current position in the recyclerview
+                RecipeClass recipe = recipesViewModel.getRecipeFromAllRecipes(position);
+                // set it to favorite
+                recipe.setFavorite(true);
+                // add it to the favorites recyclerview
+                recipesViewModel.addRecipeToFavorites(recipe);
+
+            }
+        });
 
         return view;
     }

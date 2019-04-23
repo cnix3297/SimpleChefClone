@@ -64,98 +64,23 @@ public class MyRecipesFragment extends Fragment {
         recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getName() != null)
-                    intent.putExtra("Name", recipesViewModel.getRecipeFromMyRecipes(position).getName());
-                else
-                    intent.putExtra("Name", "MF NULL");
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getCost() != null)
-                    intent.putExtra("Cost", recipesViewModel.getRecipeFromMyRecipes(position).getCost().toString());
-                else
-                    intent.putExtra("Cost", "MF NULL");
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getDescription() != null)
-                    intent.putExtra("Description", recipesViewModel.getRecipeFromMyRecipes(position).getDescription());
-                else
-                    intent.putExtra("Description", "MF NULL");
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getIngredientList() != null)
-                    intent.putExtra("Ingredients", recipesViewModel.getRecipeFromMyRecipes(position).getIngredientList().toString());
-                else
-                    intent.putExtra("Ingredients", "MF NULL");
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getTime() != null)
-                    intent.putExtra("Time", recipesViewModel.getRecipeFromMyRecipes(position).getTime().toString());
-                else
-                    intent.putExtra("Time", "MF NULL");
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getTime() != null)
-                    intent.putExtra("Steps", recipesViewModel.getRecipeFromMyRecipes(position).getSteps().toString());
-                else
-                    intent.putExtra("Steps", "MF NULL");
-                if (recipesViewModel.getRecipeFromMyRecipes(position).getTime() != null)
-                    intent.putExtra("Image", recipesViewModel.getRecipeFromMyRecipes(position).getImage().toString());
-                else
-                    intent.putExtra("Image", "MF NULL");
-
+                Intent intent = recipesViewModel.getRecipeFromFavoritesRecipes(position).toIntent(getActivity(), ViewRecipeActivity.class);
                 startActivity(intent);
             }
 
             @Override
             public void onFavoriteItemClick(int position) {
-
+                // get the recipe at the current position in the recyclerview
+                RecipeClass recipe = recipesViewModel.getRecipeFromAllRecipes(position);
+                // set it to favorite
+                recipe.setFavorite(true);
+                // add it to the favorites recyclerview
+                recipesViewModel.addRecipeToFavorites(recipe);
             }
         });
 
-/*
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-
-                    myRecipes.clear();
-                    myRecipeObjects.clear();
-                    myRecipes = (ArrayList<String>) document.get("MyRecipes");
-
-                    if (myRecipes != null) {
-                        for (int i = 0; i < myRecipes.size(); i++) {
-                            db.collection("Recipes").document(myRecipes.get(i)).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    RecipeClass document = documentSnapshot.toObject(RecipeClass.class);
-                                    myRecipeObjects.add(document);
-                                    Log.d("MYITEMS", document.getID());
-
-                                    recyclerView = view.findViewById(R.id.recyclerView);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                                    recipeListAdapter = new RecipeListAdapter(myRecipeObjects, new ArrayList<String>());
-                                    recyclerView.setAdapter(recipeListAdapter);
 
 
-                                    recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
-                                        @Override
-                                        public void onItemClick(int position) {
-
-                                            /*Intent intent = new Intent(getActivity(), ViewRecipeActivity.class);*/
-                                            Intent intent = myRecipeObjects.get(position).toIntent(getActivity(), ViewRecipeActivity.class);
-
-
-
-                                            startActivity(intent);
-                                        }
-
-                                        @Override
-                                        public void onFavoriteItemClick(int position) {
-
-                                        }
-                                    });
-                                }
-                            });
-
-                        }
-                    }
-                }
-            }
-        });
-*/
 
 
 
