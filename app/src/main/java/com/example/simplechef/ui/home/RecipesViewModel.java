@@ -1,8 +1,9 @@
 package com.example.simplechef.ui.home;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -24,9 +25,44 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class RecipesViewModel extends ViewModel {
+public class RecipesViewModel extends AndroidViewModel {
+
+    private RecipeRepository repository;
+    private LiveData<List<RecipeClass>> allRecipes;
+
+    public RecipesViewModel(@NonNull Application application) {
+        super(application);
+        repository = new RecipeRepository(application);
+        allRecipes = repository.getAllRecipes();
+    }
+
+    public void insert(RecipeClass recipe) {
+        repository.insert(recipe);
+    }
+
+    public void update(RecipeClass recipe) {
+        repository.delete(recipe);
+    }
+
+    public void delete(RecipeClass recipe) {
+        repository.delete(recipe);
+    }
+
+    public LiveData<List<RecipeClass>> getAllRecipes() {
+        return allRecipes;
+    }
+
+
+
+
+
+
+
+
+
+
     private final static String TAG = "RecipesViewModel";
-    private MutableLiveData<List<RecipeClass>> allRecipes;
+    //private MutableLiveData<List<RecipeClass>> allRecipes;
     private MutableLiveData<List<RecipeClass>> myFavoriteRecipes;
     private MutableLiveData<List<RecipeClass>> myRecipes;
     private ArrayList<RecipeClass> allRecipesDataset = new ArrayList<>();
@@ -37,14 +73,14 @@ public class RecipesViewModel extends ViewModel {
     private ArrayList<String> tempList;
 
 
-    public LiveData<List<RecipeClass>> getAllRecipes() {
+/*    public LiveData<List<RecipeClass>> getAllRecipes() {
         if (allRecipes == null) {
             allRecipes = new MutableLiveData<>();
             loadAllRecipes();
         }
 
         return allRecipes;
-    }
+    }*/
 
     public LiveData<List<RecipeClass>> getFavoriteRecipes() {
         if (myFavoriteRecipes == null) {
@@ -64,8 +100,36 @@ public class RecipesViewModel extends ViewModel {
         return myRecipes;
     }
 
+    private void initializeFavorites() {
+        DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
 
-    private void loadAllRecipes() {
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            ArrayList<String> favoritesList = new ArrayList<>();
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.contains("MyFavorites")) {
+                        favoritesList = (ArrayList<String>) document.get("MyFavorites");
+
+
+                        Log.d(TAG, "AREEEEEEEEEEEEEEEEEEEEEEEEEEE" + favoritesList.toString());
+
+                    }
+
+                } else {
+                    Log.d("DocumentFailed", "get failed with ", task.getException());
+                }
+            }
+        });
+
+
+    }
+
+
+    // on activity load we pull all recipes from firebase
+/*    private void loadAllRecipes() {
         new AsyncTask<Void, Void, List<RecipeClass>>() {
             @Override
             protected List<RecipeClass> doInBackground(Void... voids) {
@@ -83,6 +147,7 @@ public class RecipesViewModel extends ViewModel {
                         }
                     }
                 });
+                initializeFavorites();
                 return allRecipesDataset;
             }
 
@@ -93,8 +158,9 @@ public class RecipesViewModel extends ViewModel {
                 allRecipes.setValue(recipes);
             }
         }.execute();
-    }
+    }*/
 
+    // on activity load we pull all favorites from firebase
     private void loadMyFavoriteRecipes() {
         new AsyncTask<Void, Void, List<RecipeClass>>() {
             @Override
@@ -137,6 +203,7 @@ public class RecipesViewModel extends ViewModel {
         }.execute();
     }
 
+    // on activity load we pull all myrecipes from firebase
     private void loadMyRecipes() {
         new AsyncTask<Void, Void, List<RecipeClass>>() {
             @Override
@@ -243,21 +310,45 @@ public class RecipesViewModel extends ViewModel {
     public void removeRecipeFromFavorites(RecipeClass recipe) {
         myFavoritesDataset.remove(recipe);
         myFavoriteRecipes.setValue(myFavoritesDataset);
+
+        // update firebase
+
+        final RecipeClass recipeToRemoveFromFirebase = recipe;
+        final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
+
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            ArrayList<String> favoritesList;
+
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Boolean remove = false;
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.contains("MyFavorites")) {
+
+                        favoritesList = (ArrayList<String>) document.get("MyFavorites");
+                        for (int i = 0; i < favoritesList.size(); i++) {
+                            if (recipeToRemoveFromFirebase.getID().equals(favoritesList.get(i))) {
+                                remove = true;
+                            }
+                        }
+
+                        if (remove) {
+                            docRef.update("MyFavorites", FieldValue.arrayRemove(recipeToRemoveFromFirebase.getID()));
+                        }
+
+                    }
+
+                } else {
+                    Log.d("DocumentFailed", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
     public RecipeClass getRecipeFromMyRecipes(int position) {
         return myRecipesDataset.get(position);
     }
 
-    public void insert(RecipeClass recipe) {
-    }
-
-
-    public void remove(RecipeClass recipe) {
-
-    }
-
-    private void removeAllRecipes() {
-
-    }
 }

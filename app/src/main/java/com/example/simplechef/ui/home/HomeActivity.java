@@ -160,9 +160,19 @@ public class HomeActivity extends AppCompatActivity {
         };
 
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 5000);
+        mHandler.postDelayed(mRunnable, 6000);
 
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mHandler != null && mRunnable != null) {
+            mHandler.removeCallbacks(mRunnable);
+        }
+    }
+
     public void search(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

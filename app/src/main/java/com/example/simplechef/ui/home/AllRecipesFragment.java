@@ -74,7 +74,6 @@ public class AllRecipesFragment extends Fragment  {
                 if (selectedRecipe.isFavorite()) {
                     recipesViewModel.removeRecipeFromFavorites(selectedRecipe);
                 } else {
-                    // add it to the favorites
                     recipesViewModel.addRecipeToFavorites(selectedRecipe);
                 }
 

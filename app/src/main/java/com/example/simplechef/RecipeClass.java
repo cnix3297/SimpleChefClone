@@ -1,15 +1,21 @@
 package com.example.simplechef;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
 
+@Entity
 public class RecipeClass {
 
+    @PrimaryKey
+    private String ID;
+
     private ArrayList<Ingredient> ingredientList = new ArrayList<>();
-    private String ID, name, description, time, steps;
+    private String name, description, time, steps;
     private String image;
     private Double cost = 0.0;
     private Boolean favorite = false;
