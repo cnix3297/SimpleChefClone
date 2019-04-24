@@ -89,28 +89,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
     LocationListener locationListener;
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == 1){
-            FusedLocationProviderClient location = LocationServices.getFusedLocationProviderClient(getApplication());
-            location.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                // Logic to handle location object
-                                array.add( location.getLatitude());
-                                array.add( location.getLongitude());
-                                Log.d("coordinates", array.toString());
-                            }
-                            Log.d("triggered", array.toString());
-
-                        }
-                    });
-
-        }
-    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,6 +172,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 String recipeTime = editTextRecipeTime.getText().toString();
                 String recipeDirections = editTextDirections.getText().toString();
 
+
                 ArrayList<String> inputProblems = new ArrayList<>();
 
                 Boolean isValidInput = true;
@@ -231,6 +210,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     inputProblems.add("Recipe directions are missing");
                     isValidInput = false;
                 }
+
 
                 // if input is valid, lets process
                 if(isValidInput) {
@@ -303,6 +283,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 String varIngredientName = editTextIngredientName.getText().toString();
                 //String varIngredientCost = editTextIngredientCost.getText().toString();
 
+
                 //Form validation
                 if(varIngredientQuantity.equals("") && varIngredientName.equals("")){
                     Log.d("INGREDIENT ERROR", "NULL VALUES");
@@ -343,6 +324,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
                     //setObjectsEmpty();
                     //Log.d("linear layout", "onClick: " + list.size());
 
+                    editTextIngredientName.getText().clear();
+                    editTextIngredientQuantity.getText().clear();
                 }
 
             }

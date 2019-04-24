@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginPage</string>
+    <string name="app_name">SimpleChef</string>
     <string name="LogIn">Log In</string>
     <string name="SignUpSentence">Don\'t have an account?</string>
     <string name="SignUp">Sign Up!</string>
