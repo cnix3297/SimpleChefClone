@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:paddingTop="105dp"
+    android:paddingBottom="50dp"
     >
 
 
