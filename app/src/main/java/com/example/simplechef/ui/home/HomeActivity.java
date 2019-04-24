@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,25 +18,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.simplechef.R;
 import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
-import com.example.simplechef.ui.recipe_create.IngredientsListAdapter;
-import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements AllRecipesFragment.OnFavoriteListener {
 
     private BottomNavigationView bottomNavigationView;
     private final static String TAG = "HomeActivity";
@@ -175,4 +164,24 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onFavoriteSelected(RecipeClass recipe) {
+        FavoriteRecipesFragment favoriteRecipesFragment;
+            favoriteRecipesFragment = (FavoriteRecipesFragment) viewPager.getAdapter().instantiateItem(viewPager, 1);
+
+         if (favoriteRecipesFragment != null) {
+             favoriteRecipesFragment.modifyFavorite(recipe);
+         }
+
+
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof AllRecipesFragment) {
+            AllRecipesFragment allRecipesFragment = (AllRecipesFragment) fragment;
+            allRecipesFragment.setOnFavoriteListener(this);
+        }
+    }
 }

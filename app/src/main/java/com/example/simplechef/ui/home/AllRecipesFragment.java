@@ -47,6 +47,7 @@ public class AllRecipesFragment extends Fragment  {
     private ArrayList<RecipeClass> recipeList = new ArrayList<>();
     private ArrayList<String> favoritesList = new ArrayList<>();
     private RecipeListAdapter recipeListAdapter;
+    private OnFavoriteListener callback;
 
     public static AllRecipesFragment newInstance() {
         AllRecipesFragment fragment = new AllRecipesFragment();
@@ -54,6 +55,16 @@ public class AllRecipesFragment extends Fragment  {
     }
     public void search(String string){
         recipeListAdapter.onSearchRecieved(string);
+    }
+
+    public void setOnFavoriteListener(OnFavoriteListener callback) {
+        this.callback = callback;
+
+    }
+
+
+    public interface OnFavoriteListener {
+        void onFavoriteSelected(RecipeClass recipe);
     }
 
 
@@ -64,11 +75,12 @@ public class AllRecipesFragment extends Fragment  {
 
         //View To Return
         final View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
-        //Get Favorites List
-        initiateFavoritesList();
 
-        //Access NoSql Database
-        //DocumentReference docRef = db.collection("Recipe").document("4S0ycFz9A05IWKs3249d");
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recipeListAdapter = new RecipeListAdapter(recipeList);
+        recyclerView.setAdapter(recipeListAdapter);
 
         //Get Info from Recipe Collection
         db.collection("Recipes")
@@ -77,7 +89,7 @@ public class AllRecipesFragment extends Fragment  {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    ClearObject(true);
+                    ClearObject();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         RecipeClass recipeobj = document.toObject(RecipeClass.class);
                         AddObject(recipeobj);
@@ -85,12 +97,6 @@ public class AllRecipesFragment extends Fragment  {
                     }
 
                     //Recycler View Init & Data Pass
-                    final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                    Log.d("BEFORE", recipeList.toString());
-                    recipeListAdapter = new RecipeListAdapter(recipeList, favoritesList);
-                    recyclerView.setAdapter(recipeListAdapter);
 
 
                     recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
@@ -104,7 +110,7 @@ public class AllRecipesFragment extends Fragment  {
                         }
 
                         @Override
-                        public void onFavoriteItemClick(int position) {
+                        public void onFavoriteItemClick(final int position) {
                             Log.d("Favorites", "is clicked");
                             final RecipeClass currentRecipe = recipeList.get(position);
                             String recipeID = currentRecipe.getID();
@@ -130,13 +136,16 @@ public class AllRecipesFragment extends Fragment  {
                                                     remove = true;
                                                 }
                                             }
+
                                             if (remove) {
                                                 docRef.update("MyFavorites", FieldValue.arrayRemove(currentRecipe.getID()));
 
                                             } else {
                                                 docRef.update(data);
+                                                callback.onFavoriteSelected(currentRecipe);
                                             }
                                             remove = false;
+
                                         } else {
                                             docRef.set(data, SetOptions.merge());
                                         }
@@ -169,8 +178,7 @@ public class AllRecipesFragment extends Fragment  {
     public void AddObject(RecipeClass obj){
         this.recipeList.add(obj);
     }
-    public void ClearObject(Boolean clear){
-        if(clear)
+    public void ClearObject(){
             this.recipeList.clear();
     }
     public void initiateFavoritesList(){

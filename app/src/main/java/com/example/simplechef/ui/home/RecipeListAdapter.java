@@ -40,9 +40,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     private View view;
 
 
-    RecipeListAdapter(ArrayList<RecipeClass> list, ArrayList<String> favoritesList){
+    RecipeListAdapter(ArrayList<RecipeClass> list){
         this.recipes = list;
-        this.favoritesList = favoritesList;
         Log.d("CONSTRUCTOR CALLED", this.recipes.toString());
 
     }

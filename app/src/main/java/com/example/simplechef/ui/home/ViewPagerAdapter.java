@@ -27,6 +27,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public AllRecipesFragment allRecipesFragment = AllRecipesFragment.newInstance();
     public FavoriteRecipesFragment favoriteRecipesFragment = FavoriteRecipesFragment.newInstance();
     public MyRecipesFragment myRecipesFragment = MyRecipesFragment.newInstance();
+
     @Override
     public Fragment getItem(int position) {
         switch(position) {
@@ -71,7 +72,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                  allRecipesFragment.search(hold);
             case 1:
 
-                favoriteRecipesFragment.onSearch(hold);
+                /*favoriteRecipesFragment.onSearch(hold);*/
             case 2:
 
                  /*myRecipesFragment.onSearch(hold);*/

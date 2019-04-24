@@ -30,7 +30,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FavoriteRecipesFragment extends Fragment {
-
+    private static final String TAG = "FavoriteRecipesFragment";
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     final FirebaseAuth currentUser = FirebaseAuth.getInstance();
     final DocumentReference docRef = db.collection("Users").document(currentUser.getUid());
@@ -47,9 +47,16 @@ public class FavoriteRecipesFragment extends Fragment {
         return fragment;
     }
 
-    public void onSearch(String search){
-        /*recipeListAdapter.onSearchRecieved(search);*/
+    public void modifyFavorite(RecipeClass recipe) {
+        if (recipeObject.contains(recipe)) {
+            recipeObject.remove(recipe);
+        } else {
+            recipeObject.add(recipe);
+        }
+        recipeListAdapter.notifyDataSetChanged();
     }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +64,13 @@ public class FavoriteRecipesFragment extends Fragment {
         //View To Return
         View view = inflater.inflate(R.layout.fragment_home_recipe_list, container, false);
         fragView = view;
+
+        recyclerView = fragView.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recipeListAdapter = new RecipeListAdapter(recipeObject);
+        recyclerView.setAdapter(recipeListAdapter);
+
         //See if the current user has any favorites
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -74,14 +88,7 @@ public class FavoriteRecipesFragment extends Fragment {
                                  public void onSuccess(DocumentSnapshot documentSnapshot) {
                                      RecipeClass document = documentSnapshot.toObject(RecipeClass.class);
                                      recipeObject.add(document);
-                                     Log.d("FAVORITE ITEMS", document.getID());
 
-                                     //Recycler View
-                                     recyclerView = fragView.findViewById(R.id.recyclerView);
-                                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                                     recipeListAdapter = new RecipeListAdapter(recipeObject, favoritesList);
-                                     recyclerView.setAdapter(recipeListAdapter);
 
                                      recipeListAdapter.setOnItemClickListener(new RecipeListAdapter.OnRecipeItemClickListener() {
                                          @Override
@@ -114,6 +121,7 @@ public class FavoriteRecipesFragment extends Fragment {
             }
         });
 
+        recipeListAdapter.notifyDataSetChanged();
 
         return view;
     }

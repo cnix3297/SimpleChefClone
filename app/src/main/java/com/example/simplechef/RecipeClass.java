@@ -12,18 +12,29 @@ public class RecipeClass {
     private String ID, name, description, time, steps;
     private String image;
     private Double cost = 0.0;
+    private Boolean isFavorite;
 
 
     //Constructor
     public RecipeClass() {
 
     }
+
+    public Boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        isFavorite = favorite;
+    }
+
     //Constructor
     public RecipeClass(String ID, String name, String description, String steps) {
         this.ID = ID;
         this.name = name;
         this.description = description;
         this.steps = steps;
+        this.isFavorite = false;
     }
 
     public void AddIngredient(String name, String quantity, String image){
