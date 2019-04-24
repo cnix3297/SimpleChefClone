@@ -291,41 +291,44 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 else {
                     RecipeAPI getAPI = new RecipeAPI(varIngredientName);
                     Ingredient ingredient = new Ingredient(varIngredientName, varIngredientQuantity, getAPI.getSearchImage());
+                    if (getAPI.getFoodName() == null) {
+                        Toast.makeText(getApplicationContext(), "Ingredient Doesn't exist try again", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //ADD HEADERS
+                        //if(count == 0){
+                        //    TextView j = new TextView(context);
+                        //    j.setText("Amount \t Measurement \t Ingredient \t Price ");
+                        //    //listIngredient.addView(j);
+                        //}
 
-                    //ADD HEADERS
-                    //if(count == 0){
-                    //    TextView j = new TextView(context);
-                    //    j.setText("Amount \t Measurement \t Ingredient \t Price ");
-                    //    //listIngredient.addView(j);
-                    //}
+                        //ask the API for ingredient
 
-                    //ask the API for ingredient
+                        if (getAPI.getFoodName() == null) {
+                            recipeObject.AddIngredient(varIngredientName, varIngredientQuantity, getAPI.getSearchImage());
+                            ingredientList.add(ingredient);
+                            mAdapter.notifyItemInserted(ingredientList.size());
+                            //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
+                        } else {
+                            recipeObject.AddIngredient(getAPI.getFoodName(), varIngredientQuantity, getAPI.getSearchImage());
+                            ingredientList.add(ingredient);
+                            mAdapter.notifyItemInserted(ingredientList.size());
+                            //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
+                        }
 
-                    if(getAPI.getFoodName() == null) {
-                        recipeObject.AddIngredient(varIngredientName, varIngredientQuantity,getAPI.getSearchImage() );
-                        ingredientList.add(ingredient);
-                        mAdapter.notifyItemInserted(ingredientList.size());
-                        //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
-                    }else {
-                        recipeObject.AddIngredient(getAPI.getFoodName(), varIngredientQuantity,getAPI.getSearchImage());
-                        ingredientList.add(ingredient);
-                        mAdapter.notifyItemInserted(ingredientList.size());
-                        //onRecipeChangeIngredientListenerVar.onRecipeChangeIngredientListenerMethod(recipe);
+                        //add ingredient to linear layout
+                        //TextView t = new TextView(context);
+                        //t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
+                        //t.setPadding(1,10,1,10);
+                        //t.setTextSize(20);
+                        //t.setTextColor(Color.BLACK);
+                        //listIngredient.addView(t);
+                        //count++;
+                        //setObjectsEmpty();
+                        //Log.d("linear layout", "onClick: " + list.size());
+
+                        editTextIngredientName.getText().clear();
+                        editTextIngredientQuantity.getText().clear();
                     }
-
-                    //add ingredient to linear layout
-                    //TextView t = new TextView(context);
-                    //t.setText(recipeObject.getIngredientAtIndex(0).getName() + "" + recipeObject.getIngredientAtIndex(0).getPrice().toString());
-                    //t.setPadding(1,10,1,10);
-                    //t.setTextSize(20);
-                    //t.setTextColor(Color.BLACK);
-                    //listIngredient.addView(t);
-                    //count++;
-                    //setObjectsEmpty();
-                    //Log.d("linear layout", "onClick: " + list.size());
-
-                    editTextIngredientName.getText().clear();
-                    editTextIngredientQuantity.getText().clear();
                 }
 
             }
