@@ -47,6 +47,9 @@ public class MyRecipesFragment extends Fragment {
         return fragment;
     }
 
+    /*public void onSearch(String search){
+        recipeListAdapter.onSearchRecieved(search);
+    }*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

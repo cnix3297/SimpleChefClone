@@ -48,9 +48,6 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
 
-    public interface OnItemClickListener {
-        void onSearchRecieved(String search);
-    }
 
 
     @Override
@@ -118,15 +115,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+        viewPagerAdapter.setSelected(0);
     }
 
     public void search(){
         String hold = editTextSearchPopUp.getText().toString();
-        if (hold.equalsIgnoreCase("pornhub.com")){
-            Toast.makeText(getApplicationContext(),"Welcome jacob", Toast.LENGTH_LONG).show();
-        }else
-        viewPagerAdapter.search(hold);
+
+
+        viewPagerAdapter.search(hold,viewPagerAdapter.getSelected());
 
 
 
