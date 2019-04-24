@@ -52,7 +52,9 @@ public class AllRecipesFragment extends Fragment  {
         AllRecipesFragment fragment = new AllRecipesFragment();
         return fragment;
     }
-
+    public void search(String string){
+        recipeListAdapter.onSearchRecieved(string);
+    }
 
 
     @Nullable

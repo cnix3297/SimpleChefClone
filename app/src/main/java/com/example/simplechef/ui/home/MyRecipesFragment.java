@@ -32,6 +32,7 @@ public class MyRecipesFragment extends Fragment {
 
     private ArrayList<String> myRecipes = new ArrayList<>();
     private ArrayList<RecipeClass> myRecipeObjects = new ArrayList<>();
+    private ArrayList<RecipeClass> myRecipeObjectComplete = new ArrayList<>();
     //Recycler View
     RecipeListAdapter recipeListAdapter;
     RecyclerView recyclerView;

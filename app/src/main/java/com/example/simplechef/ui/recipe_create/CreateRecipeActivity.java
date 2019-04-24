@@ -551,6 +551,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             imageURI = data.getData();
+            imageViewAddImage.setMaxWidth(20);
+            imageViewAddImage.setMaxHeight(20);
             // glide will follow imageview's width, height and scaleType
             Glide.with(this)
                     .load(imageURI)

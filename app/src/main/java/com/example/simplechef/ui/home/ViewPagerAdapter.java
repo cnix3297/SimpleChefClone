@@ -4,25 +4,28 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-
+    private static final String TAG = "ViewPagerAdapter";
     private String [] tabTitles = new String [] { "Recipes", "Favorites", "My Recipes"};
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
-
+    public AllRecipesFragment allRecipesFragment = AllRecipesFragment.newInstance();
+    public FavoriteRecipesFragment favoriteRecipesFragment = FavoriteRecipesFragment.newInstance();
+    public MyRecipesFragment myRecipesFragment = MyRecipesFragment.newInstance();
     @Override
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return AllRecipesFragment.newInstance();
+                return allRecipesFragment;
             case 1:
-                return FavoriteRecipesFragment.newInstance();
+                return favoriteRecipesFragment;
             case 2:
-                return MyRecipesFragment.newInstance();
+                return myRecipesFragment;
             default:
                 return null;
         }
@@ -37,6 +40,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
+    }
+    public void search(String hold){
+        Log.d(TAG, "search: " + hold);
+        allRecipesFragment.search(hold);
     }
 
 }

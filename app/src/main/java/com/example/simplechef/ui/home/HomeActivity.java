@@ -1,5 +1,6 @@
 package com.example.simplechef.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.example.simplechef.RecipeClass;
 import com.example.simplechef.ui.account.AccountActivity;
 import com.example.simplechef.ui.login.LoginActivity;
 import com.example.simplechef.ui.recipe_create.CreateRecipeActivity;
+import com.example.simplechef.ui.recipe_create.IngredientsListAdapter;
 import com.example.simplechef.ui.recipe_view.ViewRecipeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,11 +48,17 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
 
+    public interface OnItemClickListener {
+        void onSearchRecieved(String search);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context = this;
+        Activity activity = (Activity) getApplicationContext();
         view = ((HomeActivity) context).view;
 
         viewPager = findViewById(R.id.pager);
@@ -111,10 +119,18 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     public void search(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String hold = editTextSearchPopUp.getText().toString();
+        if (hold.equalsIgnoreCase("pornhub.com")){
+            Toast.makeText(getApplicationContext(),"Welcome jacob", Toast.LENGTH_LONG).show();
+        }else
+        viewPagerAdapter.search(hold);
+
+
+
+        /*FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         CollectionReference reference = db.collection("Recipes");
         Query query = reference.whereEqualTo("name", editTextSearchPopUp.getText().toString());
@@ -135,7 +151,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
     }
     @Override

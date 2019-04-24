@@ -95,6 +95,7 @@ public class FavoriteRecipesFragment extends Fragment {
                                              recipeListAdapter.notifyDataSetChanged();
                                          }
 
+
                                      });
                                  }
                              });
@@ -107,6 +108,7 @@ public class FavoriteRecipesFragment extends Fragment {
                 } else {
                     Log.d("DocumentFailed", "get failed with ", task.getException());
                 }
+
             }
         });
 
