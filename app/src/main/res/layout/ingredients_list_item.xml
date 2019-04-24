@@ -16,9 +16,10 @@
 
     <ImageView
         android:id="@+id/imageViewIngredientIcon"
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginLeft="5dp"
         app:srcCompat="@android:color/holo_blue_light" />
 
     <TextView
@@ -26,8 +27,8 @@
         android:text="Ingredient"
         android:gravity="center"
         android:textSize="18sp"
+        android:layout_marginLeft="10dp"
         android:textColor="@color/colorBlack"
-        android:layout_marginRight="10dp"
         android:layout_width="140dp"
         android:layout_height="match_parent" />
 
@@ -46,8 +47,8 @@
         android:id="@+id/imageButtonRemoveItem"
         android:alpha=".7"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:background="@drawable/rounded_remove_button"
         android:layout_width="20dp"
         android:layout_height="20dp" />
