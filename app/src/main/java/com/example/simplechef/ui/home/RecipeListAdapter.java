@@ -126,7 +126,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         Log.d("RecipeHolder", currentRecipe.getName());
         Log.d("RecipeHolder", currentRecipe.getImage());
-
+        recipesFull = recipes;
     }
 
 

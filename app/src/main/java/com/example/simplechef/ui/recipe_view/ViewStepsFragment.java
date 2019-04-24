@@ -24,7 +24,15 @@ public class ViewStepsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_view_steps, container, false);
         output = (TextView) view.findViewById(R.id.textViewSteps);
         Bundle  bundle = getArguments();
-        output.setText(bundle.getString("steps"));
+        String hold = bundle.getString("steps");
+        String[] holdArray = hold.split(",");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String aHoldArray : holdArray)
+        {
+            stringBuilder.append(aHoldArray);
+            stringBuilder.append("\n");
+        }
+        output.setText(stringBuilder);
 
         // Inflate the layout for this fragment
         return view;
