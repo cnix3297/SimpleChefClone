@@ -29,7 +29,7 @@ public class ViewStepsFragment extends Fragment {
         StringBuilder stringBuilder = new StringBuilder();
         for (String aHoldArray : holdArray)
         {
-            stringBuilder.append(aHoldArray);
+            stringBuilder.append(aHoldArray + "\n");
             stringBuilder.append("\n");
         }
         output.setText(stringBuilder);
