@@ -25,7 +25,7 @@ public class ViewStepsFragment extends Fragment {
         output = (TextView) view.findViewById(R.id.textViewSteps);
         Bundle  bundle = getArguments();
         String hold = bundle.getString("steps");
-        String[] holdArray = hold.split(",");
+        String[] holdArray = hold.split("~");
         StringBuilder stringBuilder = new StringBuilder();
         for (String aHoldArray : holdArray)
         {
