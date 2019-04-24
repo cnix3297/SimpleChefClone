@@ -35,13 +35,8 @@ public class RecipeAPI {
                     .getBody()
                     .toString();
             //gets the name of the product from the hold variable and stores it in a temporary variable
-            Log.d("AUTOCOMPLETESEARCH", hold);
 
             String[] hold1 = hold.split("\\W");
-
-            Log.d("AUTOCOMPLETESEARCH", hold1[6].toString());
-            Log.d("AUTOCOMPLETESEARCH", hold1[7].toString());
-            Log.d("AUTOCOMPLETESEARCH", hold1[8].toString());
 
             //sets foodName to the name of the product
             if(hold1.length != 0)

@@ -95,7 +95,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorWhite"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -128,7 +128,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorWhite"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -164,7 +164,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorWhite"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -199,7 +199,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorWhite"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -293,7 +293,7 @@
                                 android:inputType="text"
                                 android:paddingTop="5dp"
                                 android:paddingBottom="5dp"
-                                android:textColor="@color/colorWhite"
+                                android:textColor="@color/colorBlack"
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="18sp" />
 
@@ -330,7 +330,7 @@
                                 android:paddingTop="5dp"
                                 android:paddingBottom="5dp"
                                 android:textAlignment="center"
-                                android:textColor="@color/colorWhite"
+                                android:textColor="@color/colorBlack"
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="18sp" />
 
@@ -361,12 +361,14 @@
                                 android:id="@+id/buttonAddIngredient"
                                 android:layout_width="65dp"
                                 android:layout_height="30dp"
+                                android:gravity="center"
                                 android:background="@color/blue"
                                 android:text="Add"
                                 android:textColor="@color/colorWhite" />
 
                             <Button
                                 android:id="@+id/buttonClearAllIngredients"
+                                android:gravity="center"
                                 android:layout_width="65dp"
                                 android:layout_height="30dp"
                                 android:background="@color/colorGreyDarkest"
@@ -438,6 +440,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:paddingBottom="10dp"
                         android:paddingTop="10dp">
 
 
@@ -457,7 +460,7 @@
                             android:paddingEnd="10dp"
                             android:paddingRight="10dp"
                             android:paddingBottom="5dp"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorWhite"
                             android:textSize="15sp" />
 
@@ -563,17 +566,23 @@
 
             </LinearLayout>
 
-
             <Button
                 android:id="@+id/buttonSubmitRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@color/colorPrimaryMainOpacityFull"
-                android:text="@string/Submit" />
+                android:text="@string/Submit"
+                />
 
         </LinearLayout>
     </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>
 
