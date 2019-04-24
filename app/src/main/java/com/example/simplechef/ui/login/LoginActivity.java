@@ -111,6 +111,9 @@ public class LoginActivity extends AppCompatActivity {
                 String email = textViewEmail.getText().toString();
                 String password = textViewPassword.getText().toString();
 
+                if (email.equals("") || password.equals("")){
+                    Toast.makeText(getApplicationContext(), "Error, make sure you entered data", Toast.LENGTH_SHORT).show();
+                }else
                 signInWithEmailandPassword(email, password);
 
             }
