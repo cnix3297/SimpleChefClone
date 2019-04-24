@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -32,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.bumptech.glide.Glide;
@@ -63,11 +66,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 
 public class CreateRecipeActivity extends AppCompatActivity {
     private EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
-    private EditText editTextIngredientName,editTextRecipeDescription, editTextIngredientQuantity, editTextDirections;
+    private EditText editTextIngredientName, editTextRecipeDescription, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
     //private LinearLayout listIngredient;
     private RecyclerView ingredientsRecyclerView;
@@ -89,33 +94,49 @@ public class CreateRecipeActivity extends AppCompatActivity {
     LocationListener locationListener;
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == 1){
-            FusedLocationProviderClient location = LocationServices.getFusedLocationProviderClient(getApplication());
-            location.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                // Logic to handle location object
-                                array.add( location.getLatitude());
-                                array.add( location.getLongitude());
-                                Log.d("coordinates", array.toString());
-                            }
-                            Log.d("triggered", array.toString());
-
-                        }
-                    });
-
-        }
-    }
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_create);
         context = getApplicationContext();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                locationManager = (LocationManager)
+                        getSystemService(Context.LOCATION_SERVICE);
+                locationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+            } else {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) && ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION))  {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                            1);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            }
+            return;
+        }
+
 
         ingredientList = new ArrayList<>();
 
@@ -137,6 +158,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 mAdapter.notifyItemRemoved(position);
             }
         });
+
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -611,4 +633,50 @@ public class CreateRecipeActivity extends AppCompatActivity {
         ingredientList.clear();
         mAdapter.notifyDataSetChanged();
     }
+
+
+    public class MyLocationListener implements LocationListener {
+        private static final String TAG = "MyLocationListener";
+        @Override
+        public void onLocationChanged(Location loc) {
+
+            String longitude = "Longitude: " +loc.getLongitude();
+            Log.d(TAG, longitude);
+            String latitude = "Latitude: " +loc.getLatitude();
+            Log.d(TAG, latitude);
+
+            /*----------to get City-Name from coordinates ------------- */
+            String cityName=null;
+            Geocoder gcd = new Geocoder(getBaseContext(),
+                    Locale.getDefault());
+            List<Address> addresses;
+            try {
+                addresses = gcd.getFromLocation(loc.getLatitude(), loc
+                        .getLongitude(), 1);
+                if (addresses.size() > 0)
+                    System.out.println(addresses.get(0).getLocality());
+                cityName=addresses.get(0).getLocality();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+
+    }
 }
+
