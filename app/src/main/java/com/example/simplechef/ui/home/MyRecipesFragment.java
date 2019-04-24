@@ -63,8 +63,13 @@ public class MyRecipesFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
 
-                    myRecipes.clear();
-                    myRecipeObjects.clear();
+                    try{
+                        myRecipes.clear();
+                        myRecipeObjects.clear();
+                    }
+                    catch (NullPointerException E) {
+                    }
+
                     myRecipes = (ArrayList<String>) document.get("MyRecipes");
 
                     if (myRecipes != null) {

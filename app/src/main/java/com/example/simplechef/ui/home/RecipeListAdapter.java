@@ -84,7 +84,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         RecipeClass currentRecipe = recipes.get(position);
         holder.recipeName.setText(currentRecipe.getName());
         holder.recipeCost.setText(formatter.format(currentRecipe.getCost()));
-        holder.recipeDescription.setText(currentRecipe.getSteps());
+        holder.recipeDescription.setText(currentRecipe.getDescription());
 
 
         //Adding Image to Recycler view item
