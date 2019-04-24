@@ -32,6 +32,7 @@ public class MyRecipesFragment extends Fragment {
 
     private ArrayList<String> myRecipes = new ArrayList<>();
     private ArrayList<RecipeClass> myRecipeObjects = new ArrayList<>();
+    private ArrayList<RecipeClass> myRecipeObjectComplete = new ArrayList<>();
     //Recycler View
     RecipeListAdapter recipeListAdapter;
     RecyclerView recyclerView;
@@ -46,6 +47,9 @@ public class MyRecipesFragment extends Fragment {
         return fragment;
     }
 
+    /*public void onSearch(String search){
+        recipeListAdapter.onSearchRecieved(search);
+    }*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

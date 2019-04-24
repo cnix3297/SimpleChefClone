@@ -47,7 +47,9 @@ public class FavoriteRecipesFragment extends Fragment {
         return fragment;
     }
 
-
+    public void onSearch(String search){
+        /*recipeListAdapter.onSearchRecieved(search);*/
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class FavoriteRecipesFragment extends Fragment {
                                              recipeListAdapter.notifyDataSetChanged();
                                          }
 
+
                                      });
                                  }
                              });
@@ -107,6 +110,7 @@ public class FavoriteRecipesFragment extends Fragment {
                 } else {
                     Log.d("DocumentFailed", "get failed with ", task.getException());
                 }
+
             }
         });
 
