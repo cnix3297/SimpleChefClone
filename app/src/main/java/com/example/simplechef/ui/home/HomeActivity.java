@@ -194,7 +194,7 @@ public class HomeActivity extends AppCompatActivity implements ShakeDetector.Lis
 
     @Override
     public void hearShake() {
-        Log.d(TAG, "hearShake: " + "Its a Damn EarthQuake");
+
         Toast.makeText(this, "WHOAH Quit Rocking me", Toast.LENGTH_LONG).show();
     }
 }
