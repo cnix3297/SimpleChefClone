@@ -620,6 +620,12 @@ public class CreateRecipeActivity extends AppCompatActivity implements ShakeDete
     @Override
     public void hearShake() {
         clearAllIngredients();
-        Toast.makeText(context, "Ingredients Deleted", Toast.LENGTH_SHORT).show();
+        //editTextIngredientName,editTextRecipeDescription, editTextIngredientQuantity, editTextDirections
+        editTextIngredientName.setText("");
+        editTextRecipeDescription.setText("");
+        editTextIngredientQuantity.setText("");
+        editTextDirections.setText("");
+        imageViewAddImage.setImageIcon(null);
+        Toast.makeText(context, "Starting Over", Toast.LENGTH_SHORT).show();
     }
 }
