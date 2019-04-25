@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -58,6 +59,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.seismic.ShakeDetector;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -65,7 +67,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class CreateRecipeActivity extends AppCompatActivity {
+public class CreateRecipeActivity extends AppCompatActivity implements ShakeDetector.Listener {
     private EditText editTextRecipeName, editTextRecipeCost, editTextRecipeTime;
     private EditText editTextIngredientName,editTextRecipeDescription, editTextIngredientQuantity, editTextDirections;
     private Button buttonSubmitRecipe;
@@ -87,6 +89,9 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private ArrayList<Double> array = new ArrayList<>();
     LocationManager locationManager;
     LocationListener locationListener;
+    ShakeDetector shakeDetector;
+    SensorManager sensorManager;
+
 
 
 
@@ -94,7 +99,9 @@ public class CreateRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_create);
         context = getApplicationContext();
-
+        shakeDetector = new ShakeDetector(this);
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        shakeDetector.start(sensorManager);
         ingredientList = new ArrayList<>();
 
         setupToolbar();
@@ -460,7 +467,17 @@ public class CreateRecipeActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onStart() {
+        shakeDetector.start(sensorManager);
+        super.onStart();
+    }
 
+    @Override
+    protected void onStop() {
+        shakeDetector.stop();
+        super.onStop();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -598,5 +615,11 @@ public class CreateRecipeActivity extends AppCompatActivity {
         Toast.makeText(context, "Ingredient list cleared", Toast.LENGTH_SHORT).show();
         ingredientList.clear();
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void hearShake() {
+        clearAllIngredients();
+        Toast.makeText(context, "Ingredients Deleted", Toast.LENGTH_SHORT).show();
     }
 }
