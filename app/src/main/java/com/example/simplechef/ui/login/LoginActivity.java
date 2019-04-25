@@ -103,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
         textViewEmail = findViewById(R.id.textViewEmail);
         textViewPassword = findViewById(R.id.textViewPassword);
         imageViewBackground = findViewById(R.id.imageViewBackground);
-
         // button listeners
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override

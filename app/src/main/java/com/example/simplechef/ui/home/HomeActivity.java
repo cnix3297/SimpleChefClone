@@ -3,6 +3,7 @@ package com.example.simplechef.ui.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
@@ -36,8 +37,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.seismic.ShakeDetector;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements ShakeDetector.Listener {
 
     private BottomNavigationView bottomNavigationView;
     private final static String TAG = "HomeActivity";
@@ -47,6 +49,8 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
+    ShakeDetector shakeDetector;
+    SensorManager sensorManager;
 
 
 
@@ -57,7 +61,9 @@ public class HomeActivity extends AppCompatActivity {
         context = this;
         Activity activity = (Activity) getApplicationContext();
         view = ((HomeActivity) context).view;
-
+        shakeDetector = new ShakeDetector(this);
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        shakeDetector.start(sensorManager);
         viewPager = findViewById(R.id.pager);
         viewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
@@ -174,5 +180,21 @@ public class HomeActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onStart() {
+        shakeDetector.start(sensorManager);
+        super.onStart();
+    }
 
+    @Override
+    protected void onStop() {
+        shakeDetector.stop();
+        super.onStop();
+    }
+
+    @Override
+    public void hearShake() {
+        Log.d(TAG, "hearShake: " + "Its a Damn EarthQuake");
+        Toast.makeText(this, "WHOAH Quit Rocking me", Toast.LENGTH_LONG).show();
+    }
 }
